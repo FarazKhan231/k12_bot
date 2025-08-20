@@ -1,0 +1,78 @@
+{
+  "actions": [
+    {
+      "action": "navigate",
+      "target": {
+        "uid": "e4",
+        "tag": "a",
+        "role": "",
+        "type": "",
+        "name": "",
+        "id": "",
+        "placeholder": "",
+        "href": "https://laviniagro1stg.wpengine.com/team/",
+        "label": "OUR TEAM",
+        "text": "OUR TEAM",
+        "required": false,
+        "disabled": false,
+        "selector": "a:has-text(\"OUR TEAM\")"
+      },
+      "value": null,
+      "status": "error",
+      "notes": "Navigate to OUR TEAM page to validate UI and content. | locator.waitFor: Error: strict mode violation: getByRole('link', { name: 'OUR TEAM' }) resolved to 2 elements:\n    1) <a href=\"https://laviniagro1stg.wpengine.com/team/\">…</a> aka locator('#menu-item-51820').getByRole('link', { name: 'Our Team' })\n    2) <a target=\"_self\" class=\"fl-button\" href=\"https://laviniagro1stg.wpengine.com/team/\">…</a> aka getByRole('contentinfo').getByRole('link', { name: 'Our Team' })\n\nCall log:\n\u001b[2m  - waiting for getByRole('link', { name: 'OUR TEAM' }) to be visible\u001b[22m\n"
+    },
+    {
+      "action": "navigate",
+      "target": {
+        "uid": "e5",
+        "tag": "a",
+        "role": "",
+        "type": "",
+        "name": "",
+        "id": "",
+        "placeholder": "",
+        "href": "https://laviniagro1stg.wpengine.com/team/",
+        "label": "OUR TEAM",
+        "text": "OUR TEAM",
+        "required": false,
+        "disabled": false,
+        "selector": "a:has-text(\"OUR TEAM\")"
+      },
+      "value": null,
+      "status": "error",
+      "notes": "Navigate to CAREERS page to validate UI and content. | locator.waitFor: Error: strict mode violation: getByRole('link', { name: 'OUR TEAM' }) resolved to 2 elements:\n    1) <a href=\"https://laviniagro1stg.wpengine.com/team/\">…</a> aka locator('#menu-item-51820').getByRole('link', { name: 'Our Team' })\n    2) <a target=\"_self\" class=\"fl-button\" href=\"https://laviniagro1stg.wpengine.com/team/\">…</a> aka getByRole('contentinfo').getByRole('link', { name: 'Our Team' })\n\nCall log:\n\u001b[2m  - waiting for getByRole('link', { name: 'OUR TEAM' }) to be visible\u001b[22m\n"
+    },
+    {
+      "action": "navigate",
+      "target": {
+        "uid": "e9",
+        "tag": "a",
+        "role": "",
+        "type": "",
+        "name": "",
+        "id": "",
+        "placeholder": "",
+        "href": "https://laviniagro1stg.wpengine.com/",
+        "label": "",
+        "text": "",
+        "required": false,
+        "disabled": false,
+        "selector": ""
+      },
+      "value": null,
+      "status": "error",
+      "notes": "Navigate to Curriculum page to validate UI and content. | locator.waitFor: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('input, textarea, select').first() to be visible\u001b[22m\n\u001b[2m    25 × locator resolved to hidden <textarea id=\"g-recaptcha-response\" name=\"g-recaptcha-response\" class=\"g-recaptcha-response\"></textarea>\u001b[22m\n"
+    },
+    {
+      "action": "end",
+      "status": "end",
+      "notes": "End of actions."
+    }
+  ],
+  "consoleErrors": [
+    "Access to script at 'https://js.hsleadflows.net/leadflows.js' from origin 'https://laviniagro1stg.wpengine.com' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+    "Failed to load resource: net::ERR_FAILED",
+    "Timeout (C)",
+    "Timeout (z)"
+  ]
+}

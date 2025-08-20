@@ -1,0 +1,32 @@
+flowchart LR
+  user(("QA Tester")) --> UI["Frontend (Vite + React)"]
+  UI -- "POST /api/test-runs\n(multipart form: fields + optional screenshot + optional Excel)" --> BE["Backend (Express)"]
+
+  subgraph Backend
+    direction TB
+    BE --> CORS[["CORS + Health: GET /api/health"]]
+    BE -->|"Has Excel?"| DEC{Excel test cases uploaded?}
+    DEC -- "Yes" --> XLSX["Parse .xlsx\n• Detect sheet by suite\n• Read BDD column\n• Expand to actions queue"]
+    DEC -- "No" --> PLAN["Plan with OpenAI Responses API\n(model: gpt-4o-mini)"]
+    XLSX --> Q["Actions queue"]
+    PLAN --> Q
+
+    Q --> RUN["Run Playwright\n• httpCredentials if Basic Auth\n• Record video + screenshots\n• Capture console errors"]
+
+    RUN --> ART["Artifacts on disk\n/assets: PNGs + WEBM"]
+    RUN --> LOG["Actions log + errors"]
+
+    ART --> REPORT["Generate HTML report + assets index"]
+    LOG --> REPORT
+
+    REPORT --> STATIC[/"Serve at /artifacts/*"/]
+    REPORT --> SLACK["Slack webhook (optional)"]
+    REPORT --> EMAIL["Email via SMTP (optional)"]
+  end
+
+  STATIC --> UI
+
+  classDef node fill:#fff,stroke:#e5e7eb,stroke-width:1px,color:#111;
+  classDef accent fill:#eef2ff,stroke:#6366f1,color:#111;
+  class UI,BE,CORS,DEC,XLSX,PLAN,Q,RUN,ART,LOG,REPORT,STATIC,SLACK,EMAIL node;
+  class RUN,REPORT accent;

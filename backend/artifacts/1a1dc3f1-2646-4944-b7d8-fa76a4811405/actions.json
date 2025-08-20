@@ -1,0 +1,422 @@
+{
+  "actions": [
+    {
+      "action": "note",
+      "target": null,
+      "value": null,
+      "status": "error",
+      "notes": "Given a valid user is logged in to environment | Target not found"
+    },
+    {
+      "action": "click",
+      "target": {
+        "id": null,
+        "name": null,
+        "placeholder": null,
+        "text": "When navigating to the dashboard",
+        "selector": ""
+      },
+      "value": null,
+      "status": "error",
+      "notes": "locator.waitFor: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText('When navigating to the dashboard') to be visible\u001b[22m\n"
+    },
+    {
+      "action": "hover",
+      "target": {
+        "id": null,
+        "name": null,
+        "placeholder": null,
+        "text": "the RISE curriculum Library",
+        "selector": ""
+      },
+      "value": null,
+      "status": "error",
+      "notes": "And the user hovers over the RISE curriculum Library | locator.waitFor: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText('the RISE curriculum Library') to be visible\u001b[22m\n"
+    },
+    {
+      "action": "assertText",
+      "target": null,
+      "value": "the Rising 1st Grade - 9th Grade pages will appear",
+      "status": "error",
+      "notes": "Then the Rising 1st Grade - 9th Grade pages will appear | Target not found"
+    },
+    {
+      "action": "click",
+      "target": {
+        "id": null,
+        "name": null,
+        "placeholder": null,
+        "text": "When the user selects the Rising pages",
+        "selector": ""
+      },
+      "value": null,
+      "status": "error",
+      "notes": "locator.waitFor: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText('When the user selects the Rising pages') to be visible\u001b[22m\n"
+    },
+    {
+      "action": "assertText",
+      "target": null,
+      "value": "the links will be correctly linked.",
+      "status": "error",
+      "notes": "Then the links will be correctly linked. | Target not found"
+    },
+    {
+      "action": "note",
+      "target": null,
+      "value": null,
+      "status": "error",
+      "notes": "Given a valid user is logged in to environment | Target not found"
+    },
+    {
+      "action": "click",
+      "target": {
+        "id": null,
+        "name": null,
+        "placeholder": null,
+        "text": "When navigating to the dashboard",
+        "selector": ""
+      },
+      "value": null,
+      "status": "error",
+      "notes": "locator.waitFor: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText('When navigating to the dashboard') to be visible\u001b[22m\n"
+    },
+    {
+      "action": "hover",
+      "target": {
+        "id": null,
+        "name": null,
+        "placeholder": null,
+        "text": "the RISE curriculum Library",
+        "selector": ""
+      },
+      "value": null,
+      "status": "error",
+      "notes": "And the user hovers over the RISE curriculum Library | locator.waitFor: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText('the RISE curriculum Library') to be visible\u001b[22m\n"
+    },
+    {
+      "action": "assertText",
+      "target": null,
+      "value": "the Pre-program training & Ongoing support pages will appear",
+      "status": "error",
+      "notes": "Then the Pre-program training & Ongoing support pages will appear | Target not found"
+    },
+    {
+      "action": "click",
+      "target": {
+        "id": null,
+        "name": null,
+        "placeholder": null,
+        "text": "When selecting the pre program training page",
+        "selector": ""
+      },
+      "value": null,
+      "status": "error",
+      "notes": "locator.waitFor: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText('When selecting the pre program training page') to be visible\u001b[22m\n"
+    },
+    {
+      "action": "assertText",
+      "target": null,
+      "value": "the zoom links will be present and correctly linked",
+      "status": "error",
+      "notes": "Then the zoom links will be present and correctly linked | Target not found"
+    },
+    {
+      "action": "click",
+      "target": {
+        "id": null,
+        "name": null,
+        "placeholder": null,
+        "text": "When the user selects the ongoing support page",
+        "selector": ""
+      },
+      "value": null,
+      "status": "error",
+      "notes": "locator.waitFor: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText('When the user selects the ongoing support page') to be visible\u001b[22m\n"
+    },
+    {
+      "action": "assertText",
+      "target": null,
+      "value": "the user will be greeted with the placeholder page until completed",
+      "status": "error",
+      "notes": "Then the user will be greeted with the placeholder page until completed | Target not found"
+    },
+    {
+      "action": "note",
+      "target": null,
+      "value": null,
+      "status": "error",
+      "notes": "Given a valid user is logged in to environment | Target not found"
+    },
+    {
+      "action": "click",
+      "target": {
+        "id": null,
+        "name": null,
+        "placeholder": null,
+        "text": "When navigating to the dashboard",
+        "selector": ""
+      },
+      "value": null,
+      "status": "error",
+      "notes": "locator.waitFor: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText('When navigating to the dashboard') to be visible\u001b[22m\n"
+    },
+    {
+      "action": "hover",
+      "target": {
+        "id": null,
+        "name": null,
+        "placeholder": null,
+        "text": "the Teacher Training and Development",
+        "selector": ""
+      },
+      "value": null,
+      "status": "error",
+      "notes": "And the user hovers over the Teacher Training and Development | locator.waitFor: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText('the Teacher Training and Development') to be visible\u001b[22m\n"
+    },
+    {
+      "action": "assertText",
+      "target": null,
+      "value": "the Pre-program training & Weekly Development Meetings pages will appear",
+      "status": "error",
+      "notes": "Then the Pre-program training & Weekly Development Meetings pages will appear | Target not found"
+    },
+    {
+      "action": "click",
+      "target": {
+        "id": null,
+        "name": null,
+        "placeholder": null,
+        "text": "When selecting the pre program training page",
+        "selector": ""
+      },
+      "value": null,
+      "status": "error",
+      "notes": "locator.waitFor: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText('When selecting the pre program training page') to be visible\u001b[22m\n"
+    },
+    {
+      "action": "assertText",
+      "target": null,
+      "value": "the zoom links will be present and correctly linked",
+      "status": "error",
+      "notes": "Then the zoom links will be present and correctly linked | Target not found"
+    },
+    {
+      "action": "click",
+      "target": {
+        "id": null,
+        "name": null,
+        "placeholder": null,
+        "text": "When the user selects the weekly development meeting page",
+        "selector": ""
+      },
+      "value": null,
+      "status": "error",
+      "notes": "locator.waitFor: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText('When the user selects the weekly development meeting page') to be visible\u001b[22m\n"
+    },
+    {
+      "action": "assertText",
+      "target": null,
+      "value": "the zoom links will be present and correctly linked",
+      "status": "error",
+      "notes": "Then the zoom links will be present and correctly linked | Target not found"
+    },
+    {
+      "action": "note",
+      "target": null,
+      "value": null,
+      "status": "error",
+      "notes": "Given a valid RISE admin user is logged into the environment | Target not found"
+    },
+    {
+      "action": "click",
+      "target": {
+        "id": null,
+        "name": null,
+        "placeholder": null,
+        "text": "When the user navigates to the dashboard",
+        "selector": ""
+      },
+      "value": null,
+      "status": "error",
+      "notes": "locator.waitFor: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText('When the user navigates to the dashboard') to be visible\u001b[22m\n"
+    },
+    {
+      "action": "click",
+      "target": {
+        "id": null,
+        "name": null,
+        "placeholder": null,
+        "text": "And the user selects the platform roster",
+        "selector": ""
+      },
+      "value": null,
+      "status": "error",
+      "notes": "locator.waitFor: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText('And the user selects the platform roster') to be visible\u001b[22m\n"
+    },
+    {
+      "action": "assertText",
+      "target": null,
+      "value": "the user will be able to access a table including their rosters info including the <columns>",
+      "status": "error",
+      "notes": "Then the user will be able to access a table including their rosters info including the <columns> | Target not found"
+    },
+    {
+      "action": "click",
+      "target": {
+        "id": null,
+        "name": null,
+        "placeholder": null,
+        "text": "|First Name|Last Name| Title|Email|School|Action|",
+        "selector": ""
+      },
+      "value": null,
+      "status": "error",
+      "notes": "locator.waitFor: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText('|First Name|Last Name| Title|Email|School|Action|') to be visible\u001b[22m\n"
+    },
+    {
+      "action": "note",
+      "target": null,
+      "value": null,
+      "status": "error",
+      "notes": "Given a valid RISE admin user is logged into the environment | Target not found"
+    },
+    {
+      "action": "click",
+      "target": {
+        "id": null,
+        "name": null,
+        "placeholder": null,
+        "text": "When the user navigates to the dashboard",
+        "selector": ""
+      },
+      "value": null,
+      "status": "error",
+      "notes": "locator.waitFor: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText('When the user navigates to the dashboard') to be visible\u001b[22m\n"
+    },
+    {
+      "action": "click",
+      "target": {
+        "id": null,
+        "name": null,
+        "placeholder": null,
+        "text": "And the user selects the platform roster",
+        "selector": ""
+      },
+      "value": null,
+      "status": "error",
+      "notes": "locator.waitFor: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText('And the user selects the platform roster') to be visible\u001b[22m\n"
+    },
+    {
+      "action": "assertText",
+      "target": null,
+      "value": "the user will be able to access a table including their rosters info including the <columns>",
+      "status": "error",
+      "notes": "Then the user will be able to access a table including their rosters info including the <columns> | Target not found"
+    },
+    {
+      "action": "click",
+      "target": {
+        "id": null,
+        "name": null,
+        "placeholder": null,
+        "text": "|First Name|Last Name| Title|Email|School|Action|",
+        "selector": ""
+      },
+      "value": null,
+      "status": "error",
+      "notes": "locator.waitFor: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText('|First Name|Last Name| Title|Email|School|Action|') to be visible\u001b[22m\n"
+    },
+    {
+      "action": "click",
+      "target": {
+        "id": null,
+        "name": null,
+        "placeholder": null,
+        "text": "When the user selects the Enroll a Staff Member button",
+        "selector": ""
+      },
+      "value": null,
+      "status": "error",
+      "notes": "locator.waitFor: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText('When the user selects the Enroll a Staff Member button') to be visible\u001b[22m\n"
+    },
+    {
+      "action": "click",
+      "target": {
+        "id": null,
+        "name": null,
+        "placeholder": null,
+        "text": "And inserts data in the following <fields> and selects Add A Staff Member",
+        "selector": ""
+      },
+      "value": null,
+      "status": "error",
+      "notes": "locator.waitFor: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText('And inserts data in the following <fields> and selects Add A Staff Member') to be visible\u001b[22m\n"
+    },
+    {
+      "action": "click",
+      "target": {
+        "id": null,
+        "name": null,
+        "placeholder": null,
+        "text": "|First Name|Last Name|Email|Title|",
+        "selector": ""
+      },
+      "value": null,
+      "status": "error",
+      "notes": "locator.waitFor: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText('|First Name|Last Name|Email|Title|') to be visible\u001b[22m\n"
+    },
+    {
+      "action": "assertText",
+      "target": null,
+      "value": "the user will be successfully uploaded and added to the roster",
+      "status": "error",
+      "notes": "Then the user will be successfully uploaded and added to the roster | Target not found"
+    },
+    {
+      "action": "note",
+      "target": null,
+      "value": null,
+      "status": "error",
+      "notes": "Given a valid RISE admin user is logged into the environment | Target not found"
+    },
+    {
+      "action": "click",
+      "target": {
+        "id": null,
+        "name": null,
+        "placeholder": null,
+        "text": "When the user navigates to the dashboard",
+        "selector": ""
+      },
+      "value": null,
+      "status": "error",
+      "notes": "locator.waitFor: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText('When the user navigates to the dashboard') to be visible\u001b[22m\n"
+    },
+    {
+      "action": "click",
+      "target": {
+        "id": null,
+        "name": null,
+        "placeholder": null,
+        "text": "And the user selects the platform roster",
+        "selector": ""
+      },
+      "value": null,
+      "status": "error",
+      "notes": "locator.waitFor: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText('And the user selects the platform roster') to be visible\u001b[22m\n"
+    },
+    {
+      "action": "assertText",
+      "target": null,
+      "value": "the user will be able to access a table including their rosters info including the <columns>",
+      "status": "error",
+      "notes": "Then the user will be able to access a table including their rosters info including the <columns> | Target not found"
+    }
+  ],
+  "consoleErrors": [
+    "Access to script at 'https://js.hsleadflows.net/leadflows.js' from origin 'https://laviniagro1stg.wpengine.com' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+    "Failed to load resource: net::ERR_FAILED",
+    "Timeout (C)",
+    "Timeout (z)"
+  ]
+}

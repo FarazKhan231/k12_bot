@@ -1,0 +1,75 @@
+{
+  "actions": [
+    {
+      "action": "click",
+      "target": {
+        "uid": "e3",
+        "tag": "a",
+        "role": "",
+        "type": "",
+        "name": "",
+        "id": "",
+        "placeholder": "",
+        "href": "https://passageprepstg.wpenginepowered.com/my-account/",
+        "label": "Login To Account",
+        "text": "Login To Account",
+        "required": false,
+        "disabled": false,
+        "selector": "a:has-text(\"Login To Account\")"
+      },
+      "value": null,
+      "status": "ok",
+      "notes": "Navigate to the login page to proceed with the smoke testing."
+    },
+    {
+      "action": "fill",
+      "target": {
+        "uid": "e14",
+        "tag": "input",
+        "role": "",
+        "type": "text",
+        "name": "username",
+        "id": "username",
+        "placeholder": "",
+        "href": "",
+        "label": "Username or email address *\nRequired",
+        "text": "",
+        "required": true,
+        "disabled": false,
+        "selector": "#username"
+      },
+      "value": "testuser@example.com",
+      "status": "ok",
+      "notes": "Filling in the username field to proceed with login."
+    },
+    {
+      "action": "fill",
+      "target": {
+        "uid": "e21",
+        "tag": "input",
+        "role": "",
+        "type": "password",
+        "name": "password",
+        "id": "password",
+        "placeholder": "",
+        "href": "",
+        "label": "Password *\nRequired",
+        "text": "",
+        "required": true,
+        "disabled": false,
+        "selector": "#password"
+      },
+      "value": "***",
+      "status": "ok",
+      "notes": "Filling in the password field to proceed with login."
+    },
+    {
+      "action": "end",
+      "status": "error",
+      "notes": "Agent parse error: 429 Rate limit reached for gpt-4o-mini in organization org-H5qzjnKwwWehu1jvG1H1CfNs on requests per min (RPM): Limit 3, Used 3, Requested 1. Please try again in 20s. Visit https://platform.openai.com/account/rate-limits to learn more. You can increase your rate limit by adding a payment method to your account at https://platform.openai.com/account/billing."
+    }
+  ],
+  "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 404 ()"
+  ]
+}

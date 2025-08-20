@@ -1,0 +1,13 @@
+{
+  "actions": [
+    {
+      "action": "end",
+      "status": "end",
+      "notes": "No interactable elements found"
+    }
+  ],
+  "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 401 ()",
+    "Failed to load resource: the server responded with a status of 401 ()"
+  ]
+}

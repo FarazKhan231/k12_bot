@@ -1,0 +1,75 @@
+{
+  "actions": [
+    {
+      "action": "navigate",
+      "target": {
+        "uid": "e3",
+        "tag": "a",
+        "role": "",
+        "type": "",
+        "name": "",
+        "id": "",
+        "placeholder": "",
+        "href": "https://passagepreparation.com/my-account/",
+        "label": "Login To Account",
+        "text": "Login To Account",
+        "required": false,
+        "disabled": false,
+        "selector": "a:has-text(\"Login To Account\")"
+      },
+      "value": null,
+      "status": "error",
+      "notes": "Navigate to Login To Account to attempt login. | Unsupported action: navigate"
+    },
+    {
+      "action": "navigate",
+      "target": {
+        "uid": "e21",
+        "tag": "a",
+        "role": "",
+        "type": "",
+        "name": "",
+        "id": "",
+        "placeholder": "",
+        "href": "https://passagepreparation.com/about/",
+        "label": "About Us",
+        "text": "About Us",
+        "required": false,
+        "disabled": false,
+        "selector": "a:has-text(\"About Us\")"
+      },
+      "value": null,
+      "status": "error",
+      "notes": "Navigate to About Us for more information about the site. | locator.waitFor: Error: strict mode violation: getByRole('link', { name: 'About Us' }) resolved to 2 elements:\n    1) <a href=\"https://passagepreparation.com/about/\" class=\"awb-menu__main-a awb-menu__main-a_regular\">…</a> aka getByLabel('Menu', { exact: true }).getByRole('link', { name: 'About Us' })\n    2) <a href=\"https://passagepreparation.com/about/\" class=\"awb-menu__main-a awb-menu__main-a_regular\">…</a> aka getByLabel('Footer Pages Menu 01 - Main').getByRole('link', { name: 'About Us' })\n\nCall log:\n\u001b[2m  - waiting for getByRole('link', { name: 'About Us' }) to be visible\u001b[22m\n"
+    },
+    {
+      "action": "navigate",
+      "target": {
+        "uid": "e22",
+        "tag": "a",
+        "role": "",
+        "type": "",
+        "name": "",
+        "id": "",
+        "placeholder": "",
+        "href": "https://passagepreparation.com/contact-us/",
+        "label": "Contact Us",
+        "text": "Contact Us",
+        "required": false,
+        "disabled": false,
+        "selector": "a:has-text(\"Contact Us\")"
+      },
+      "value": null,
+      "status": "error",
+      "notes": "Navigate to Contact Us for support options. | locator.waitFor: Error: strict mode violation: getByRole('link', { name: 'Contact Us' }) resolved to 2 elements:\n    1) <a href=\"https://passagepreparation.com/contact-us/\" class=\"awb-menu__main-a awb-menu__main-a_regular\">…</a> aka getByLabel('Menu', { exact: true }).getByRole('link', { name: 'Contact Us' })\n    2) <a href=\"https://passagepreparation.com/contact-us/\" class=\"awb-menu__main-a awb-menu__main-a_regular\">…</a> aka getByLabel('Footer Pages Menu 01 - Main').getByRole('link', { name: 'Contact Us' })\n\nCall log:\n\u001b[2m  - waiting for getByRole('link', { name: 'Contact Us' }) to be visible\u001b[22m\n"
+    },
+    {
+      "action": "end",
+      "status": "end",
+      "notes": "End the session as no further actions are safe."
+    }
+  ],
+  "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 404 ()"
+  ]
+}

@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<title>passagePrep · smoke Report</title>
+<style>
+  body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;padding:24px;background:#f7f7fb;color:#111}
+  h1{margin:0 0 8px}
+  .grid{display:grid;grid-template-columns:1fr;gap:16px}
+  .card{background:#fff;border:1px solid #e5e7eb;border-radius:16px;padding:16px}
+  .muted{color:#6b7280}
+  table{width:100%;border-collapse:collapse}
+  th,td{font-size:14px}
+  th{background:#f3f4f6;text-align:left;padding:8px;border-bottom:1px solid #e5e7eb}
+</style>
+</head>
+<body>
+  <h1>passagePrep · smoke Report</h1>
+  <p class="muted">Started: 2025-08-18T07:05:51.239Z</p>
+
+  <div class="grid">
+    <div class="card">
+      <h2>Plan</h2>
+      <div># Smoke Testing Plan for PassagePrep<br/><br/>This document outlines the smoke testing plan for the PassagePrep application. The goal is to ensure that the core functionalities are working as expected before proceeding with further testing.<br/><br/>## Target URL<br/>- [PassagePrep Staging](https://passageprepstg.wpenginepowered.com/)<br/><br/>## Objectives<br/>- Validate critical paths and ensure the application is stable for further testing.</div>
+    </div>
+
+    <div class="card">
+      <h2>Checks</h2>
+      <ol><li><strong>Login and Dashboard Load</strong> — <em>Ensure that users can log in and the dashboard loads without errors.</em></li>
+<li><strong>Discover First Section</strong> — <em>Verify that the list view of the first section renders correctly, indicating data retrieval is functional.</em></li>
+<li><strong>Open First Item</strong> — <em>Confirm that the detail content for the first item loads correctly, ensuring the item detail view is operational.</em></li>
+<li><strong>Run Basic Search</strong> — <em>Ensure that the search functionality returns results, validating the search feature's basic operation.</em></li></ol>
+      <h3>Heuristics</h3>
+      <ul><li>Check for UI responsiveness and load times.</li>
+<li>Verify that no critical errors are displayed in the console.</li>
+<li>Ensure that all links and buttons are functional.</li>
+<li>Confirm that the application behaves consistently across different browsers.</li></ul>
+    </div>
+
+    <div class="card">
+      <h2>Actions</h2>
+      <table>
+        <thead><tr><th>#</th><th>Action</th><th>Target</th><th>Value</th><th>Status</th><th>Notes</th></tr></thead>
+        <tbody>
+    <tr>
+      <td style="padding:8px;border-bottom:1px solid #eee">1</td>
+      <td style="padding:8px;border-bottom:1px solid #eee"><code>end</code></td>
+      <td style="padding:8px;border-bottom:1px solid #eee"></td>
+      <td style="padding:8px;border-bottom:1px solid #eee"></td>
+      <td style="padding:8px;border-bottom:1px solid #eee">end</td>
+      <td style="padding:8px;border-bottom:1px solid #eee;color:#6b7280">No interactable elements found</td>
+    </tr></tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <h2>Video</h2>
+      <div style="margin:0 0 24px">
+       <video controls src="http://localhost:8787/artifacts/c3137596-2604-4315-aa33-8091ea190ec0/assets/714c7a531687ff5faf45e36c245d3c38.webm" style="max-width:100%;border-radius:12px;border:1px solid #e5e7eb"></video>
+       <div style="color:#6b7280;font-size:12px">714c7a531687ff5faf45e36c245d3c38.webm</div>
+     </div>
+    </div>
+
+    <div class="card">
+      <h2>Screenshots</h2>
+      <figure style="margin:0 0 24px">
+       <img src="http://localhost:8787/artifacts/c3137596-2604-4315-aa33-8091ea190ec0/assets/01_initial.png" alt="01_initial.png" style="max-width:100%;border-radius:12px;border:1px solid #e5e7eb"/>
+       <figcaption style="color:#6b7280;font-size:12px">01_initial.png</figcaption>
+     </figure>
+    </div>
+  </div>
+</body>
+</html>

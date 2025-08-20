@@ -1,0 +1,179 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<title>passagePrep · exploratory Report</title>
+<style>
+  body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;padding:24px;background:#f7f7fb;color:#111}
+  h1{margin:0 0 8px}
+  .grid{display:grid;grid-template-columns:1fr;gap:16px}
+  .card{background:#fff;border:1px solid #e5e7eb;border-radius:16px;padding:16px}
+  .muted{color:#6b7280}
+  table{width:100%;border-collapse:collapse}
+  th,td{font-size:14px}
+  th{background:#f3f4f6;text-align:left;padding:8px;border-bottom:1px solid #e5e7eb}
+</style>
+</head>
+<body>
+  <h1>passagePrep · exploratory Report</h1>
+  <p class="muted">Started: 2025-08-15T19:12:45.287Z</p>
+
+  <div class="grid">
+    <div class="card">
+      <h2>Plan</h2>
+      <div># Exploratory Testing Plan<br/><br/>## Objective<br/>To identify potential issues and ensure the functionality of the live URL.<br/><br/>## Scope<br/>Focus on critical user flows, UI elements, and performance.<br/><br/>## Duration<br/>2 hours<br/><br/>## Resources<br/>- Testing tools: Browser DevTools, Postman<br/>- Access credentials: Provided<br/><br/>## Reporting<br/>Document findings in the issue tracker.</div>
+    </div>
+
+    <div class="card">
+      <h2>Checks</h2>
+      <ol><li><strong>Verify Homepage Load</strong> — <em>Ensure the homepage loads correctly without errors.</em></li>
+<li><strong>Test Navigation Links</strong> — <em>Check all navigation links for correct routing and loading.</em></li>
+<li><strong>Form Submission Validation</strong> — <em>Test form submissions for validation messages and successful submissions.</em></li>
+<li><strong>Responsive Design Check</strong> — <em>Verify the site displays correctly on various screen sizes.</em></li>
+<li><strong>Performance Testing</strong> — <em>Assess page load times and responsiveness under load.</em></li></ol>
+      <h3>Heuristics</h3>
+      <ul><li>Look for broken links or images.</li>
+<li>Check for consistent UI elements.</li>
+<li>Test edge cases in forms.</li>
+<li>Evaluate error handling.</li>
+<li>Assess browser compatibility.</li></ul>
+    </div>
+
+    <div class="card">
+      <h2>Actions</h2>
+      <table>
+        <thead><tr><th>#</th><th>Action</th><th>Target</th><th>Value</th><th>Status</th><th>Notes</th></tr></thead>
+        <tbody>
+    <tr>
+      <td style="padding:8px;border-bottom:1px solid #eee">1</td>
+      <td style="padding:8px;border-bottom:1px solid #eee"><code>navigate</code></td>
+      <td style="padding:8px;border-bottom:1px solid #eee">Login To Account</td>
+      <td style="padding:8px;border-bottom:1px solid #eee"></td>
+      <td style="padding:8px;border-bottom:1px solid #eee">error</td>
+      <td style="padding:8px;border-bottom:1px solid #eee;color:#6b7280">Navigating to the Login To Account page to explore user authentication flow. | Unsupported action: navigate</td>
+    </tr>
+    <tr>
+      <td style="padding:8px;border-bottom:1px solid #eee">2</td>
+      <td style="padding:8px;border-bottom:1px solid #eee"><code>select</code></td>
+      <td style="padding:8px;border-bottom:1px solid #eee">Select Your State or Territory*</td>
+      <td style="padding:8px;border-bottom:1px solid #eee">Alabama</td>
+      <td style="padding:8px;border-bottom:1px solid #eee">error</td>
+      <td style="padding:8px;border-bottom:1px solid #eee;color:#6b7280">Selecting a state is a required action to proceed with any further interactions. | locator.waitFor: Error: strict mode violation: locator('#select_your_state_or_territory-45dd4272-2900-4c8a-a684-d337f6a2cee2') resolved to 2 elements:
+    1) <select required="" class="hs-input is-placeholder" name="select_your_state_or_territory" id="select_your_state_or_territory-45dd4272-2900-4c8a-a684-d337f6a2cee2">…</select> aka getByLabel('Select Your State or')
+    2) <select required="" class="hs-input is-placeholder" name="select_your_state_or_territory" id="select_your_state_or_territory-45dd4272-2900-4c8a-a684-d337f6a2cee2">…</select> aka locator('#select_your_state_or_territory-45dd4272-2900-4c8a-a684-d337f6a2cee2').nth(1)
+
+Call log:
+[2m  - waiting for locator('#select_your_state_or_territory-45dd4272-2900-4c8a-a684-d337f6a2cee2') to be visible[22m
+</td>
+    </tr>
+    <tr>
+      <td style="padding:8px;border-bottom:1px solid #eee">3</td>
+      <td style="padding:8px;border-bottom:1px solid #eee"><code>click</code></td>
+      <td style="padding:8px;border-bottom:1px solid #eee">Login To Account</td>
+      <td style="padding:8px;border-bottom:1px solid #eee"></td>
+      <td style="padding:8px;border-bottom:1px solid #eee">ok</td>
+      <td style="padding:8px;border-bottom:1px solid #eee;color:#6b7280">Navigating to the login page to explore account functionalities.</td>
+    </tr>
+    <tr>
+      <td style="padding:8px;border-bottom:1px solid #eee">4</td>
+      <td style="padding:8px;border-bottom:1px solid #eee"><code>fill</code></td>
+      <td style="padding:8px;border-bottom:1px solid #eee">Username or email address *
+Required</td>
+      <td style="padding:8px;border-bottom:1px solid #eee">testuser@example.com</td>
+      <td style="padding:8px;border-bottom:1px solid #eee">ok</td>
+      <td style="padding:8px;border-bottom:1px solid #eee;color:#6b7280">Filling the required username field to proceed with the login process.</td>
+    </tr>
+    <tr>
+      <td style="padding:8px;border-bottom:1px solid #eee">5</td>
+      <td style="padding:8px;border-bottom:1px solid #eee"><code>fill</code></td>
+      <td style="padding:8px;border-bottom:1px solid #eee">Password *
+Required</td>
+      <td style="padding:8px;border-bottom:1px solid #eee">password123</td>
+      <td style="padding:8px;border-bottom:1px solid #eee">ok</td>
+      <td style="padding:8px;border-bottom:1px solid #eee;color:#6b7280">Filling the required password field to proceed with the login process.</td>
+    </tr>
+    <tr>
+      <td style="padding:8px;border-bottom:1px solid #eee">6</td>
+      <td style="padding:8px;border-bottom:1px solid #eee"><code>press</code></td>
+      <td style="padding:8px;border-bottom:1px solid #eee">Log In</td>
+      <td style="padding:8px;border-bottom:1px solid #eee">Enter</td>
+      <td style="padding:8px;border-bottom:1px solid #eee">ok</td>
+      <td style="padding:8px;border-bottom:1px solid #eee;color:#6b7280">Submitting the login form after filling in the required fields.</td>
+    </tr>
+    <tr>
+      <td style="padding:8px;border-bottom:1px solid #eee">7</td>
+      <td style="padding:8px;border-bottom:1px solid #eee"><code>press</code></td>
+      <td style="padding:8px;border-bottom:1px solid #eee">Log In</td>
+      <td style="padding:8px;border-bottom:1px solid #eee">Enter</td>
+      <td style="padding:8px;border-bottom:1px solid #eee">ok</td>
+      <td style="padding:8px;border-bottom:1px solid #eee;color:#6b7280">Submitting the login form after filling in the required fields.</td>
+    </tr>
+    <tr>
+      <td style="padding:8px;border-bottom:1px solid #eee">8</td>
+      <td style="padding:8px;border-bottom:1px solid #eee"><code>press</code></td>
+      <td style="padding:8px;border-bottom:1px solid #eee">Log In</td>
+      <td style="padding:8px;border-bottom:1px solid #eee">Enter</td>
+      <td style="padding:8px;border-bottom:1px solid #eee">ok</td>
+      <td style="padding:8px;border-bottom:1px solid #eee;color:#6b7280">Pressing Enter to submit the login form after filling in the required fields.</td>
+    </tr>
+    <tr>
+      <td style="padding:8px;border-bottom:1px solid #eee">9</td>
+      <td style="padding:8px;border-bottom:1px solid #eee"><code>end</code></td>
+      <td style="padding:8px;border-bottom:1px solid #eee"></td>
+      <td style="padding:8px;border-bottom:1px solid #eee"></td>
+      <td style="padding:8px;border-bottom:1px solid #eee">error</td>
+      <td style="padding:8px;border-bottom:1px solid #eee;color:#6b7280">Agent parse error: 429 Rate limit reached for gpt-4o-mini in organization org-H5qzjnKwwWehu1jvG1H1CfNs on requests per min (RPM): Limit 3, Used 3, Requested 1. Please try again in 20s. Visit https://platform.openai.com/account/rate-limits to learn more. You can increase your rate limit by adding a payment method to your account at https://platform.openai.com/account/billing.</td>
+    </tr></tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <h2>Video</h2>
+      <div style="margin:0 0 24px">
+       <video controls src="http://localhost:8787/artifacts/c9ba8ac5-f36e-49e2-8f8a-eb9f567ad620/assets/a0ae91ccfeb715b5efc7cb57e7ed7a88.webm" style="max-width:100%;border-radius:12px;border:1px solid #e5e7eb"></video>
+       <div style="color:#6b7280;font-size:12px">a0ae91ccfeb715b5efc7cb57e7ed7a88.webm</div>
+     </div>
+    </div>
+
+    <div class="card">
+      <h2>Screenshots</h2>
+      <figure style="margin:0 0 24px">
+       <img src="http://localhost:8787/artifacts/c9ba8ac5-f36e-49e2-8f8a-eb9f567ad620/assets/01_initial.png" alt="01_initial.png" style="max-width:100%;border-radius:12px;border:1px solid #e5e7eb"/>
+       <figcaption style="color:#6b7280;font-size:12px">01_initial.png</figcaption>
+     </figure>
+<figure style="margin:0 0 24px">
+       <img src="http://localhost:8787/artifacts/c9ba8ac5-f36e-49e2-8f8a-eb9f567ad620/assets/02_error.png" alt="02_error.png" style="max-width:100%;border-radius:12px;border:1px solid #e5e7eb"/>
+       <figcaption style="color:#6b7280;font-size:12px">02_error.png</figcaption>
+     </figure>
+<figure style="margin:0 0 24px">
+       <img src="http://localhost:8787/artifacts/c9ba8ac5-f36e-49e2-8f8a-eb9f567ad620/assets/03_error.png" alt="03_error.png" style="max-width:100%;border-radius:12px;border:1px solid #e5e7eb"/>
+       <figcaption style="color:#6b7280;font-size:12px">03_error.png</figcaption>
+     </figure>
+<figure style="margin:0 0 24px">
+       <img src="http://localhost:8787/artifacts/c9ba8ac5-f36e-49e2-8f8a-eb9f567ad620/assets/04_click.png" alt="04_click.png" style="max-width:100%;border-radius:12px;border:1px solid #e5e7eb"/>
+       <figcaption style="color:#6b7280;font-size:12px">04_click.png</figcaption>
+     </figure>
+<figure style="margin:0 0 24px">
+       <img src="http://localhost:8787/artifacts/c9ba8ac5-f36e-49e2-8f8a-eb9f567ad620/assets/05_fill.png" alt="05_fill.png" style="max-width:100%;border-radius:12px;border:1px solid #e5e7eb"/>
+       <figcaption style="color:#6b7280;font-size:12px">05_fill.png</figcaption>
+     </figure>
+<figure style="margin:0 0 24px">
+       <img src="http://localhost:8787/artifacts/c9ba8ac5-f36e-49e2-8f8a-eb9f567ad620/assets/06_fill.png" alt="06_fill.png" style="max-width:100%;border-radius:12px;border:1px solid #e5e7eb"/>
+       <figcaption style="color:#6b7280;font-size:12px">06_fill.png</figcaption>
+     </figure>
+<figure style="margin:0 0 24px">
+       <img src="http://localhost:8787/artifacts/c9ba8ac5-f36e-49e2-8f8a-eb9f567ad620/assets/07_press.png" alt="07_press.png" style="max-width:100%;border-radius:12px;border:1px solid #e5e7eb"/>
+       <figcaption style="color:#6b7280;font-size:12px">07_press.png</figcaption>
+     </figure>
+<figure style="margin:0 0 24px">
+       <img src="http://localhost:8787/artifacts/c9ba8ac5-f36e-49e2-8f8a-eb9f567ad620/assets/08_press.png" alt="08_press.png" style="max-width:100%;border-radius:12px;border:1px solid #e5e7eb"/>
+       <figcaption style="color:#6b7280;font-size:12px">08_press.png</figcaption>
+     </figure>
+<figure style="margin:0 0 24px">
+       <img src="http://localhost:8787/artifacts/c9ba8ac5-f36e-49e2-8f8a-eb9f567ad620/assets/09_press.png" alt="09_press.png" style="max-width:100%;border-radius:12px;border:1px solid #e5e7eb"/>
+       <figcaption style="color:#6b7280;font-size:12px">09_press.png</figcaption>
+     </figure>
+    </div>
+  </div>
+</body>
+</html>
