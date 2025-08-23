@@ -4,74 +4,339 @@ export const testingProfiles = {
       lavinia: {
         login: {
           path: "/login",
-          usernameSelector: 'input[name="email"], input[type="email"]',
-          passwordSelector: 'input[name="password"], input[type="password"]',
-          submitSelector: 'button[type="submit"], button:has-text("Sign in"), [data-test="login-submit"]',
-          usernameEnv: "LAVINIA_USERNAME",
-          passwordEnv: "LAVINIA_PASSWORD"
+      usernameSelector: 'input[name="email"], input[type="email"], #user_email, #user_login',
+      passwordSelector: 'input[name="password"], input[type="password"], #user_pass',
+      submitSelector: 'button[type="submit"], input[type="submit"], button:has-text("Login"), button:has-text("Sign in")',
+      usernameEnv: "faraz.khan+1@k12coalition.com",
+      passwordEnv: "zJmIMIgp&i%fhP1HjhoRY^D6"
+    },
+    basicAuth: {
+      username: "laviniagro1stg",
+      password: "7ada27f4"
         },
         prompts: {
-          exploratory: `
-    Primary goal: Systematically explore Lavinia across all sections and states.
-    
-    Dynamic Flow:
-    1) Authentication
-       - Login with LAVINIA_USERNAME and LAVINIA_PASSWORD.
-       - Validate error handling for invalid/empty input.
-       - Confirm dashboard loads with no console errors.
-    
-    2) Section Discovery
-       - Enumerate all visible sections/tabs from the dashboard nav.
-       - For each section:
-         - Open list view -> confirm items render correctly.
-         - Open multiple detail pages (first, last, random).
-         - Validate text, media, and forms render.
-         - Check search, filters, and pagination (if present).
-    
-    3) State Exploration
-       - Empty list view (if present).
-       - Invalid URL -> error page renders.
-       - Logged-in vs logged-out restrictions.
-    
-    4) Cross-Cutting
-       - Validate responsiveness (resize browser).
-       - Check for broken links/404s.
-       - Monitor console for errors/warnings.
-       - Verify accessibility basics (labels, keyboard navigation).
-    
-    Avoid destructive operations (delete, deactivate, purchase).
-    `,
-    
-          smoke: `
-    Smoke test for Lavinia (dynamic):
-    
-    1) Login -> confirm dashboard loads without console errors.
-    2) Auto-discover first section from nav -> verify list view renders.
-    3) Open first item -> detail page renders correctly.
-    4) If form is available, validate safe submit -> non-error response.
-    Stop if any major blocker is found.
+      smoke: `
+SMOKE TEST - Execute Both Scenarios in Order:
+
+MANDATORY EXECUTION ORDER:
+
+SCENARIO 1 - POSITIVE LOGIN (Execute First):
+1) Navigate to the provided URL
+2) Click on "PLATFORM LOGIN" button/link
+3) Fill username field with valid credentials
+4) Fill password field with valid credentials
+5) Click "Login" or "Sign In" button
+6) Verify successful login and dashboard access
+7) Check for any JavaScript console errors
+8) Find and click "Sign Out" or "Logout" option
+9) Verify return to homepage
+
+SCENARIO 2 - NEGATIVE LOGIN (Execute Second):
+1) Navigate to the provided URL again
+2) Click on "PLATFORM LOGIN" button/link
+3) Leave username field completely empty
+4) Leave password field completely empty
+5) Click "Login" or "Sign In" button
+6) Verify error message appears
+7) Verify user stays on login page
+
+CRITICAL REQUIREMENTS:
+- MUST execute Scenario 1 (positive) FIRST
+- MUST execute Scenario 2 (negative) SECOND
+- Complete both scenarios before ending
+- Positive scenario should succeed
+- Negative scenario should show validation errors
+
+DO NOT END TEST until both scenarios are completed.
+`,
+
+      exploratory: `
+EXPLORATORY TEST - Deep Application Feature Discovery:
+
+COMPREHENSIVE APPLICATION EXPLORATION (30+ Actions Required):
+
+1) Authentication & User Management Deep Dive
+   - Test login with valid credentials -> verify dashboard access
+   - Test logout functionality -> verify returns to homepage
+   - Attempt login with invalid credentials -> verify error handling
+   - Check "Remember Me" functionality if present
+   - Test password reset/forgot password flow
+   - Explore user profile settings and preferences
+   - Test account creation and registration process
+
+2) Complete Navigation & Content Discovery
+   - Systematically click EVERY menu item and submenu
+   - Test ALL footer links and secondary navigation
+   - Explore breadcrumb navigation on deep pages
+   - Test site search functionality throughout application
+   - Navigate using browser back/forward buttons
+   - Test internal page-to-page linking
+   - Explore any hidden or advanced navigation options
+
+3) Core Application Features Deep Testing
+   - Test all main application sections and modules
+   - Explore data tables, lists, and grid functionality
+   - Test advanced filtering, sorting, and pagination
+   - Check form functionality and validation rules
+   - Test file upload/download capabilities
+   - Explore reporting and analytics features
+   - Test any workflow or process automation
+
+4) User Management & Account Features
+   - Explore user profile management thoroughly
+   - Test role-based access controls and permissions
+   - Check user settings and customization options
+   - Test password change and security features
+   - Explore user account creation and management
+   - Test user permissions for different features
+   - Check user activity logs and audit trails
+
+5) Content Management & Data Operations
+   - Test content creation and editing workflows
+   - Explore resource upload and management systems
+   - Test content publishing and approval processes
+   - Check content search, filtering, and organization
+   - Test content versioning and rollback features
+   - Explore content sharing and collaboration tools
+   - Test data import/export functionality
+
+6) Advanced Application Features
+   - Test any assessment or evaluation tools
+   - Explore progress tracking and analytics
+   - Check reporting and data visualization features
+   - Test communication tools (messaging, notifications)
+   - Explore calendar and scheduling features
+   - Test collaboration and group features
+   - Check any gamification or engagement features
+
+7) Data Management & Analytics Deep Dive
+   - Test data export and reporting features
+   - Explore backup and restore functionality
+   - Check data import capabilities and validation
+   - Test data security and privacy features
+   - Explore analytics and performance metrics
+   - Check data integrity and consistency
+   - Test any data migration or synchronization tools
+
+8) Integration & Third-Party Features
+   - Test any third-party integrations thoroughly
+   - Explore API endpoints and data exchange
+   - Check external resource linking and embedding
+   - Test any payment or billing integrations
+   - Explore email notification and communication systems
+   - Check any social or collaboration features
+   - Test any external tool integrations
+
+9) Performance & Technical Deep Dive
+   - Monitor page load times across all sections
+   - Check for JavaScript errors on every page
+   - Test with different network conditions
+   - Explore concurrent user access scenarios
+   - Test memory usage during extended sessions
+   - Check database performance and connectivity
+   - Test API response times and reliability
+
+10) Edge Cases & Advanced Scenarios
+   - Test with large datasets and performance limits
+   - Explore concurrent user access scenarios
+   - Test data validation and error handling
+   - Check accessibility features and compliance
+   - Test mobile responsiveness across all features
+   - Explore offline functionality if available
+   - Test unusual user workflows and edge cases
+
+MANDATORY EXPLORATION REQUIREMENTS:
+- Test MINIMUM 30 application-specific actions
+- Explore ALL major application sections thoroughly
+- Test ALL interactive features and tools discovered
+- Document any new features or functionality found
+- Check console errors and performance on every page
+- Test edge cases and unusual scenarios
+
+Continue exploring until comprehensive application understanding achieved or 40+ actions completed.
     `,
     
           regression: `
-    Regression test for Lavinia (dynamic):
-    
-    1) Re-run stable flows:
-       - Login -> dashboard.
-       - Enumerate all nav sections -> open representative detail pages.
-       - Run search/filter/pagination if available.
-       - Submit safe forms (settings/profile).
-    2) Confirm UI structure, labels, and layout are consistent.
-    3) Validate URLs and status codes.
-    4) Watch console for regressions.
+REGRESSION TEST - Comprehensive Application Stability Check:
+
+DEEP APPLICATION TESTING SEQUENCE (25+ Actions Required):
+
+1) Authentication & Session Management
+   - Login with valid credentials -> verify dashboard access
+   - Test session persistence across multiple page navigations
+   - Verify logout functionality -> return to homepage
+   - Test login with invalid credentials -> verify error handling
+   - Check "Remember Me" functionality if present
+   - Test password reset/forgot password flow
+
+2) Complete Navigation Testing
+   - Test ALL main navigation menu items
+   - Verify breadcrumb navigation works correctly
+   - Test footer links and secondary navigation
+   - Check mobile navigation and responsive menu
+   - Test search functionality throughout the application
+   - Verify internal page-to-page linking
+
+3) Core Application Features
+   - Test all main application sections and modules
+   - Verify data tables and lists display correctly
+   - Test filtering, sorting, and pagination features
+   - Check form functionality and validation
+   - Test any file upload/download capabilities
+   - Verify any reporting or analytics features
+
+4) User Management & Account Features
+   - Test user profile management and settings
+   - Verify account creation and registration process
+   - Test role-based access controls and permissions
+   - Check user preferences and customization options
+   - Test password change and security features
+   - Verify user activity logs and history
+
+5) Content Management & Data Operations
+   - Test content creation and editing workflows
+   - Verify data import/export functionality
+   - Check content publishing and approval processes
+   - Test search and filtering capabilities
+   - Verify data validation and error handling
+   - Test backup and restore features
+
+6) Application Performance & Technical
+   - Monitor page load times across all sections
+   - Check for JavaScript errors on all pages
+   - Verify database connectivity and performance
+   - Test concurrent user access scenarios
+   - Check memory usage during extended sessions
+   - Verify API endpoints and data exchange
+
+7) Integration & Third-Party Features
+   - Test any third-party integrations
+   - Verify external API connections
+   - Check payment/billing integrations if present
+   - Test email notification systems
+   - Verify social media integrations
+   - Check any external resource linking
+
+8) Security & Data Protection
+   - Test data security and privacy features
+   - Verify SSL certificate and HTTPS enforcement
+   - Check input validation and sanitization
+   - Test access control and authorization
+   - Verify data encryption and protection
+   - Check audit logs and security monitoring
+
+9) Responsive Design & Accessibility
+   - Test responsive design across different screen sizes
+   - Verify mobile functionality and touch interactions
+   - Check accessibility features and compliance
+   - Test keyboard navigation and screen readers
+   - Verify print functionality for key pages
+   - Check browser compatibility
+
+10) Error Handling & Edge Cases
+   - Test error pages and error handling
+   - Verify form validation and error messages
+   - Check timeout and session expiration handling
+   - Test with slow network connections
+   - Verify graceful degradation of features
+   - Check error logging and monitoring
+
+CRITICAL REGRESSION REQUIREMENTS:
+- Test MINIMUM 25 application-specific actions
+- Visit ALL major application sections
+- Test ALL interactive features and tools
+- Verify NO functionality degradation
+- Check performance across all application areas
+- Ensure data integrity and security
+
+STABILITY CHECKPOINTS:
+- All application features must work as before
+- User sessions must remain stable
+- Data must be consistent across sessions
+- Performance must meet established standards
+- All integrations must function correctly
+
+Continue testing until comprehensive application coverage achieved or 35+ actions completed.
     `,
     
           feature: `
-    Feature validation for Lavinia:
-    
-    1) Detect the newest/experimental feature surface (highlighted nav item, "New" badge, or recently added flow).
-    2) Verify visibility, required fields, and labels.
-    3) Run a happy-path submit/interaction.
-    4) Confirm correct confirmation/feedback and no console errors.
+FEATURE TEST for Lavinia Agricultural Platform - New Feature Validation:
+
+TARGETED FEATURE DISCOVERY & TESTING (20+ Actions Required):
+
+1) New Feature Identification
+   - Scan homepage for "New", "Updated", or "Recently Added" badges
+   - Look for new menu items or navigation changes
+   - Check for new call-to-action buttons or promotional content
+   - Identify any new forms, widgets, or interactive elements
+   - Look for new product offerings or service pages
+
+2) Enhanced Content & Media Features
+   - Test any new image galleries or photo albums
+   - Verify new video content plays correctly
+   - Check new downloadable resources (PDFs, brochures)
+   - Test new blog posts or news articles
+   - Verify new testimonials or case studies
+
+3) New Business Features
+   - Test new product catalog entries
+   - Verify new service offerings pages
+   - Check new pricing or quote request forms
+   - Test any new customer portal features
+   - Verify new contact or support channels
+
+4) Improved User Experience Features
+   - Test new search functionality or filters
+   - Verify enhanced navigation or menu systems
+   - Check new responsive design improvements
+   - Test new mobile-specific features
+   - Verify new accessibility improvements
+
+5) New Form & Interactive Elements
+   - Test any new contact or inquiry forms
+   - Verify new newsletter signup options
+   - Check new user registration processes
+   - Test new feedback or survey forms
+   - Verify new social media integration
+
+6) Technical & Performance Enhancements
+   - Test new page loading optimizations
+   - Verify new security features (SSL, form validation)
+   - Check new analytics or tracking implementation
+   - Test new third-party integrations
+   - Verify new SEO improvements
+
+7) New Integration Features
+   - Test new social media widgets or feeds
+   - Verify new Google Maps or location features
+   - Check new payment processing options
+   - Test new email marketing integrations
+   - Verify new CRM or lead capture systems
+
+8) Feature Integration Testing
+   - Verify new features work with existing navigation
+   - Test new features across different browsers
+   - Check new features on mobile devices
+   - Verify new features don't break existing functionality
+   - Test new features with different user scenarios
+
+VALIDATION REQUIREMENTS:
+- Test MINIMUM 20 feature-specific actions
+- Verify new features work as intended
+- Check integration with existing functionality
+- Test across multiple devices/browsers
+- Verify no existing features are broken
+- Document any issues or improvements needed
+
+SUCCESS CRITERIA:
+- All new features function correctly
+- No regression in existing functionality
+- New features enhance user experience
+- Performance impact is minimal
+- Mobile compatibility maintained
+- All integrations work seamlessly
+
+Continue testing until all identified new features are thoroughly validated.
     `
         }
       },
@@ -85,6 +350,10 @@ export const testingProfiles = {
           submitSelector: 'button:has-text("Sign in"), button[type="submit"]',
           usernameEnv: "PASSAGEPREP_USERNAME",
           passwordEnv: "PASSAGEPREP_PASSWORD"
+        },
+        basicAuth: {
+          username: "admin",
+          password: "passageprep2024"
         },
         prompts: {
           exploratory: `
@@ -164,6 +433,10 @@ export const testingProfiles = {
           submitSelector: 'button:has-text("Log in"), button[type="submit"]',
           usernameEnv: "TEACHING_USERNAME",
           passwordEnv: "TEACHING_PASSWORD"
+        },
+        basicAuth: {
+          username: "teacher",
+          password: "teaching2024"
         },
         prompts: {
           exploratory: `

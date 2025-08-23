@@ -9,6 +9,9 @@ export default function JiraTickets() {
   const [generating, setGenerating] = useState(false)
   const [username, setUsername] = useState('faraz.khan@k12coalition.com')
   const [statusFilter, setStatusFilter] = useState('all')
+  const [materializing, setMaterializing] = useState(false)
+  const [running, setRunning] = useState(false)
+  const [runOutput, setRunOutput] = useState('')
 
   // Fetch JIRA tickets
   const fetchTickets = async () => {
@@ -42,64 +45,235 @@ export default function JiraTickets() {
       
       if (!response.ok) throw new Error('Failed to generate test cases')
       const data = await response.json()
-      setTestCases(data)
+
+      // Normalize response to a safe array of test cases with array bddSteps
+      const normalized = (Array.isArray(data) ? data : []).map((tc, idx) => {
+        const steps = Array.isArray(tc?.bddSteps)
+          ? tc.bddSteps
+          : typeof tc?.bddSteps === 'string'
+            ? tc.bddSteps.split(/\r?\n/).map(s => s.trim()).filter(Boolean)
+            : []
+        return {
+          testCaseId: tc?.testCaseId || `TC-${String(idx + 1).padStart(3, '0')}`,
+          title: tc?.title || 'Untitled Test Case',
+          priority: tc?.priority || 'Medium',
+          bddSteps: steps
+        }
+      })
+      setTestCases(normalized)
       
       // Generate Playwright script
       const scriptResponse = await fetch(`${import.meta.env.VITE_API_BASE}/api/jira/generate-playwright`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ testCases: data })
+        body: JSON.stringify({ testCases: normalized })
       })
       
       if (scriptResponse.ok) {
         const scriptData = await scriptResponse.json()
         setPlaywrightScript(scriptData.script)
+      } else {
+        setPlaywrightScript('')
       }
     } catch (error) {
       console.error('Error generating test cases:', error)
       alert('Failed to generate test cases. Check your OpenAI configuration.')
+      setTestCases([])
+      setPlaywrightScript('')
     } finally {
       setGenerating(false)
     }
   }
 
-  // Download Playwright script
-  const downloadScript = () => {
-    const blob = new Blob([playwrightScript], { type: 'text/javascript' })
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement('a')
-    a.href = url
-    a.download = `${selectedTicket?.key || 'test'}-playwright.spec.js`
-    document.body.appendChild(a)
-    a.click()
-    document.body.removeChild(a)
-    URL.revokeObjectURL(url)
+  // Materialize Playwright project files from generated script
+  const materializePlaywright = async () => {
+    try {
+      setMaterializing(true)
+      if (!selectedTicket || !playwrightScript) {
+        alert('No generated script to materialize')
+        return
+      }
+
+      // Helper: extract code blocks from fenced markdown or raw
+      const extractBlocks = (text) => {
+        const blocks = []
+        const regex = /```[a-zA-Z]*\n([\s\S]*?)```/g
+        let m
+        while ((m = regex.exec(text)) !== null) {
+          blocks.push(m[1].trim())
+        }
+        if (blocks.length === 0) {
+          blocks.push(text.trim())
+        }
+        return blocks
+      }
+
+      const toSafeName = (s) => s.replace(/[^A-Za-z0-9_-]/g, '_')
+
+      const ensureExport = (code, className) => {
+        if (!className) return code
+        if (!/export\s*\{\s*[^}]+\}/.test(code) && !/export\s+default/.test(code)) {
+          return `${code}\n\nexport { ${className} };\n`
+        }
+        return code
+      }
+
+      const ensureJsExt = (p) => (p.endsWith('.js') ? p : `${p}.js`)
+
+      const fixImports = (code, isSpec = false) => {
+        // Normalize import path to ../pages for specs and ./pages for page modules
+        // 1) Convert page-objects -> pages
+        let out = code.replace(/from\s+['"]\.\/(page-objects|pages)\//g, (m) => `from '${isSpec ? '../pages/' : './pages/'}`)
+        // 2) Also handle without leading ./
+        out = out.replace(/from\s+['"](page-objects|pages)\//g, (m) => `from '${isSpec ? '../pages/' : './pages/'}`)
+        // 3) Ensure .js extension for pages imports
+        out = out.replace(/from\s+['"]([^'"\n]+\/pages\/[^'"\n]+)['"]/g, (full, p1) => {
+          return `from '${ensureJsExt(p1)}'`
+        })
+        return out
+      }
+
+      const transformSpec = (code) => {
+        let out = code
+        // Ensure @playwright/test import is present
+        if (!/from\s+['"]@playwright\/test['"]/.test(out)) {
+          out = `import { test, expect } from '@playwright/test'\n` + out
+        }
+        // If code uses playwright[browserName], ensure playwright import
+        if (/playwright\s*\[/.test(out) && !/from\s+['"]playwright['"]/.test(out)) {
+          out = `import playwright from 'playwright'\n` + out
+        }
+        // Replace Puppeteer-style page.emulate(...) with viewport setup
+        out = out.replace(/await\s+page\.emulate\([^)]*\);?/g, (m) => {
+          const vp = m.match(/viewport\s*:\s*\{\s*width\s*:\s*(\d+)\s*,\s*height\s*:\s*(\d+)\s*\}/)
+          const width = vp ? parseInt(vp[1], 10) : 375
+          const height = vp ? parseInt(vp[2], 10) : 667
+          return `await page.setViewportSize({ width: ${width}, height: ${height} });`
+        })
+        return out
+      }
+
+      const guessFileFromBlock = (block) => {
+        const lines = block.split(/\r?\n/)
+        for (let i = 0; i < Math.min(5, lines.length); i++) {
+          const ln = lines[i].trim()
+          const m = ln.match(/^\/\/\s*([^\s].*\.js)$/)
+          if (m) {
+            const rel = m[1].replace(/^page-objects\//, 'pages/')
+            const isSpecHint = /tests\//.test(rel) || /\.spec\.js$/.test(rel)
+            return { path: rel.startsWith('pages/') || rel.startsWith('tests/') ? rel : (isSpecHint ? `tests/${rel}` : `pages/${rel}`), content: block }
+          }
+        }
+
+        const isTest = /@playwright\/test|\btest\.describe\(|\btest\(/.test(block)
+        if (isTest) {
+          const specName = `${toSafeName(selectedTicket.key)}.spec.js`
+          return { path: `tests/${specName}`, content: fixImports(block, true) }
+        }
+
+        const classMatch = block.match(/class\s+([A-Za-z0-9_]+)/)
+        if (classMatch) {
+          const className = classMatch[1]
+          let content = block
+          content = content.replace(/export\s*\{[\s\S]*?\};?/g, '').trim()
+          content = ensureExport(content, className)
+          return { path: `pages/${className}.js`, content }
+        }
+
+        const specName = `${toSafeName(selectedTicket.key)}.spec.js`
+        return { path: `tests/${specName}`, content: fixImports(block, true) }
+      }
+
+      const blocks = extractBlocks(playwrightScript)
+      const filesMap = new Map()
+
+      blocks.forEach((block) => {
+        const file = guessFileFromBlock(block)
+        if (file.path.startsWith('tests/')) {
+          file.content = transformSpec(fixImports(file.content, true))
+        } else {
+          file.content = fixImports(file.content, false)
+        }
+        if (filesMap.has(file.path)) {
+          filesMap.set(file.path, filesMap.get(file.path) + "\n\n" + file.content)
+        } else {
+          filesMap.set(file.path, file.content)
+        }
+      })
+
+      const files = Array.from(filesMap.entries()).map(([path, content]) => ({ path, content }))
+
+      if (files.length === 0) {
+        alert('Could not derive files from generated script')
+        return
+      }
+
+      // Ensure minimal config files
+      files.push({ path: `playwright.config.js`, content: `// Auto-generated config\nimport { defineConfig } from '@playwright/test';\nexport default defineConfig({ testDir: './tests', use: { headless: true } });\n` })
+      files.push({ path: `package.json`, content: `{"private": true, "type": "module"}` })
+
+      const resp = await fetch(`${import.meta.env.VITE_API_BASE}/api/playwright/materialize`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ files })
+      })
+      if (!resp.ok) throw new Error('Failed to write files')
+      const json = await resp.json()
+      alert(`Playwright files written under: ${json.baseDir}`)
+    } catch (err) {
+      console.error(err)
+      alert(err.message)
+    } finally {
+      setMaterializing(false)
+    }
   }
 
-  // Download test cases as Excel
+  const runPlaywright = async () => {
+    try {
+      setRunning(true)
+      setRunOutput('')
+      const resp = await fetch(`${import.meta.env.VITE_API_BASE}/api/playwright/run`, { method: 'POST' })
+      const json = await resp.json()
+      setRunOutput(json.output || `Exit code: ${json.code}`)
+    } catch (err) {
+      console.error(err)
+      alert(err.message)
+    } finally {
+      setRunning(false)
+    }
+  }
+
+  // Download test cases as CSV
   const downloadTestCases = () => {
-    // Convert test cases to Excel format
-    const excelData = testCases.map(tc => ({
-      'Test Case ID': tc.testCaseId,
-      'Title': tc.title,
-      'Priority': tc.priority,
-      'Test Script (BDD)': tc.bddSteps.join('\n')
-    }))
-    
-    // Create CSV content
-    const headers = Object.keys(excelData[0]).join(',')
-    const rows = excelData.map(row => Object.values(row).map(v => `"${v}"`).join(','))
-    const csv = [headers, ...rows].join('\n')
-    
-    const blob = new Blob([csv], { type: 'text/csv' })
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement('a')
-    a.href = url
-    a.download = `${selectedTicket?.key || 'test'}-test-cases.csv`
-    document.body.appendChild(a)
-    a.click()
-    document.body.removeChild(a)
-    URL.revokeObjectURL(url)
+    try {
+      if (!Array.isArray(testCases) || testCases.length === 0) {
+        alert('No test cases to download')
+        return
+      }
+      const rows = testCases.map(tc => ({
+        'Test Case ID': tc?.testCaseId || '',
+        'Title': tc?.title || '',
+        'Priority': tc?.priority || '',
+        'Test Script (BDD)': Array.isArray(tc?.bddSteps) ? tc.bddSteps.join('\n') : ''
+      }))
+      const headers = Object.keys(rows[0])
+      const csv = [
+        headers.join(','),
+        ...rows.map(r => headers.map(h => `"${String(r[h] ?? '').replace(/"/g, '""')}"`).join(','))
+      ].join('\n')
+      const blob = new Blob([csv], { type: 'text/csv' })
+      const url = URL.createObjectURL(blob)
+      const a = document.createElement('a')
+      a.href = url
+      a.download = `${selectedTicket?.key || 'test'}-test-cases.csv`
+      document.body.appendChild(a)
+      a.click()
+      document.body.removeChild(a)
+      URL.revokeObjectURL(url)
+    } catch (e) {
+      console.error(e)
+      alert('Failed to download CSV')
+    }
   }
 
   useEffect(() => {
@@ -252,8 +426,9 @@ export default function JiraTickets() {
           </div>
         )}
 
-        {/* Tickets List */}
+        {/* Tickets List + Generated Content */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {/* Tickets */}
           <div>
             <div className="bg-white rounded-2xl shadow-xl p-6 border border-slate-200/50 mb-6">
               <h2 className="text-xl font-semibold text-slate-800 mb-4 flex items-center gap-2">
@@ -396,7 +571,7 @@ export default function JiraTickets() {
                           </div>
                           <h4 className="font-semibold text-slate-900 mb-3">{tc.title}</h4>
                           <ol className="list-decimal list-inside space-y-2 text-sm text-slate-600">
-                            {tc.bddSteps.map((step, stepIndex) => (
+                            {(Array.isArray(tc.bddSteps) ? tc.bddSteps : []).map((step, stepIndex) => (
                               <li key={stepIndex} className="bg-slate-50 px-3 py-2 rounded-md">{step}</li>
                             ))}
                           </ol>
@@ -426,15 +601,29 @@ export default function JiraTickets() {
                       <pre className="bg-slate-900 text-slate-100 p-4 rounded-lg text-xs overflow-x-auto max-h-96 border border-slate-700">
                         <code>{playwrightScript}</code>
                       </pre>
-                      <button
-                        onClick={downloadScript}
-                        className="mt-4 w-full px-4 py-3 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-semibold rounded-xl shadow-md hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-200 flex items-center justify-center gap-2"
-                      >
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                        </svg>
-                        Download Playwright Script
-                      </button>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-4">
+                        <button
+                          onClick={materializePlaywright}
+                          disabled={materializing}
+                          className="w-full px-4 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 disabled:from-slate-400 disabled:to-slate-500 text-white font-semibold rounded-xl shadow-md hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-200 flex items-center justify-center gap-2"
+                        >
+                          {materializing ? 'Writing files...' : 'Write Files to Repo'}
+                        </button>
+                        <button
+                          onClick={runPlaywright}
+                          disabled={running}
+                          className="w-full px-4 py-3 bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-700 hover:to-green-700 disabled:from-slate-400 disabled:to-slate-500 text-white font-semibold rounded-xl shadow-md hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-200 flex items-center justify-center gap-2"
+                        >
+                          {running ? 'Running...' : 'Run Playwright Tests'}
+                        </button>
+                      </div>
+
+                      {runOutput && (
+                        <div className="mt-4 bg-slate-50 border border-slate-200 rounded-xl p-4">
+                          <h4 className="font-semibold text-slate-800 mb-2">Run Output</h4>
+                          <pre className="text-xs text-slate-700 whitespace-pre-wrap">{runOutput}</pre>
+                        </div>
+                      )}
                     </div>
                   )}
                 </div>

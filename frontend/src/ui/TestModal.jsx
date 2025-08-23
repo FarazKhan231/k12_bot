@@ -8,9 +8,7 @@ export default function TestModal({open, onClose, selected}){
   const [url, setUrl] = useState('')
   const [file, setFile] = useState(null)
   const [testCasesFile, setTestCasesFile] = useState(null)
-  const [useBasicAuth, setUseBasicAuth] = useState(false)
-  const [basicUser, setBasicUser] = useState('')
-  const [basicPass, setBasicPass] = useState('')
+
   const [submitting, setSubmitting] = useState(false)
   const [message, setMessage] = useState('')
 
@@ -31,10 +29,7 @@ export default function TestModal({open, onClose, selected}){
         if(!file){ throw new Error('Please choose a screenshot file') }
         form.append('screenshot', file)
       }
-      if(useBasicAuth){
-        form.append('basicAuthUser', basicUser)
-        form.append('basicAuthPass', basicPass)
-      }
+
       if(testCasesFile){
         form.append('testCases', testCasesFile)
       }
@@ -97,33 +92,6 @@ export default function TestModal({open, onClose, selected}){
             />
           )}
         </div>
-
-        {tab==='url' && (
-          <div className="mb-4">
-            <label className="inline-flex items-center gap-2">
-              <input type="checkbox" checked={useBasicAuth} onChange={e=>setUseBasicAuth(e.target.checked)} />
-              <span>Use HTTP Basic Auth</span>
-            </label>
-            {useBasicAuth && (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-3">
-                <input
-                  type="text"
-                  placeholder="Username"
-                  className="w-full border border-slate-200 rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-slate-200"
-                  value={basicUser}
-                  onChange={e=>setBasicUser(e.target.value)}
-                />
-                <input
-                  type="password"
-                  placeholder="Password"
-                  className="w-full border border-slate-200 rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-slate-200"
-                  value={basicPass}
-                  onChange={e=>setBasicPass(e.target.value)}
-                />
-              </div>
-            )}
-          </div>
-        )}
 
         <div className="mb-4">
           <label className="block mb-2 text-sm font-medium text-slate-700">Optional: Upload Excel test cases (.xlsx)</label>
