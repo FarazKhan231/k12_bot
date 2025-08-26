@@ -1,0 +1,80 @@
+{
+  "actions": [
+    {
+      "action": "click",
+      "target": {
+        "uid": "e1",
+        "tag": "a",
+        "role": "",
+        "type": "",
+        "name": "",
+        "id": "",
+        "placeholder": "",
+        "href": "https://laviniagro1stg.wpengine.com/user-account",
+        "label": "Dashboard",
+        "text": "Dashboard",
+        "required": false,
+        "disabled": false,
+        "selector": "a:has-text(\"Dashboard\")"
+      },
+      "value": null,
+      "status": "ok",
+      "notes": "Navigate to Dashboard from My Account."
+    },
+    {
+      "action": "click",
+      "target": {
+        "uid": "e2",
+        "tag": "a",
+        "role": "",
+        "type": "",
+        "name": "",
+        "id": "",
+        "placeholder": "",
+        "href": "https://laviniagro1stg.wpengine.com/user-account/platform-roster",
+        "label": "Platform Roster",
+        "text": "Platform Roster",
+        "required": false,
+        "disabled": false,
+        "selector": "a:has-text(\"Platform Roster\")"
+      },
+      "value": null,
+      "status": "ok",
+      "notes": "Access Platform Roster."
+    },
+    {
+      "action": "click",
+      "target": {
+        "uid": "e3",
+        "tag": "a",
+        "role": "",
+        "type": "",
+        "name": "",
+        "id": "",
+        "placeholder": "",
+        "href": "https://laviniagro1stg.wpengine.com/user-account/platform-roster#",
+        "label": "RISE Curriculum Library",
+        "text": "RISE Curriculum Library",
+        "required": false,
+        "disabled": false,
+        "selector": "a:has-text(\"RISE Curriculum Library\")"
+      },
+      "value": null,
+      "status": "ok",
+      "notes": "Open RISE Curriculum Library."
+    },
+    {
+      "action": "end",
+      "status": "end",
+      "notes": "End of actions."
+    }
+  ],
+  "consoleErrors": [
+    "Access to script at 'https://js.hsleadflows.net/leadflows.js' from origin 'https://laviniagro1stg.wpengine.com' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+    "Failed to load resource: net::ERR_FAILED",
+    "TypeError: $(...).select2 is not a function",
+    "Access to script at 'https://js.hsleadflows.net/leadflows.js' from origin 'https://laviniagro1stg.wpengine.com' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 404 ()"
+  ]
+}

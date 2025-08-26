@@ -1,0 +1,365 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<title>Lavinia · smoke Report</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    margin: 0; padding: 0; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+  }
+  
+  .container {
+    max-width: 1200px; margin: 0 auto; padding: 20px;
+  }
+  
+  .header {
+    background: white; border-radius: 20px; padding: 30px; margin-bottom: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    text-align: center;
+  }
+  
+  .header h1 {
+    margin: 0 0 10px 0; font-size: 2.5em; font-weight: 700;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .header .meta {
+    color: #6b7280; font-size: 1.1em;
+  }
+  
+  .summary-cards {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px; margin-bottom: 20px;
+  }
+  
+  .summary-card {
+    background: white; border-radius: 16px; padding: 25px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    text-align: center; transition: transform 0.2s;
+  }
+  
+  .summary-card:hover { transform: translateY(-2px); }
+  
+  .summary-card .number {
+    font-size: 2.5em; font-weight: 700; margin-bottom: 5px;
+  }
+  
+  .summary-card .label {
+    color: #6b7280; font-size: 0.9em; text-transform: uppercase; letter-spacing: 0.5px;
+  }
+  
+  .total .number { color: #3b82f6; }
+  .passed .number { color: #10b981; }
+  .failed .number { color: #ef4444; }
+  .success .number { color: #f59e0b; }
+  
+  .section {
+    background: white; border-radius: 16px; margin-bottom: 20px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1); overflow: hidden;
+  }
+  
+  .section-header {
+    background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+    padding: 20px 25px; cursor: pointer; user-select: none;
+    display: flex; align-items: center; justify-content: space-between;
+    transition: background 0.2s;
+  }
+  
+  .section-header:hover { background: linear-gradient(135deg, #e2e8f0, #cbd5e1); }
+  
+  .section-header h2 {
+    margin: 0; font-size: 1.3em; font-weight: 600; color: #1e293b;
+  }
+  
+  .section-content {
+    padding: 25px; display: none;
+  }
+  
+  .section-content.active { display: block; }
+  
+  .toggle-icon {
+    font-size: 1.2em; transition: transform 0.2s;
+  }
+  
+  .section-header.active .toggle-icon { transform: rotate(180deg); }
+  
+  .plan-content {
+    background: #f8fafc; border-radius: 12px; padding: 20px;
+    border-left: 4px solid #3b82f6; font-size: 1.1em; line-height: 1.6;
+  }
+  
+  .checks-list {
+    background: #f8fafc; border-radius: 12px; padding: 20px;
+    border-left: 4px solid #10b981;
+  }
+  
+  .checks-list ol, .checks-list ul {
+    margin: 0; padding-left: 20px;
+  }
+  
+  .checks-list li {
+    margin-bottom: 10px; line-height: 1.5;
+  }
+  
+  .actions-table {
+    width: 100%; border-collapse: collapse; margin-top: 15px;
+  }
+  
+  .actions-table th {
+    background: #f1f5f9; padding: 12px; text-align: left; font-weight: 600;
+    color: #475569; border-bottom: 2px solid #e2e8f0;
+  }
+  
+  .actions-table td {
+    padding: 12px; border-bottom: 1px solid #f1f5f9;
+  }
+  
+  .action-row { transition: background 0.2s; }
+  .action-row:hover { background: #f8fafc; }
+  
+  .action-row.status-ok { border-left: 4px solid #10b981; }
+  .action-row.status-error { border-left: 4px solid #ef4444; }
+  .action-row.status-pending { border-left: 4px solid #f59e0b; }
+  
+  .step-number { font-weight: 600; color: #475569; width: 50px; }
+  .action-type { font-family: 'Monaco', 'Menlo', monospace; }
+  .action-status { font-weight: 600; }
+  .action-notes { color: #6b7280; font-size: 0.9em; }
+  
+  .media-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px; margin-top: 15px;
+  }
+  
+  .media-item {
+    background: #f8fafc; border-radius: 12px; padding: 15px;
+    border: 1px solid #e2e8f0;
+  }
+  
+  .media-item img, .media-item video {
+    width: 100%; border-radius: 8px; margin-bottom: 10px;
+  }
+  
+  .media-item .caption {
+    color: #6b7280; font-size: 0.9em; text-align: center;
+  }
+  
+  .no-media {
+    text-align: center; color: #6b7280; font-style: italic;
+    padding: 40px 20px;
+  }
+  
+  @media (max-width: 768px) {
+    .container { padding: 10px; }
+    .summary-cards { grid-template-columns: repeat(2, 1fr); }
+    .actions-table { font-size: 0.9em; }
+    .actions-table th, .actions-table td { padding: 8px; }
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Lavinia · smoke Report</h1>
+      <div class="meta">Started: 2025-08-20T17:30:58.124Z</div>
+    </div>
+
+    <div class="summary-cards">
+      <div class="summary-card total">
+        <div class="number">4</div>
+        <div class="label">Total Steps</div>
+      </div>
+      <div class="summary-card passed">
+        <div class="number">3</div>
+        <div class="label">Passed</div>
+      </div>
+      <div class="summary-card failed">
+        <div class="number">0</div>
+        <div class="label">Failed</div>
+      </div>
+      <div class="summary-card success">
+        <div class="number">75%</div>
+        <div class="label">Success Rate</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header" onclick="toggleSection('plan')">
+        <h2>📋 Test Plan</h2>
+        <span class="toggle-icon">▼</span>
+      </div>
+      <div class="section-content" id="plan-content">
+        <div class="plan-content"># Smoke Testing Plan for Lavinia Agricultural Platform<br/><br/>## Objective<br/>Validate critical path functionality of the Lavinia Agricultural Platform.<br/><br/>## Execution Order<br/>1. Platform Access & Authentication<br/>2. Core Navigation Testing<br/>3. Essential Content Validation<br/>4. Form Testing<br/>5. Mobile/Responsive Check<br/><br/>## Performance Requirements<br/>- Page load time: ≤ 5 seconds<br/>- No broken images or 404 errors<br/>- Zero JavaScript console errors<br/>- All links functional</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header" onclick="toggleSection('checks')">
+        <h2>✅ Test Checks</h2>
+        <span class="toggle-icon">▼</span>
+      </div>
+      <div class="section-content" id="checks-content">
+        <div class="checks-list">
+          <h3>Test Steps:</h3>
+          <ol><li><strong>Verify Homepage Branding</strong> — <em>Ensure basic branding loads correctly.</em></li>
+<li><strong>Verify Login Form Appearance</strong> — <em>Confirm login form is accessible.</em></li>
+<li><strong>Verify Dashboard Load</strong> — <em>Ensure successful login leads to dashboard.</em></li>
+<li><strong>Check JavaScript Console Errors</strong> — <em>Identify any errors during login process.</em></li>
+<li><strong>Verify Homepage Content</strong> — <em>Ensure homepage displays expected content.</em></li>
+<li><strong>Verify About Page Load</strong> — <em>Confirm about page loads with correct content.</em></li>
+<li><strong>Verify Products/Services Load</strong> — <em>Ensure product listings are visible.</em></li>
+<li><strong>Verify Resources Page Load</strong> — <em>Check resource pages are accessible.</em></li>
+<li><strong>Verify Contact Form Accessibility</strong> — <em>Ensure contact form is reachable.</em></li>
+<li><strong>Verify Careers Page Load</strong> — <em>Confirm careers page loads correctly.</em></li>
+<li><strong>Verify Dropdown Menu Functionality</strong> — <em>Ensure subpages load from dropdowns.</em></li>
+<li><strong>Verify Hero Section/Banner Images Load</strong> — <em>Check that images are displayed properly.</em></li>
+<li><strong>Verify Main Content Sections Render</strong> — <em>Ensure main content is displayed correctly.</em></li>
+<li><strong>Test Image Galleries/Media Content</strong> — <em>Verify galleries and media load correctly.</em></li>
+<li><strong>Verify Social Media Links Functionality</strong> — <em>Ensure footer links work as expected.</em></li>
+<li><strong>Check Contact Information Display</strong> — <em>Confirm contact info is visible.</em></li>
+<li><strong>Verify Contact Form Fields</strong> — <em>Ensure all fields are present in the form.</em></li>
+<li><strong>Test Form Validation</strong> — <em>Check validation without submitting the form.</em></li>
+<li><strong>Verify Newsletter Signup Form</strong> — <em>Ensure newsletter form is functional.</em></li>
+<li><strong>Check Quote Request Forms</strong> — <em>Verify quote request forms are accessible.</em></li>
+<li><strong>Verify Mobile Navigation Menu</strong> — <em>Ensure menu works on mobile devices.</em></li>
+<li><strong>Check Mobile Content Display</strong> — <em>Confirm content displays properly on mobile.</em></li></ol>
+          <h3>Testing Heuristics:</h3>
+          <ul><li>Check for visual consistency across pages.</li>
+<li>Ensure all interactive elements are responsive.</li>
+<li>Validate accessibility standards are met.</li>
+<li>Monitor for performance issues during navigation.</li></ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header" onclick="toggleSection('actions')">
+        <h2>🎯 Test Actions</h2>
+        <span class="toggle-icon">▼</span>
+      </div>
+      <div class="section-content" id="actions-content">
+        <table class="actions-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Action</th>
+              <th>Target</th>
+              <th>Value</th>
+              <th>Status</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+    <tr class="action-row status-ok">
+      <td class="step-number">1</td>
+      <td class="action-type"><code>click</code></td>
+      <td class="action-target">Dashboard</td>
+      <td class="action-value"></td>
+      <td class="action-status">✅ ok</td>
+      <td class="action-notes">Navigate to Dashboard from My Account.</td>
+    </tr>
+    <tr class="action-row status-ok">
+      <td class="step-number">2</td>
+      <td class="action-type"><code>click</code></td>
+      <td class="action-target">Platform Roster</td>
+      <td class="action-value"></td>
+      <td class="action-status">✅ ok</td>
+      <td class="action-notes">Access Platform Roster.</td>
+    </tr>
+    <tr class="action-row status-ok">
+      <td class="step-number">3</td>
+      <td class="action-type"><code>click</code></td>
+      <td class="action-target">RISE Curriculum Library</td>
+      <td class="action-value"></td>
+      <td class="action-status">✅ ok</td>
+      <td class="action-notes">Open RISE Curriculum Library.</td>
+    </tr>
+    <tr class="action-row status-pending">
+      <td class="step-number">4</td>
+      <td class="action-type"><code>end</code></td>
+      <td class="action-target"></td>
+      <td class="action-value"></td>
+      <td class="action-status">⏳ end</td>
+      <td class="action-notes">End of actions.</td>
+    </tr></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header" onclick="toggleSection('video')">
+        <h2>🎥 Screen Recording</h2>
+        <span class="toggle-icon">▼</span>
+      </div>
+      <div class="section-content" id="video-content">
+        <div class="media-grid">
+            
+              <div class="media-item">
+                <video controls style="width:100%;border-radius:8px;">
+                  <source src="http://localhost:8787/artifacts/0feafd22-a391-4b77-beab-cb990bb3b07d/assets/6809cdd34aaabc4afabad87efb99f122.webm" type="video/webm">
+                  Your browser does not support the video tag.
+                </video>
+                <div class="caption">6809cdd34aaabc4afabad87efb99f122.webm</div>
+              </div>
+            
+          </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header" onclick="toggleSection('screenshots')">
+        <h2>📸 Screenshots</h2>
+        <span class="toggle-icon">▼</span>
+      </div>
+      <div class="section-content" id="screenshots-content">
+        <div class="media-grid">
+            
+              <div class="media-item">
+                <img src="http://localhost:8787/artifacts/0feafd22-a391-4b77-beab-cb990bb3b07d/assets/01_initial.png" alt="01_initial.png" style="width:100%;border-radius:8px;">
+                <div class="caption">01_initial.png</div>
+              </div>
+            
+              <div class="media-item">
+                <img src="http://localhost:8787/artifacts/0feafd22-a391-4b77-beab-cb990bb3b07d/assets/02_click.png" alt="02_click.png" style="width:100%;border-radius:8px;">
+                <div class="caption">02_click.png</div>
+              </div>
+            
+              <div class="media-item">
+                <img src="http://localhost:8787/artifacts/0feafd22-a391-4b77-beab-cb990bb3b07d/assets/03_click.png" alt="03_click.png" style="width:100%;border-radius:8px;">
+                <div class="caption">03_click.png</div>
+              </div>
+            
+              <div class="media-item">
+                <img src="http://localhost:8787/artifacts/0feafd22-a391-4b77-beab-cb990bb3b07d/assets/04_click.png" alt="04_click.png" style="width:100%;border-radius:8px;">
+                <div class="caption">04_click.png</div>
+              </div>
+            
+          </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function toggleSection(sectionId) {
+      const header = event.currentTarget;
+      const content = document.getElementById(sectionId + '-content');
+      
+      header.classList.toggle('active');
+      content.classList.toggle('active');
+    }
+    
+    // Auto-expand first section (Test Plan)
+    document.addEventListener('DOMContentLoaded', function() {
+      const firstSection = document.querySelector('.section-header');
+      if (firstSection) {
+        firstSection.click();
+      }
+    });
+  </script>
+</body>
+</html>

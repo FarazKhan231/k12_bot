@@ -1,0 +1,77 @@
+{
+  "actions": [
+    {
+      "action": "fill",
+      "target": {
+        "uid": "e1",
+        "tag": "input",
+        "role": "",
+        "type": "text",
+        "name": "log",
+        "id": "user_login",
+        "placeholder": "",
+        "href": "",
+        "label": "Username or Email Address",
+        "text": "",
+        "required": true,
+        "disabled": false,
+        "selector": "#user_login"
+      },
+      "value": "testuser",
+      "status": "ok",
+      "notes": "Fill in the username field."
+    },
+    {
+      "action": "fill",
+      "target": {
+        "uid": "e2",
+        "tag": "input",
+        "role": "",
+        "type": "password",
+        "name": "pwd",
+        "id": "user_pass",
+        "placeholder": "",
+        "href": "",
+        "label": "Password",
+        "text": "",
+        "required": true,
+        "disabled": false,
+        "selector": "#user_pass"
+      },
+      "value": "***",
+      "status": "ok",
+      "notes": "Fill in the password field."
+    },
+    {
+      "action": "click",
+      "target": {
+        "uid": "e5",
+        "tag": "input",
+        "role": "",
+        "type": "submit",
+        "name": "wp-submit",
+        "id": "wp-submit",
+        "placeholder": "",
+        "href": "",
+        "label": "",
+        "text": "",
+        "required": false,
+        "disabled": false,
+        "selector": "#wp-submit"
+      },
+      "value": null,
+      "status": "ok",
+      "notes": "Click the submit button to log in."
+    },
+    {
+      "action": "end",
+      "status": "end",
+      "notes": "End actions after login attempt."
+    }
+  ],
+  "consoleErrors": [
+    "Access to script at 'https://js.hsleadflows.net/leadflows.js' from origin 'https://laviniagro1stg.wpengine.com' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 403 ()"
+  ]
+}

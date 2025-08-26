@@ -1,0 +1,164 @@
+{
+  "actions": [
+    {
+      "action": "click",
+      "target": {
+        "id": null,
+        "name": null,
+        "placeholder": null,
+        "text": "PLATFORM LOGIN",
+        "selector": ""
+      },
+      "value": null,
+      "status": "ok",
+      "notes": "Click on PLATFORM LOGIN"
+    },
+    {
+      "action": "fill",
+      "target": {
+        "placeholder": "username",
+        "name": "username"
+      },
+      "value": "faraz.khan+1@k12coalition.com",
+      "status": "ok",
+      "notes": "Fill username with faraz.khan+1@k12coalition.com"
+    },
+    {
+      "action": "fill",
+      "target": {
+        "placeholder": "password",
+        "name": "password"
+      },
+      "value": "***",
+      "status": "ok",
+      "notes": "Fill password"
+    },
+    {
+      "action": "click",
+      "target": {
+        "id": null,
+        "name": null,
+        "placeholder": null,
+        "text": "login",
+        "selector": ""
+      },
+      "value": null,
+      "status": "error",
+      "notes": "Click login button | locator.waitFor: Error: strict mode violation: getByText('login') resolved to 3 elements:\n    1) <span class=\"menu-item-text\">platform Login</span> aka getByRole('link', { name: 'platform Login' })\n    2) <span class=\"menu-item-text\">Login</span> aka locator('#menu-item-51866').getByText('Login')\n    3) <button name=\"login\" type=\"submit\" value=\"Login\" class=\"user-registration-Button button \">Login</button> aka getByRole('button', { name: 'Login' })\n\nCall log:\n\u001b[2m  - waiting for getByText('login') to be visible\u001b[22m\n"
+    },
+    {
+      "action": "click",
+      "target": {
+        "id": null,
+        "name": null,
+        "placeholder": null,
+        "text": "When navigating to the dashboard",
+        "selector": ""
+      },
+      "value": null,
+      "status": "error",
+      "notes": "locator.waitFor: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText('When navigating to the dashboard') to be visible\u001b[22m\n"
+    },
+    {
+      "action": "hover",
+      "target": {
+        "id": null,
+        "name": null,
+        "placeholder": null,
+        "text": "the RISE curriculum Library",
+        "selector": ""
+      },
+      "value": null,
+      "status": "error",
+      "notes": "And the user hovers over the RISE curriculum Library | locator.waitFor: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText('the RISE curriculum Library') to be visible\u001b[22m\n"
+    },
+    {
+      "action": "assertText",
+      "target": null,
+      "value": "the Rising 1st Grade - 9th Grade pages will appear",
+      "status": "error",
+      "notes": "Then the Rising 1st Grade - 9th Grade pages will appear | Target not found"
+    },
+    {
+      "action": "click",
+      "target": {
+        "id": null,
+        "name": null,
+        "placeholder": null,
+        "text": "When the user selects the Rising pages",
+        "selector": ""
+      },
+      "value": null,
+      "status": "error",
+      "notes": "locator.waitFor: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText('When the user selects the Rising pages') to be visible\u001b[22m\n"
+    },
+    {
+      "action": "assertText",
+      "target": null,
+      "value": "the links will be correctly linked.",
+      "status": "error",
+      "notes": "Then the links will be correctly linked. | Target not found"
+    },
+    {
+      "action": "click",
+      "target": {
+        "uid": "e20",
+        "tag": "button",
+        "role": "",
+        "type": "submit",
+        "name": "login",
+        "id": "",
+        "placeholder": "",
+        "href": "",
+        "label": "Login",
+        "text": "Login",
+        "required": false,
+        "disabled": false,
+        "selector": "[name=\"login\"]"
+      },
+      "value": null,
+      "status": "ok",
+      "notes": "Click on Login button to attempt login."
+    },
+    {
+      "action": "click",
+      "target": null,
+      "value": null,
+      "status": "error",
+      "notes": "Click on 'Lost your password?' for password recovery. | Target not found"
+    },
+    {
+      "action": "navigate",
+      "target": {
+        "uid": "e6",
+        "tag": "a",
+        "role": "",
+        "type": "",
+        "name": "",
+        "id": "",
+        "placeholder": "",
+        "href": "https://laviniagro1stg.wpengine.com/user-account/course-completion",
+        "label": "On-Demand Course Completion",
+        "text": "On-Demand Course Completion",
+        "required": false,
+        "disabled": false,
+        "selector": "a:has-text(\"On-Demand Course Completion\")"
+      },
+      "value": null,
+      "status": "error",
+      "notes": "Navigate to Careers page to check for UI consistency. | Unsupported action: navigate"
+    },
+    {
+      "action": "end",
+      "status": "end",
+      "notes": "End of actions."
+    }
+  ],
+  "consoleErrors": [
+    "Access to script at 'https://js.hsleadflows.net/leadflows.js' from origin 'https://laviniagro1stg.wpengine.com' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+    "Failed to load resource: net::ERR_FAILED",
+    "TypeError: $(...).select2 is not a function",
+    "Access to script at 'https://js.hsleadflows.net/leadflows.js' from origin 'https://laviniagro1stg.wpengine.com' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+    "Failed to load resource: net::ERR_FAILED"
+  ]
+}

@@ -1,0 +1,160 @@
+{
+  "actions": [
+    {
+      "action": "click",
+      "target": {
+        "uid": "e7",
+        "tag": "a",
+        "role": "",
+        "type": "",
+        "name": "",
+        "id": "",
+        "placeholder": "",
+        "href": "https://laviniagro1stg.wpengine.com/user-account/",
+        "label": "PLATFORM LOGIN",
+        "text": "PLATFORM LOGIN",
+        "required": false,
+        "disabled": false,
+        "selector": "a:has-text(\"PLATFORM LOGIN\")"
+      },
+      "value": null,
+      "status": "ok",
+      "notes": "Click on PLATFORM LOGIN to access the login form."
+    },
+    {
+      "action": "fill",
+      "target": {
+        "uid": "e16",
+        "tag": "input",
+        "role": "",
+        "type": "password",
+        "name": "password",
+        "id": "password",
+        "placeholder": "",
+        "href": "",
+        "label": "Password *",
+        "text": "",
+        "required": false,
+        "disabled": false,
+        "selector": "#password"
+      },
+      "value": "***",
+      "status": "ok",
+      "notes": "Leave username field empty for negative test."
+    },
+    {
+      "action": "fill",
+      "target": {
+        "uid": "e17",
+        "tag": "input",
+        "role": "",
+        "type": "checkbox",
+        "name": "rememberme",
+        "id": "rememberme",
+        "placeholder": "",
+        "href": "",
+        "label": " Remember Me",
+        "text": "",
+        "required": false,
+        "disabled": false,
+        "selector": "#rememberme"
+      },
+      "value": "",
+      "status": "error",
+      "notes": "Leave password field empty for negative test. | locator.fill: Error: Input of type \"checkbox\" cannot be filled\nCall log:\n\u001b[2m  - waiting for locator('#rememberme')\u001b[22m\n\u001b[2m    - locator resolved to <input type=\"checkbox\" id=\"rememberme\" value=\"forever\" name=\"rememberme\" class=\"user-registration-form__input user-registration-form__input-checkbox\"/>\u001b[22m\n\u001b[2m    - fill(\"\")\u001b[22m\n\u001b[2m  - attempting fill action\u001b[22m\n\u001b[2m    - waiting for element to be visible, enabled and editable\u001b[22m\n"
+    },
+    {
+      "action": "click",
+      "target": {
+        "uid": "e20",
+        "tag": "a",
+        "role": "",
+        "type": "",
+        "name": "",
+        "id": "",
+        "placeholder": "",
+        "href": "https://k12coalition.com/b-corp/?__hstc=51647990.eecaf390edd34af19845fab668f9d052.1755763022969.1755763022969.1755763022969.1&__hssc=51647990.3.1755763022969&__hsfp=3324227801",
+        "label": "",
+        "text": "",
+        "required": false,
+        "disabled": false,
+        "selector": ""
+      },
+      "value": null,
+      "status": "ok",
+      "notes": "Click on Login to trigger validation error."
+    },
+    {
+      "action": "fill",
+      "target": {
+        "uid": "e16",
+        "tag": "input",
+        "role": "",
+        "type": "text",
+        "name": "username",
+        "id": "username",
+        "placeholder": "",
+        "href": "",
+        "label": "Username or Email *",
+        "text": "",
+        "required": false,
+        "disabled": false,
+        "selector": "#username"
+      },
+      "value": "",
+      "status": "ok",
+      "notes": "Leave username field empty for negative test."
+    },
+    {
+      "action": "fill",
+      "target": {
+        "uid": "e17",
+        "tag": "input",
+        "role": "",
+        "type": "password",
+        "name": "password",
+        "id": "password",
+        "placeholder": "",
+        "href": "",
+        "label": "Password *",
+        "text": "",
+        "required": false,
+        "disabled": false,
+        "selector": "#password"
+      },
+      "value": "***",
+      "status": "ok",
+      "notes": "Leave password field empty for negative test."
+    },
+    {
+      "action": "click",
+      "target": {
+        "uid": "e20",
+        "tag": "button",
+        "role": "",
+        "type": "submit",
+        "name": "login",
+        "id": "",
+        "placeholder": "",
+        "href": "",
+        "label": "Login",
+        "text": "Login",
+        "required": false,
+        "disabled": false,
+        "selector": "[name=\"login\"]"
+      },
+      "value": null,
+      "status": "ok",
+      "notes": "Click on Login to trigger validation error."
+    },
+    {
+      "action": "end",
+      "status": "end",
+      "notes": "End of actions."
+    }
+  ],
+  "consoleErrors": [
+    "TypeError: $(...).select2 is not a function",
+    "TypeError: $(...).select2 is not a function"
+  ]
+}

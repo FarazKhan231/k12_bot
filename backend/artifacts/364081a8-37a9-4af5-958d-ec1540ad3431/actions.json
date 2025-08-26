@@ -1,0 +1,307 @@
+{
+  "actions": [
+    {
+      "action": "screenshot",
+      "status": "success",
+      "notes": "Take screenshot of current state",
+      "target": "body"
+    },
+    {
+      "action": "wait",
+      "status": "success",
+      "notes": "Wait for page to stabilize",
+      "target": "2000"
+    },
+    {
+      "action": "screenshot",
+      "status": "success",
+      "notes": "Take screenshot of current state",
+      "target": "body"
+    },
+    {
+      "action": "wait",
+      "status": "success",
+      "notes": "Wait for page to stabilize",
+      "target": "2000"
+    },
+    {
+      "action": "screenshot",
+      "status": "success",
+      "notes": "Take screenshot of current state",
+      "target": "body"
+    },
+    {
+      "action": "wait",
+      "status": "success",
+      "notes": "Wait for page to stabilize",
+      "target": "2000"
+    },
+    {
+      "action": "screenshot",
+      "status": "success",
+      "notes": "Take screenshot of current state",
+      "target": "body"
+    },
+    {
+      "action": "wait",
+      "status": "success",
+      "notes": "Wait for page to stabilize",
+      "target": "2000"
+    },
+    {
+      "action": "screenshot",
+      "status": "success",
+      "notes": "Take screenshot of current state",
+      "target": "body"
+    },
+    {
+      "action": "wait",
+      "status": "success",
+      "notes": "Wait for page to stabilize",
+      "target": "2000"
+    },
+    {
+      "action": "screenshot",
+      "status": "success",
+      "notes": "Take screenshot of current state",
+      "target": "body"
+    },
+    {
+      "action": "wait",
+      "status": "success",
+      "notes": "Wait for page to stabilize",
+      "target": "2000"
+    },
+    {
+      "action": "screenshot",
+      "status": "success",
+      "notes": "Take screenshot of current state",
+      "target": "body"
+    },
+    {
+      "action": "wait",
+      "status": "success",
+      "notes": "Wait for page to stabilize",
+      "target": "2000"
+    },
+    {
+      "action": "screenshot",
+      "status": "success",
+      "notes": "Take screenshot of current state",
+      "target": "body"
+    },
+    {
+      "action": "wait",
+      "status": "success",
+      "notes": "Wait for page to stabilize",
+      "target": "2000"
+    },
+    {
+      "action": "screenshot",
+      "status": "success",
+      "notes": "Take screenshot of current state",
+      "target": "body"
+    },
+    {
+      "action": "wait",
+      "status": "success",
+      "notes": "Wait for page to stabilize",
+      "target": "2000"
+    },
+    {
+      "action": "screenshot",
+      "status": "success",
+      "notes": "Take screenshot of current state",
+      "target": "body"
+    },
+    {
+      "action": "wait",
+      "status": "success",
+      "notes": "Wait for page to stabilize",
+      "target": "2000"
+    },
+    {
+      "action": "screenshot",
+      "status": "success",
+      "notes": "Take screenshot of current state",
+      "target": "body"
+    },
+    {
+      "action": "wait",
+      "status": "success",
+      "notes": "Wait for page to stabilize",
+      "target": "2000"
+    },
+    {
+      "action": "screenshot",
+      "status": "success",
+      "notes": "Take screenshot of current state",
+      "target": "body"
+    },
+    {
+      "action": "wait",
+      "status": "success",
+      "notes": "Wait for page to stabilize",
+      "target": "2000"
+    },
+    {
+      "action": "screenshot",
+      "status": "success",
+      "notes": "Take screenshot of current state",
+      "target": "body"
+    },
+    {
+      "action": "wait",
+      "status": "success",
+      "notes": "Wait for page to stabilize",
+      "target": "2000"
+    },
+    {
+      "action": "screenshot",
+      "status": "success",
+      "notes": "Take screenshot of current state",
+      "target": "body"
+    },
+    {
+      "action": "wait",
+      "status": "success",
+      "notes": "Wait for page to stabilize",
+      "target": "2000"
+    },
+    {
+      "action": "screenshot",
+      "status": "success",
+      "notes": "Take screenshot of current state",
+      "target": "body"
+    },
+    {
+      "action": "wait",
+      "status": "success",
+      "notes": "Wait for page to stabilize",
+      "target": "2000"
+    },
+    {
+      "action": "screenshot",
+      "status": "success",
+      "notes": "Take screenshot of current state",
+      "target": "body"
+    },
+    {
+      "action": "wait",
+      "status": "success",
+      "notes": "Wait for page to stabilize",
+      "target": "2000"
+    },
+    {
+      "action": "screenshot",
+      "status": "success",
+      "notes": "Take screenshot of current state",
+      "target": "body"
+    },
+    {
+      "action": "wait",
+      "status": "success",
+      "notes": "Wait for page to stabilize",
+      "target": "2000"
+    },
+    {
+      "action": "screenshot",
+      "status": "success",
+      "notes": "Take screenshot of current state",
+      "target": "body"
+    },
+    {
+      "action": "wait",
+      "status": "success",
+      "notes": "Wait for page to stabilize",
+      "target": "2000"
+    },
+    {
+      "action": "screenshot",
+      "status": "success",
+      "notes": "Take screenshot of current state",
+      "target": "body"
+    },
+    {
+      "action": "wait",
+      "status": "success",
+      "notes": "Wait for page to stabilize",
+      "target": "2000"
+    },
+    {
+      "action": "screenshot",
+      "status": "success",
+      "notes": "Take screenshot of current state",
+      "target": "body"
+    },
+    {
+      "action": "wait",
+      "status": "success",
+      "notes": "Wait for page to stabilize",
+      "target": "2000"
+    },
+    {
+      "action": "screenshot",
+      "status": "success",
+      "notes": "Take screenshot of current state",
+      "target": "body"
+    },
+    {
+      "action": "wait",
+      "status": "success",
+      "notes": "Wait for page to stabilize",
+      "target": "2000"
+    },
+    {
+      "action": "screenshot",
+      "status": "success",
+      "notes": "Take screenshot of current state",
+      "target": "body"
+    },
+    {
+      "action": "wait",
+      "status": "success",
+      "notes": "Wait for page to stabilize",
+      "target": "2000"
+    },
+    {
+      "action": "screenshot",
+      "status": "success",
+      "notes": "Take screenshot of current state",
+      "target": "body"
+    },
+    {
+      "action": "wait",
+      "status": "success",
+      "notes": "Wait for page to stabilize",
+      "target": "2000"
+    },
+    {
+      "action": "screenshot",
+      "status": "success",
+      "notes": "Take screenshot of current state",
+      "target": "body"
+    },
+    {
+      "action": "wait",
+      "status": "success",
+      "notes": "Wait for page to stabilize",
+      "target": "2000"
+    },
+    {
+      "action": "screenshot",
+      "status": "success",
+      "notes": "Take screenshot of current state",
+      "target": "body"
+    },
+    {
+      "action": "wait",
+      "status": "success",
+      "notes": "Wait for page to stabilize",
+      "target": "2000"
+    }
+  ],
+  "consoleErrors": [
+    "TypeError: $(...).select2 is not a function"
+  ]
+}

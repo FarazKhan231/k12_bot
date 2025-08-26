@@ -1,0 +1,233 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<title>Lavinia · regression Report</title>
+<style>
+  body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;padding:24px;background:#f7f7fb;color:#111}
+  h1{margin:0 0 8px}
+  .grid{display:grid;grid-template-columns:1fr;gap:16px}
+  .card{background:#fff;border:1px solid #e5e7eb;border-radius:16px;padding:16px}
+  .muted{color:#6b7280}
+  table{width:100%;border-collapse:collapse}
+  th,td{font-size:14px}
+  th{background:#f3f4f6;text-align:left;padding:8px;border-bottom:1px solid #e5e7eb}
+  .metrics{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px}
+  .badge{display:inline-block;border-radius:999px;padding:6px 12px;font-weight:600;border:1px solid #e5e7eb}
+  .ok{background:#ecfdf5;color:#065f46;border-color:#a7f3d0}
+  .fail{background:#fef2f2;color:#991b1b;border-color:#fecaca}
+</style>
+</head>
+<body>
+  <h1>Lavinia · regression Report</h1>
+  <p class="muted">Started: 2025-08-20T16:40:24.928Z</p>
+
+  <div class="grid">
+    <div class="card">
+      <h2>Summary</h2>
+      <div class="metrics">
+        <span class="badge">Total steps: 13</span>
+        <span class="badge ok">Passed: 4</span>
+        <span class="badge fail">Failed: 8</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Plan</h2>
+      <div>Using uploaded test cases for regression.</div>
+    </div>
+
+    <div class="card">
+      <h2>Checks</h2>
+      <ol><li>—</li></ol>
+      <h3>Heuristics</h3>
+      <ul><li>—</li></ul>
+    </div>
+
+    <div class="card">
+      <h2>Actions</h2>
+      <table>
+        <thead><tr><th>#</th><th>Action</th><th>Target</th><th>Value</th><th>Status</th><th>Notes</th></tr></thead>
+        <tbody>
+    <tr>
+      <td style="padding:8px;border-bottom:1px solid #eee">1</td>
+      <td style="padding:8px;border-bottom:1px solid #eee"><code>click</code></td>
+      <td style="padding:8px;border-bottom:1px solid #eee"></td>
+      <td style="padding:8px;border-bottom:1px solid #eee"></td>
+      <td style="padding:8px;border-bottom:1px solid #eee">ok</td>
+      <td style="padding:8px;border-bottom:1px solid #eee;color:#6b7280">Click on PLATFORM LOGIN</td>
+    </tr>
+    <tr>
+      <td style="padding:8px;border-bottom:1px solid #eee">2</td>
+      <td style="padding:8px;border-bottom:1px solid #eee"><code>fill</code></td>
+      <td style="padding:8px;border-bottom:1px solid #eee"></td>
+      <td style="padding:8px;border-bottom:1px solid #eee">faraz.khan+1@k12coalition.com</td>
+      <td style="padding:8px;border-bottom:1px solid #eee">ok</td>
+      <td style="padding:8px;border-bottom:1px solid #eee;color:#6b7280">Fill username with faraz.khan+1@k12coalition.com</td>
+    </tr>
+    <tr>
+      <td style="padding:8px;border-bottom:1px solid #eee">3</td>
+      <td style="padding:8px;border-bottom:1px solid #eee"><code>fill</code></td>
+      <td style="padding:8px;border-bottom:1px solid #eee"></td>
+      <td style="padding:8px;border-bottom:1px solid #eee">***</td>
+      <td style="padding:8px;border-bottom:1px solid #eee">ok</td>
+      <td style="padding:8px;border-bottom:1px solid #eee;color:#6b7280">Fill password</td>
+    </tr>
+    <tr>
+      <td style="padding:8px;border-bottom:1px solid #eee">4</td>
+      <td style="padding:8px;border-bottom:1px solid #eee"><code>click</code></td>
+      <td style="padding:8px;border-bottom:1px solid #eee">button[type="submit"]</td>
+      <td style="padding:8px;border-bottom:1px solid #eee"></td>
+      <td style="padding:8px;border-bottom:1px solid #eee">ok</td>
+      <td style="padding:8px;border-bottom:1px solid #eee;color:#6b7280">Click Login button</td>
+    </tr>
+    <tr>
+      <td style="padding:8px;border-bottom:1px solid #eee">5</td>
+      <td style="padding:8px;border-bottom:1px solid #eee"><code>click</code></td>
+      <td style="padding:8px;border-bottom:1px solid #eee"></td>
+      <td style="padding:8px;border-bottom:1px solid #eee"></td>
+      <td style="padding:8px;border-bottom:1px solid #eee">error</td>
+      <td style="padding:8px;border-bottom:1px solid #eee;color:#6b7280">locator.waitFor: Timeout 10000ms exceeded.
+Call log:
+[2m  - waiting for getByText('navigating to the dashboard') to be visible[22m
+</td>
+    </tr>
+    <tr>
+      <td style="padding:8px;border-bottom:1px solid #eee">6</td>
+      <td style="padding:8px;border-bottom:1px solid #eee"><code>hover</code></td>
+      <td style="padding:8px;border-bottom:1px solid #eee"></td>
+      <td style="padding:8px;border-bottom:1px solid #eee"></td>
+      <td style="padding:8px;border-bottom:1px solid #eee">error</td>
+      <td style="padding:8px;border-bottom:1px solid #eee;color:#6b7280">And the user hovers over the RISE curriculum Library | locator.waitFor: Timeout 10000ms exceeded.
+Call log:
+[2m  - waiting for getByText('the RISE curriculum Library') to be visible[22m
+</td>
+    </tr>
+    <tr>
+      <td style="padding:8px;border-bottom:1px solid #eee">7</td>
+      <td style="padding:8px;border-bottom:1px solid #eee"><code>assertText</code></td>
+      <td style="padding:8px;border-bottom:1px solid #eee"></td>
+      <td style="padding:8px;border-bottom:1px solid #eee">the Rising 1st Grade - 9th Grade pages will appear</td>
+      <td style="padding:8px;border-bottom:1px solid #eee">error</td>
+      <td style="padding:8px;border-bottom:1px solid #eee;color:#6b7280">Then the Rising 1st Grade - 9th Grade pages will appear | Target not found</td>
+    </tr>
+    <tr>
+      <td style="padding:8px;border-bottom:1px solid #eee">8</td>
+      <td style="padding:8px;border-bottom:1px solid #eee"><code>click</code></td>
+      <td style="padding:8px;border-bottom:1px solid #eee"></td>
+      <td style="padding:8px;border-bottom:1px solid #eee"></td>
+      <td style="padding:8px;border-bottom:1px solid #eee">error</td>
+      <td style="padding:8px;border-bottom:1px solid #eee;color:#6b7280">locator.waitFor: Timeout 10000ms exceeded.
+Call log:
+[2m  - waiting for getByText('the user selects the Rising pages') to be visible[22m
+</td>
+    </tr>
+    <tr>
+      <td style="padding:8px;border-bottom:1px solid #eee">9</td>
+      <td style="padding:8px;border-bottom:1px solid #eee"><code>assertText</code></td>
+      <td style="padding:8px;border-bottom:1px solid #eee"></td>
+      <td style="padding:8px;border-bottom:1px solid #eee">the links will be correctly linked.</td>
+      <td style="padding:8px;border-bottom:1px solid #eee">error</td>
+      <td style="padding:8px;border-bottom:1px solid #eee;color:#6b7280">Then the links will be correctly linked. | Target not found</td>
+    </tr>
+    <tr>
+      <td style="padding:8px;border-bottom:1px solid #eee">10</td>
+      <td style="padding:8px;border-bottom:1px solid #eee"><code>navigate</code></td>
+      <td style="padding:8px;border-bottom:1px solid #eee">Dashboard</td>
+      <td style="padding:8px;border-bottom:1px solid #eee"></td>
+      <td style="padding:8px;border-bottom:1px solid #eee">error</td>
+      <td style="padding:8px;border-bottom:1px solid #eee;color:#6b7280">Navigate to Dashboard. | Unsupported action: navigate</td>
+    </tr>
+    <tr>
+      <td style="padding:8px;border-bottom:1px solid #eee">11</td>
+      <td style="padding:8px;border-bottom:1px solid #eee"><code>navigate</code></td>
+      <td style="padding:8px;border-bottom:1px solid #eee">Platform Roster</td>
+      <td style="padding:8px;border-bottom:1px solid #eee"></td>
+      <td style="padding:8px;border-bottom:1px solid #eee">error</td>
+      <td style="padding:8px;border-bottom:1px solid #eee;color:#6b7280">Navigate to Platform Roster. | Unsupported action: navigate</td>
+    </tr>
+    <tr>
+      <td style="padding:8px;border-bottom:1px solid #eee">12</td>
+      <td style="padding:8px;border-bottom:1px solid #eee"><code>navigate</code></td>
+      <td style="padding:8px;border-bottom:1px solid #eee">On-Demand Course Completion</td>
+      <td style="padding:8px;border-bottom:1px solid #eee"></td>
+      <td style="padding:8px;border-bottom:1px solid #eee">error</td>
+      <td style="padding:8px;border-bottom:1px solid #eee;color:#6b7280">Navigate to On-Demand Course Completion. | Unsupported action: navigate</td>
+    </tr>
+    <tr>
+      <td style="padding:8px;border-bottom:1px solid #eee">13</td>
+      <td style="padding:8px;border-bottom:1px solid #eee"><code>end</code></td>
+      <td style="padding:8px;border-bottom:1px solid #eee"></td>
+      <td style="padding:8px;border-bottom:1px solid #eee"></td>
+      <td style="padding:8px;border-bottom:1px solid #eee">end</td>
+      <td style="padding:8px;border-bottom:1px solid #eee;color:#6b7280">End of actions.</td>
+    </tr></tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <h2>Video</h2>
+      <div style="margin:0 0 24px">
+       <video controls src="http://localhost:8787/artifacts/e3c87c02-f950-4f75-a298-bf85312de635/assets/8a3c13553bc45311810b5f0d47888624.webm" style="max-width:100%;border-radius:12px;border:1px solid #e5e7eb"></video>
+       <div style="color:#6b7280;font-size:12px">8a3c13553bc45311810b5f0d47888624.webm</div>
+     </div>
+    </div>
+
+    <div class="card">
+      <h2>Screenshots</h2>
+      <figure style="margin:0 0 24px">
+       <img src="http://localhost:8787/artifacts/e3c87c02-f950-4f75-a298-bf85312de635/assets/01_initial.png" alt="01_initial.png" style="max-width:100%;border-radius:12px;border:1px solid #e5e7eb"/>
+       <figcaption style="color:#6b7280;font-size:12px">01_initial.png</figcaption>
+     </figure>
+<figure style="margin:0 0 24px">
+       <img src="http://localhost:8787/artifacts/e3c87c02-f950-4f75-a298-bf85312de635/assets/02_click.png" alt="02_click.png" style="max-width:100%;border-radius:12px;border:1px solid #e5e7eb"/>
+       <figcaption style="color:#6b7280;font-size:12px">02_click.png</figcaption>
+     </figure>
+<figure style="margin:0 0 24px">
+       <img src="http://localhost:8787/artifacts/e3c87c02-f950-4f75-a298-bf85312de635/assets/03_fill.png" alt="03_fill.png" style="max-width:100%;border-radius:12px;border:1px solid #e5e7eb"/>
+       <figcaption style="color:#6b7280;font-size:12px">03_fill.png</figcaption>
+     </figure>
+<figure style="margin:0 0 24px">
+       <img src="http://localhost:8787/artifacts/e3c87c02-f950-4f75-a298-bf85312de635/assets/04_fill.png" alt="04_fill.png" style="max-width:100%;border-radius:12px;border:1px solid #e5e7eb"/>
+       <figcaption style="color:#6b7280;font-size:12px">04_fill.png</figcaption>
+     </figure>
+<figure style="margin:0 0 24px">
+       <img src="http://localhost:8787/artifacts/e3c87c02-f950-4f75-a298-bf85312de635/assets/05_click.png" alt="05_click.png" style="max-width:100%;border-radius:12px;border:1px solid #e5e7eb"/>
+       <figcaption style="color:#6b7280;font-size:12px">05_click.png</figcaption>
+     </figure>
+<figure style="margin:0 0 24px">
+       <img src="http://localhost:8787/artifacts/e3c87c02-f950-4f75-a298-bf85312de635/assets/06_error.png" alt="06_error.png" style="max-width:100%;border-radius:12px;border:1px solid #e5e7eb"/>
+       <figcaption style="color:#6b7280;font-size:12px">06_error.png</figcaption>
+     </figure>
+<figure style="margin:0 0 24px">
+       <img src="http://localhost:8787/artifacts/e3c87c02-f950-4f75-a298-bf85312de635/assets/07_error.png" alt="07_error.png" style="max-width:100%;border-radius:12px;border:1px solid #e5e7eb"/>
+       <figcaption style="color:#6b7280;font-size:12px">07_error.png</figcaption>
+     </figure>
+<figure style="margin:0 0 24px">
+       <img src="http://localhost:8787/artifacts/e3c87c02-f950-4f75-a298-bf85312de635/assets/08_error.png" alt="08_error.png" style="max-width:100%;border-radius:12px;border:1px solid #e5e7eb"/>
+       <figcaption style="color:#6b7280;font-size:12px">08_error.png</figcaption>
+     </figure>
+<figure style="margin:0 0 24px">
+       <img src="http://localhost:8787/artifacts/e3c87c02-f950-4f75-a298-bf85312de635/assets/09_error.png" alt="09_error.png" style="max-width:100%;border-radius:12px;border:1px solid #e5e7eb"/>
+       <figcaption style="color:#6b7280;font-size:12px">09_error.png</figcaption>
+     </figure>
+<figure style="margin:0 0 24px">
+       <img src="http://localhost:8787/artifacts/e3c87c02-f950-4f75-a298-bf85312de635/assets/10_error.png" alt="10_error.png" style="max-width:100%;border-radius:12px;border:1px solid #e5e7eb"/>
+       <figcaption style="color:#6b7280;font-size:12px">10_error.png</figcaption>
+     </figure>
+<figure style="margin:0 0 24px">
+       <img src="http://localhost:8787/artifacts/e3c87c02-f950-4f75-a298-bf85312de635/assets/11_error.png" alt="11_error.png" style="max-width:100%;border-radius:12px;border:1px solid #e5e7eb"/>
+       <figcaption style="color:#6b7280;font-size:12px">11_error.png</figcaption>
+     </figure>
+<figure style="margin:0 0 24px">
+       <img src="http://localhost:8787/artifacts/e3c87c02-f950-4f75-a298-bf85312de635/assets/12_error.png" alt="12_error.png" style="max-width:100%;border-radius:12px;border:1px solid #e5e7eb"/>
+       <figcaption style="color:#6b7280;font-size:12px">12_error.png</figcaption>
+     </figure>
+<figure style="margin:0 0 24px">
+       <img src="http://localhost:8787/artifacts/e3c87c02-f950-4f75-a298-bf85312de635/assets/13_error.png" alt="13_error.png" style="max-width:100%;border-radius:12px;border:1px solid #e5e7eb"/>
+       <figcaption style="color:#6b7280;font-size:12px">13_error.png</figcaption>
+     </figure>
+    </div>
+  </div>
+</body>
+</html>

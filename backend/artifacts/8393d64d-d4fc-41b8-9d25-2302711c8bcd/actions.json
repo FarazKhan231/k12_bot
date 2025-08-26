@@ -1,0 +1,79 @@
+{
+  "actions": [
+    {
+      "action": "screenshot",
+      "status": "success",
+      "notes": "Fallback: Take screenshot of current state",
+      "target": "body"
+    },
+    {
+      "action": "wait",
+      "status": "success",
+      "notes": "Fallback: Wait for page to stabilize",
+      "target": "2000"
+    },
+    {
+      "action": "screenshot",
+      "status": "success",
+      "notes": "Fallback: Take screenshot of current state",
+      "target": "body"
+    },
+    {
+      "action": "wait",
+      "status": "success",
+      "notes": "Fallback: Wait for page to stabilize",
+      "target": "2000"
+    },
+    {
+      "action": "screenshot",
+      "status": "success",
+      "notes": "Fallback: Take screenshot of current state",
+      "target": "body"
+    },
+    {
+      "action": "wait",
+      "status": "success",
+      "notes": "Fallback: Wait for page to stabilize",
+      "target": "2000"
+    },
+    {
+      "action": "screenshot",
+      "status": "success",
+      "notes": "Fallback: Take screenshot of current state",
+      "target": "body"
+    },
+    {
+      "action": "wait",
+      "status": "success",
+      "notes": "Fallback: Wait for page to stabilize",
+      "target": "2000"
+    },
+    {
+      "action": "screenshot",
+      "status": "success",
+      "notes": "Fallback: Take screenshot of current state",
+      "target": "body"
+    },
+    {
+      "action": "wait",
+      "status": "success",
+      "notes": "Fallback: Wait for page to stabilize",
+      "target": "2000"
+    },
+    {
+      "action": "screenshot",
+      "status": "success",
+      "notes": "Fallback: Take screenshot of current state",
+      "target": "body"
+    },
+    {
+      "action": "wait",
+      "status": "success",
+      "notes": "Fallback: Wait for page to stabilize",
+      "target": "2000"
+    }
+  ],
+  "consoleErrors": [
+    "TypeError: $(...).select2 is not a function"
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "actions": [
+    {
+      "action": "end",
+      "status": "end",
+      "notes": "Too many AI failures, ending test"
+    }
+  ],
+  "consoleErrors": [
+    "TypeError: $(...).select2 is not a function"
+  ]
+}

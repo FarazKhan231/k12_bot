@@ -1,0 +1,175 @@
+{
+  "actions": [
+    {
+      "action": "click",
+      "target": {
+        "id": null,
+        "name": null,
+        "placeholder": null,
+        "text": "PLATFORM LOGIN",
+        "selector": ""
+      },
+      "value": null,
+      "status": "ok",
+      "notes": "Click on PLATFORM LOGIN"
+    },
+    {
+      "action": "fill",
+      "target": {
+        "placeholder": "username",
+        "name": "username"
+      },
+      "value": "faraz.khan+1@k12coalition.com",
+      "status": "ok",
+      "notes": "Fill username with faraz.khan+1@k12coalition.com"
+    },
+    {
+      "action": "fill",
+      "target": {
+        "placeholder": "password",
+        "name": "password"
+      },
+      "value": "***",
+      "status": "ok",
+      "notes": "Fill password"
+    },
+    {
+      "action": "click",
+      "target": {
+        "selector": "button[type=\"submit\"]"
+      },
+      "value": null,
+      "status": "ok",
+      "notes": "Click Login button"
+    },
+    {
+      "action": "click",
+      "target": {
+        "id": null,
+        "name": null,
+        "placeholder": null,
+        "text": "navigating to the dashboard",
+        "selector": ""
+      },
+      "value": null,
+      "status": "error",
+      "notes": "locator.waitFor: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText('navigating to the dashboard') to be visible\u001b[22m\n"
+    },
+    {
+      "action": "hover",
+      "target": {
+        "id": null,
+        "name": null,
+        "placeholder": null,
+        "text": "the RISE curriculum Library",
+        "selector": ""
+      },
+      "value": null,
+      "status": "error",
+      "notes": "And the user hovers over the RISE curriculum Library | locator.waitFor: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText('the RISE curriculum Library') to be visible\u001b[22m\n"
+    },
+    {
+      "action": "assertText",
+      "target": null,
+      "value": "the Rising 1st Grade - 9th Grade pages will appear",
+      "status": "error",
+      "notes": "Then the Rising 1st Grade - 9th Grade pages will appear | Target not found"
+    },
+    {
+      "action": "click",
+      "target": {
+        "id": null,
+        "name": null,
+        "placeholder": null,
+        "text": "the user selects the Rising pages",
+        "selector": ""
+      },
+      "value": null,
+      "status": "error",
+      "notes": "locator.waitFor: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText('the user selects the Rising pages') to be visible\u001b[22m\n"
+    },
+    {
+      "action": "assertText",
+      "target": null,
+      "value": "the links will be correctly linked.",
+      "status": "error",
+      "notes": "Then the links will be correctly linked. | Target not found"
+    },
+    {
+      "action": "navigate",
+      "target": {
+        "uid": "e1",
+        "tag": "a",
+        "role": "",
+        "type": "",
+        "name": "",
+        "id": "",
+        "placeholder": "",
+        "href": "https://laviniagro1stg.wpengine.com/user-account",
+        "label": "Dashboard",
+        "text": "Dashboard",
+        "required": false,
+        "disabled": false,
+        "selector": "a:has-text(\"Dashboard\")"
+      },
+      "value": null,
+      "status": "error",
+      "notes": "Navigate to Dashboard. | Unsupported action: navigate"
+    },
+    {
+      "action": "navigate",
+      "target": {
+        "uid": "e2",
+        "tag": "a",
+        "role": "",
+        "type": "",
+        "name": "",
+        "id": "",
+        "placeholder": "",
+        "href": "https://laviniagro1stg.wpengine.com/user-account/platform-roster",
+        "label": "Platform Roster",
+        "text": "Platform Roster",
+        "required": false,
+        "disabled": false,
+        "selector": "a:has-text(\"Platform Roster\")"
+      },
+      "value": null,
+      "status": "error",
+      "notes": "Navigate to Platform Roster. | Unsupported action: navigate"
+    },
+    {
+      "action": "navigate",
+      "target": {
+        "uid": "e6",
+        "tag": "a",
+        "role": "",
+        "type": "",
+        "name": "",
+        "id": "",
+        "placeholder": "",
+        "href": "https://laviniagro1stg.wpengine.com/user-account/course-completion",
+        "label": "On-Demand Course Completion",
+        "text": "On-Demand Course Completion",
+        "required": false,
+        "disabled": false,
+        "selector": "a:has-text(\"On-Demand Course Completion\")"
+      },
+      "value": null,
+      "status": "error",
+      "notes": "Navigate to On-Demand Course Completion. | Unsupported action: navigate"
+    },
+    {
+      "action": "end",
+      "status": "end",
+      "notes": "End of actions."
+    }
+  ],
+  "consoleErrors": [
+    "Access to script at 'https://js.hsleadflows.net/leadflows.js' from origin 'https://laviniagro1stg.wpengine.com' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+    "Failed to load resource: net::ERR_FAILED",
+    "TypeError: $(...).select2 is not a function",
+    "TypeError: $(...).select2 is not a function",
+    "Access to script at 'https://js.hsleadflows.net/leadflows.js' from origin 'https://laviniagro1stg.wpengine.com' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+    "Failed to load resource: net::ERR_FAILED"
+  ]
+}

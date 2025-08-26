@@ -1,0 +1,27 @@
+{
+  "actions": [
+    {
+      "action": "navigate",
+      "status": "success",
+      "notes": "Navigated to https://laviniagro1stg.wpengine.com/"
+    },
+    {
+      "action": "check",
+      "status": "success",
+      "notes": "Page loaded successfully"
+    },
+    {
+      "action": "check",
+      "status": "success",
+      "notes": "Basic functionality verified"
+    },
+    {
+      "action": "end",
+      "status": "success",
+      "notes": "Smoke test completed"
+    }
+  ],
+  "consoleErrors": [
+    "TypeError: $(...).select2 is not a function"
+  ]
+}

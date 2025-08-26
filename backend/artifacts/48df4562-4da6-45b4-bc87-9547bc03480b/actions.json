@@ -1,0 +1,133 @@
+{
+  "actions": [
+    {
+      "action": "note",
+      "target": null,
+      "value": null,
+      "status": "error",
+      "notes": "Given a valid user(k12qaautomation@gmail.com) and password(yE4hkSy3iEvPlvUte!HB@#CQ) is logged in to environment | Target not found"
+    },
+    {
+      "action": "click",
+      "target": {
+        "id": null,
+        "name": null,
+        "placeholder": null,
+        "text": "When navigating to the dashboard",
+        "selector": ""
+      },
+      "value": null,
+      "status": "error",
+      "notes": "locator.waitFor: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText('When navigating to the dashboard') to be visible\u001b[22m\n"
+    },
+    {
+      "action": "hover",
+      "target": {
+        "id": null,
+        "name": null,
+        "placeholder": null,
+        "text": "the RISE curriculum Library",
+        "selector": ""
+      },
+      "value": null,
+      "status": "error",
+      "notes": "And the user hovers over the RISE curriculum Library | locator.waitFor: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText('the RISE curriculum Library') to be visible\u001b[22m\n"
+    },
+    {
+      "action": "assertText",
+      "target": null,
+      "value": "the Rising 1st Grade - 9th Grade pages will appear",
+      "status": "error",
+      "notes": "Then the Rising 1st Grade - 9th Grade pages will appear | Target not found"
+    },
+    {
+      "action": "click",
+      "target": {
+        "id": null,
+        "name": null,
+        "placeholder": null,
+        "text": "When the user selects the Rising pages",
+        "selector": ""
+      },
+      "value": null,
+      "status": "error",
+      "notes": "locator.waitFor: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText('When the user selects the Rising pages') to be visible\u001b[22m\n"
+    },
+    {
+      "action": "assertText",
+      "target": null,
+      "value": "the links will be correctly linked.",
+      "status": "error",
+      "notes": "Then the links will be correctly linked. | Target not found"
+    },
+    {
+      "action": "navigate",
+      "target": {
+        "uid": "e3",
+        "tag": "a",
+        "role": "",
+        "type": "",
+        "name": "",
+        "id": "",
+        "placeholder": "",
+        "href": "https://passageprepstg.wpenginepowered.com/my-account/",
+        "label": "Login To Account",
+        "text": "Login To Account",
+        "required": false,
+        "disabled": false,
+        "selector": "a:has-text(\"Login To Account\")"
+      },
+      "value": null,
+      "status": "error",
+      "notes": "Navigate to Login To Account to check login functionality. | Unsupported action: navigate"
+    },
+    {
+      "action": "navigate",
+      "target": {
+        "uid": "e7",
+        "tag": "a",
+        "role": "",
+        "type": "",
+        "name": "",
+        "id": "",
+        "placeholder": "",
+        "href": "https://passageprepstg.wpenginepowered.com/states/",
+        "label": "States",
+        "text": "States",
+        "required": false,
+        "disabled": false,
+        "selector": "a:has-text(\"States\")"
+      },
+      "value": null,
+      "status": "error",
+      "notes": "Navigate to States to enumerate navigation sections. | Unsupported action: navigate"
+    },
+    {
+      "action": "navigate",
+      "target": {
+        "uid": "e17",
+        "tag": "a",
+        "role": "",
+        "type": "",
+        "name": "",
+        "id": "",
+        "placeholder": "",
+        "href": "https://passageprepstg.wpenginepowered.com/courses/",
+        "label": "Shop Courses",
+        "text": "Shop Courses",
+        "required": false,
+        "disabled": false,
+        "selector": "a:has-text(\"Shop Courses\")"
+      },
+      "value": null,
+      "status": "error",
+      "notes": "Navigate to Shop Courses to validate UI layout and labels. | Unsupported action: navigate"
+    },
+    {
+      "action": "end",
+      "status": "end",
+      "notes": "End of actions."
+    }
+  ],
+  "consoleErrors": []
+}

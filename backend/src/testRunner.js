@@ -2,8 +2,24 @@ import fs from 'fs'
 import path from 'path'
 import nodemailer from 'nodemailer'
 import { chromium } from 'playwright'
+import { expect } from '@playwright/test'
 import { testingProfiles } from './testingProfiles.js'
 import xlsx from 'xlsx'
+import { OpenAI } from 'openai'
+
+// Initialize OpenAI client
+const client = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY
+})
+
+// Constants for AI-driven testing
+const AGENT_BATCH_SIZE = 3
+const OPENAI_MAX_RETRIES = 3
+const OPENAI_MIN_GAP_MS = 20000
+
+// Global state for rate limiting
+global.isRateLimited = false
+global.rateLimitUntil = null
 
 const artifactsRoot = path.resolve(process.cwd(), 'artifacts')
 
@@ -57,230 +73,157 @@ function relFromArtifacts(absPath) {
 function publicUrlFromAbs(absPath) {
   return artifactLink(relFromArtifacts(absPath))
 }
-// ---------- Playwright Script Generation ----------
-async function generatePlaywrightScript(testType, url, projectId) {
-  const profile = testingProfiles[projectId] || testingProfiles._default
-  
-  let testSteps = []
-  
-  if (testType === 'smoke') {
-    testSteps = [
-      'Navigate to the homepage',
-      'Verify page loads without errors',
-      'Check basic navigation elements',
-      'Verify login functionality (if applicable)',
-      'Check critical user flows',
-      'Verify no console errors'
-    ]
-  } else if (testType === 'regression') {
-    testSteps = [
-      'Navigate to the homepage',
-      'Test all main navigation menus',
-      'Verify all forms and inputs',
-      'Test user authentication flows',
-      'Check responsive design on different viewports',
-      'Verify accessibility features',
-      'Test error handling and edge cases',
-      'Check performance metrics'
-    ]
-  } else if (testType === 'exploratory') {
-    testSteps = [
-      'Navigate to the homepage',
-      'Explore all visible elements',
-      'Test interactive components',
-      'Check for broken links',
-      'Verify content accuracy',
-      'Test user workflows',
-      'Document any issues found'
-    ]
-  } else if (testType === 'feature') {
-    testSteps = [
-      'Navigate to the homepage',
-      'Test specific feature functionality',
-      'Verify feature integration',
-      'Check feature accessibility',
-      'Test feature error handling',
-      'Verify feature performance'
-    ]
+// ---------- AI Functions ----------
+async function callOpenAI(prompt, maxLength = 500) {
+  if (global.isRateLimited && global.rateLimitUntil > Date.now()) {
+    const waitTime = global.rateLimitUntil - Date.now()
+    console.log(`[callOpenAI] Rate limited, waiting ${waitTime}ms`)
+    await new Promise(resolve => setTimeout(resolve, waitTime))
   }
 
-  // Check if login credentials are available
-  const hasLoginCredentials = profile?.login && process.env[profile.login.usernameEnv] && process.env[profile.login.passwordEnv]
-  const username = hasLoginCredentials ? process.env[profile.login.usernameEnv] : null
-  const password = hasLoginCredentials ? process.env[profile.login.passwordEnv] : null
-  
-  // Also check for hardcoded credentials in profile
-  const hardcodedUsername = profile?.login?.username || null
-  const hardcodedPassword = profile?.login?.password || null
-  
-  const finalUsername = username || hardcodedUsername
-  const finalPassword = password || hardcodedPassword
-  const hasAnyCredentials = finalUsername && finalPassword
-  
-  // Generate login steps if credentials are available
-  let loginSteps = ''
-  if (hasAnyCredentials) {
-    loginSteps = `
-  // Login functionality test
-  console.log('🔐 Testing login functionality...');
-  
-  // Look for login form elements
-  const usernameField = page.locator('input[name="username"], input[placeholder*="username"], input[id*="username"]').first();
-  const passwordField = page.locator('input[type="password"], input[name="password"], input[placeholder*="password"], input[id*="password"]').first();
-  const loginButton = page.locator('button[type="submit"], input[type="submit"], button:has-text("Login"), button:has-text("Sign In")').first();
-  
-  // Check if login form is present
-  if (await usernameField.isVisible() && await passwordField.isVisible() && await loginButton.isVisible()) {
-    console.log('✅ Login form found, attempting login...');
-    
-    // Fill in credentials
-    await usernameField.fill('${finalUsername}');
-    await passwordField.fill('${finalPassword}');
-    
-    // Take screenshot before login
-    await page.screenshot({ path: '03_before_login.png', fullPage: true });
-    
-    // Click login button
-    await loginButton.click();
-    
-    // Wait for navigation or success message
-    await page.waitForLoadState('networkidle');
-    await page.waitForTimeout(2000);
-    
-    // Take screenshot after login
-    await page.screenshot({ path: '04_after_login.png', fullPage: true });
-    
-    // Verify login was successful (check for dashboard, user menu, or logout button)
-    const successIndicators = [
-      page.locator('text=Dashboard'),
-      page.locator('text=Welcome'),
-      page.locator('text=Logout'),
-      page.locator('text=Sign Out'),
-      page.locator('[data-testid="user-menu"]'),
-      page.locator('.user-menu'),
-      page.locator('.dashboard')
-    ];
-    
-    let loginSuccessful = false;
-    for (const indicator of successIndicators) {
-      if (await indicator.isVisible()) {
-        console.log('✅ Login successful! Found indicator:', await indicator.textContent());
-        loginSuccessful = true;
-        break;
-      }
+  try {
+    const response = await client.chat.completions.create({
+      model: 'gpt-4o-mini',
+      messages: [{ role: 'user', content: prompt }],
+      max_tokens: maxLength,
+      temperature: 0.1
+    })
+
+    global.isRateLimited = false
+    return response.choices[0].message.content
+  } catch (error) {
+    if (error.status === 429) {
+      global.isRateLimited = true
+      global.rateLimitUntil = Date.now() + 60000 // Wait 1 minute
+      console.log('[callOpenAI] 429 rate-limited, will retry later')
+      throw new Error('Rate limited')
     }
-    
-    if (!loginSuccessful) {
-      console.log('⚠️ Login may have failed - no success indicators found');
-      // Check for error messages
-      const errorElements = page.locator('text=Invalid, text=Error, text=Failed, .error, .alert');
-      if (await errorElements.isVisible()) {
-        console.log('❌ Login failed with error:', await errorElements.first().textContent());
-      }
-    }
-  } else {
-    console.log('ℹ️ No login form found on this page');
-  }`
+    throw error
   }
-
-  // Basic auth setup if available
-  const basicAuth = profile?.basicAuth
-  const basicAuthSetup = basicAuth ? `
-  // Set up basic authentication
-  await page.setExtraHTTPHeaders({
-    'Authorization': 'Basic ' + Buffer.from('${basicAuth.username}:${basicAuth.password}').toString('base64')
-  });` : ''
-
-  return `import { test, expect } from '@playwright/test';
-
-test('${testType} test for ${url}', async ({ page }) => {
-  // Navigate to the URL
-  await page.goto('${url}');
-  
-  // Wait for page to load
-  await page.waitForLoadState('networkidle');
-  
-  // Take initial screenshot
-  await page.screenshot({ path: '01_initial.png', fullPage: true });
-  
-  // Basic page validation
-  await expect(page.locator('body')).toBeVisible();
-  
-  // Test Steps:
-  ${testSteps.map((step, index) => `// ${index + 1}. ${step}`).join('\n  ')}
-  
-  // Example implementation for smoke test:
-  if ('${testType}' === 'smoke') {
-    // Check if page loads without errors
-    await expect(page.locator('body')).toBeVisible();
-    
-    // Check for console errors
-    const consoleErrors = [];
-    page.on('console', msg => {
-      if (msg.type() === 'error') consoleErrors.push(msg.text());
-    });
-    
-    // Wait a bit for any console errors to appear
-    await page.waitForTimeout(2000);
-    
-    // Verify no critical errors
-    expect(consoleErrors.filter(err => 
-      !err.includes('favicon') && 
-      !err.includes('analytics') && 
-      !err.includes('tracking')
-    )).toHaveLength(0);
-  }
-  
-  ${loginSteps}
-  
-  // Take final screenshot
-  await page.screenshot({ path: '02_final.png', fullPage: true });
-});`
 }
 
-// ---------- Playwright Test Execution ----------
-async function runPlaywrightTest(scriptPath, outDir) {
-  return new Promise((resolve, reject) => {
-    const { spawn } = require('child_process')
+async function planWithAI(testType, url, profile) {
+  const prompt = `Generate a test plan for ${testType} testing of ${url}. 
+  
+Profile context: ${JSON.stringify(profile, null, 2)}
+
+Return ONLY a valid JSON object with this exact structure:
+{
+  "plan": "brief description of the test plan",
+  "checks": [
+    {"id": "1", "title": "check title", "rationale": "why this check"}
+  ],
+  "heuristics": ["heuristic1", "heuristic2"]
+}
+
+Keep the response concise and focused.`
+
+  try {
+    const response = await callOpenAI(prompt, 200)
+    const jsonMatch = response.match(/\{[\s\S]*\}/)
+    if (jsonMatch) {
+      return JSON.parse(jsonMatch[0])
+    }
+    throw new Error('No valid JSON found in response')
+  } catch (error) {
+    console.log('[planWithAI] AI failed, using fallback plan:', error.message)
+    return {
+      plan: `${testType} testing using fallback plan`,
+      checks: [
+        { id: "1", title: "Basic navigation", rationale: "Ensure page loads and navigation works" },
+        { id: "2", title: "Core functionality", rationale: "Test main application features" },
+        { id: "3", title: "User workflows", rationale: "Verify critical user paths" }
+      ],
+      heuristics: ["Reliability", "Coverage", "User Experience"]
+    }
+  }
+}
+
+async function agentDecideBatch(page, testType, profile, testCases, actions) {
+  const prompt = `You are testing ${page.url()} for ${testType} testing.
+
+Current page state: ${await page.title()}
+Available elements: ${await getVisibleElements(page)}
+
+Profile context: ${JSON.stringify(profile, null, 2)}
+Previous actions: ${JSON.stringify(actions.slice(-5), null, 2)}
+
+Generate the next batch of test actions. Return ONLY a valid JSON array with this exact structure:
+[
+  {"action": "action_type", "target": "element_selector", "value": "input_value", "text": "description"}
+]
+
+Valid actions: navigate, click, fill, select, press, hover, assertText, wait, screenshot
+Keep response concise and focused.`
+
+  try {
+    const response = await callOpenAI(prompt, 150)
+    const jsonMatch = response.match(/\[[\s\S]*\]/)
+    if (jsonMatch) {
+      return JSON.parse(jsonMatch[0])
+    }
+    throw new Error('No valid JSON found in response')
+  } catch (error) {
+    console.log('[agentDecideBatch] AI failed, using fallback actions:', error.message)
+    return generateFallbackActions(page, profile)
+  }
+}
+
+async function generateFallbackActions(page, profile) {
+  // Intelligent fallback action generation
+  const actions = []
+  
+  // Look for login form elements
+  const usernameField = page.locator('input[name="username"], input[placeholder*="username"], input[id*="username"], input[name="email"], input[type="email"]').first()
+  const passwordField = page.locator('input[type="password"], input[name="password"], input[placeholder*="password"], input[id*="password"]').first()
+  const submitButton = page.locator('button[type="submit"], input[type="submit"], button:has-text("Login"), button:has-text("Sign In"), button:has-text("Sign in")').first()
+  
+  if (usernameField && passwordField && submitButton) {
+    // Create login actions with proper selectors
+    const username = profile?.login?.username || process.env[profile?.login?.usernameEnv]
+    const password = profile?.login?.password || process.env[profile?.login?.passwordEnv]
     
-    const child = spawn('npx', ['playwright', 'test', scriptPath, '--reporter=html'], {
-      cwd: outDir,
-      stdio: ['pipe', 'pipe', 'pipe']
-    })
-
-    let stdout = ''
-    let stderr = ''
-
-    child.stdout.on('data', (data) => {
-      stdout += data.toString()
-    })
-
-    child.stderr.on('data', (data) => {
-      stderr += data.toString()
-    })
-
-    child.on('close', (code) => {
-      if (code === 0) {
-        resolve({
-          success: true,
-          exitCode: code,
-          output: stdout,
-          errors: stderr
-        })
-      } else {
-        resolve({
-          success: false,
-          exitCode: code,
-          output: stdout,
-          errors: stderr
-        })
-      }
-    })
-
-    child.on('error', (error) => {
-      reject(error)
-    })
-  })
+    if (username && password) {
+      // Get the actual selectors for the elements
+      const usernameSelector = await usernameField.evaluate(el => {
+        if (el.id) return `#${el.id}`
+        if (el.name) return `[name="${el.name}"]`
+        if (el.placeholder) return `[placeholder="${el.placeholder}"]`
+        return 'input[type="text"], input[type="email"]'
+      })
+      
+      const passwordSelector = await passwordField.evaluate(el => {
+        if (el.id) return `#${el.id}`
+        if (el.name) return `[name="${el.name}"]`
+        if (el.placeholder) return `[placeholder="${el.placeholder}"]`
+        return 'input[type="password"]'
+      })
+      
+      const submitSelector = await submitButton.evaluate(el => {
+        if (el.id) return `#${el.id}`
+        if (el.type === 'submit') return 'button[type="submit"], input[type="submit"]'
+        return 'button:has-text("Login"), button:has-text("Sign In"), button:has-text("Sign in")'
+      })
+      
+      actions.push(
+        { action: 'fill', target: usernameSelector, value: username, text: 'Fill username field' },
+        { action: 'fill', target: passwordSelector, value: password, text: 'Fill password field' },
+        { action: 'click', target: submitSelector, text: 'Click login button' }
+      )
+      
+      console.log('🔐 Generated login actions with selectors:', { usernameSelector, passwordSelector, submitSelector })
+    }
+  }
+  
+  // If no login form or no actions generated, add generic actions
+  if (actions.length === 0) {
+    actions.push(
+      { action: 'screenshot', target: 'body', text: 'Take screenshot of current state' },
+      { action: 'wait', target: '2000', text: 'Wait for page to stabilize' }
+    )
+  }
+  
+  return actions
 }
 
 // ---------- Test case ingestion (Excel) ----------
@@ -528,7 +471,7 @@ function buildAssetsIndexHTML({ projectName, runId, files }) {
 </html>`
 }
 
-function buildReportHTML({ projectName, testType, startedAt, plan, checks = [], heuristics = [], artifacts = [], actions = [] }) {
+export function buildReportHTML({ projectName, testType, startedAt, plan, checks = [], heuristics = [], artifacts = [], actions = [] }) {
   const imgs = artifacts.filter(a => a.type === 'screenshot')
   const vids = artifacts.filter(a => a.type === 'video')
 
@@ -874,34 +817,6 @@ function walkFiles(dir) {
 function sleep(ms){ return new Promise(r => setTimeout(r, ms)) }
 let lastOAICall = 0
 
-async function callOpenAI(makeRequest, label='openai') {
-  for (let attempt = 0; attempt <= OPENAI_MAX_RETRIES; attempt++) {
-    // simple spacing between calls if configured
-    const now = Date.now()
-    const gap = OPENAI_MIN_GAP_MS - (now - lastOAICall)
-    if (gap > 0) await sleep(gap)
-
-    try {
-      const res = await makeRequest()
-      lastOAICall = Date.now()
-      return res
-    } catch (err) {
-      const is429 = err?.status === 429 || err?.code === 'rate_limit_exceeded'
-      if (!is429 || attempt === OPENAI_MAX_RETRIES) throw err
-
-      // backoff with jitter; respect "try again in Xs" if present
-      let waitMs = 2000 * Math.pow(attempt + 1, 2) // 2s, 8s, 18s, 32s...
-      const msg = err?.error?.message || err?.message || ''
-      const m = msg.match(/try again in\s+(\d+)s/i)
-      if (m) waitMs = Math.max(waitMs, (parseInt(m[1], 10) + 1) * 1000)
-      waitMs += Math.floor(Math.random() * 500) // jitter
-
-      console.warn(`[${label}] 429 rate-limited. Retry ${attempt + 1}/${OPENAI_MAX_RETRIES} in ${waitMs}ms`)
-      await sleep(waitMs)
-    }
-  }
-}
-
 // ---------- Agent utilities ----------
 const DANGEROUS_RE = /(delete|remove|destroy|drop|logout|sign\s*out|deactivate|close\s*account|unsubscribe|checkout|purchase|pay|buy)/i
 
@@ -1019,7 +934,268 @@ Return STRICT JSON:
   return JSON.parse(m[0])
 }
 
+// ---------- Action Execution ----------
+async function executeDecision(page, decision, artifacts, outDir) {
+  const { action, target, value, text } = decision
+  
+  console.log(`🎯 Executing action: ${action} on ${target}`)
+  
+  try {
+    switch (action) {
+      case 'navigate':
+        if (value) {
+          await page.goto(value, { waitUntil: 'networkidle', timeout: 30000 })
+        }
+        break
+        
+      case 'click':
+        if (target) {
+          const element = typeof target === 'string' ? page.locator(target) : page.locator(target)
+          await element.click({ timeout: 10000 })
+        }
+        break
+        
+      case 'fill':
+        if (target && value) {
+          const element = typeof target === 'string' ? page.locator(target) : page.locator(target)
+          await element.fill(value)
+        }
+        break
+        
+      case 'select':
+        if (target && value) {
+          const element = typeof target === 'string' ? page.locator(target) : page.locator(target)
+          await element.selectOption(value)
+        }
+        break
+        
+      case 'press':
+        if (value) {
+          await page.keyboard.press(value)
+        }
+        break
+        
+      case 'hover':
+        if (target) {
+          const element = typeof target === 'string' ? page.locator(target) : page.locator(target)
+          await element.hover()
+        }
+        break
+        
+      case 'assertText':
+        if (target && value) {
+          const element = typeof target === 'string' ? page.locator(target) : page.locator(target)
+          await expect(element).toContainText(value)
+        }
+        break
+        
+      case 'wait':
+        const waitTime = parseInt(value) || parseInt(target) || 2000
+        await page.waitForTimeout(waitTime)
+        break
+        
+      case 'screenshot':
+        const screenshotPath = path.join(outDir, `screenshot_${Date.now()}.png`)
+        await page.screenshot({ path: screenshotPath, fullPage: true })
+        artifacts.push({ type: 'screenshot', path: screenshotPath })
+        break
+        
+      default:
+        console.log(`⚠️ Unknown action: ${action}`)
+    }
+    
+    console.log(`✅ Action ${action} completed successfully`)
+    
+  } catch (error) {
+    console.log(`❌ Action ${action} failed: ${error.message}`)
+    throw error
+  }
+}
 
+// ---------- Login Functions ----------
+async function attemptLogin(page, profile, artifacts, outDir) {
+  console.log('🔐 Attempting automatic login...')
+  
+  try {
+    // Wait for login form to be visible with longer timeout
+    console.log('⏳ Waiting for login form to load...')
+    await page.waitForLoadState('networkidle', { timeout: 30000 })
+    await page.waitForTimeout(2000) // Additional wait for form elements
+    
+    // Look for login form elements with better selectors
+    const usernameSelectors = [
+      'input[name="email"]',
+      'input[name="username"]', 
+      'input[placeholder*="email"]',
+      'input[placeholder*="username"]',
+      'input[type="email"]',
+      '#user_email',
+      '#user_login'
+    ]
+    
+    const passwordSelectors = [
+      'input[name="password"]',
+      'input[type="password"]',
+      'input[placeholder*="password"]',
+      '#user_pass'
+    ]
+    
+    const submitSelectors = [
+      'button[type="submit"]',
+      'input[type="submit"]',
+      'button:has-text("Login")',
+      'button:has-text("Sign In")',
+      'button:has-text("Sign in")'
+    ]
+    
+    // Find the first visible element for each type
+    let usernameField = null
+    let passwordField = null
+    let submitButton = null
+    
+    // Wait for at least one form element to appear
+    console.log('🔍 Looking for login form elements...')
+    await page.waitForTimeout(3000) // Wait for dynamic content
+    
+    for (const selector of usernameSelectors) {
+      try {
+        const element = page.locator(selector).first()
+        if (await element.isVisible()) {
+          usernameField = element
+          console.log(`✅ Found username field: ${selector}`)
+          break
+        }
+      } catch (e) {
+        // Continue to next selector
+      }
+    }
+    
+    for (const selector of passwordSelectors) {
+      try {
+        const element = page.locator(selector).first()
+        if (await element.isVisible()) {
+          passwordField = element
+          console.log(`✅ Found password field: ${selector}`)
+          break
+        }
+      } catch (e) {
+        // Continue to next selector
+      }
+    }
+    
+    for (const selector of submitSelectors) {
+      try {
+        const element = page.locator(selector).first()
+        if (await element.isVisible()) {
+          submitButton = element
+          console.log(`✅ Found submit button: ${selector}`)
+          break
+        }
+      } catch (e) {
+        // Continue to next selector
+      }
+    }
+    
+    if (usernameField && passwordField && submitButton) {
+      // Get credentials from profile
+      const username = profile?.login?.username || process.env[profile?.login?.usernameEnv]
+      const password = profile?.login?.password || process.env[profile?.login?.passwordEnv]
+      
+      if (username && password) {
+        console.log(`🔐 Filling credentials for user: ${username}`)
+        
+        // Take screenshot before login
+        const beforeLoginPath = path.join(outDir, 'before_login.png')
+        await page.screenshot({ path: beforeLoginPath, fullPage: true })
+        artifacts.push({ type: 'screenshot', path: beforeLoginPath })
+        
+        // Fill username
+        await usernameField.fill(username)
+        console.log('✅ Username filled')
+        
+        // Fill password
+        await passwordField.fill(password)
+        console.log('✅ Password filled')
+        
+        // Wait a moment
+        await page.waitForTimeout(1000)
+        
+        // Click login button
+        await submitButton.click()
+        console.log('✅ Login button clicked')
+        
+        // Wait for navigation or success
+        await page.waitForLoadState('networkidle', { timeout: 15000 })
+        await page.waitForTimeout(2000)
+        
+        // Take screenshot after login
+        const afterLoginPath = path.join(outDir, 'after_login.png')
+        await page.screenshot({ path: afterLoginPath, fullPage: true })
+        artifacts.push({ type: 'screenshot', path: afterLoginPath })
+        
+        console.log('✅ Login attempt completed')
+        return true
+        
+      } else {
+        console.log('❌ No credentials available for login')
+        return false
+      }
+    } else {
+      console.log('❌ Login form elements not found')
+      console.log('- Username field:', !!usernameField)
+      console.log('- Password field:', !!passwordField)
+      console.log('- Submit button:', !!submitButton)
+      return false
+    }
+    
+  } catch (error) {
+    console.log(`❌ Login attempt failed: ${error.message}`)
+    return false
+  }
+}
+
+// ---------- Page Analysis Functions ----------
+async function getVisibleElements(page) {
+  try {
+    return await page.evaluate(() => {
+      const elements = []
+      const selectors = [
+        'input', 'button', 'a', 'select', 'textarea', '[role="button"]', '[role="link"]'
+      ]
+      
+      selectors.forEach(selector => {
+        const nodes = document.querySelectorAll(selector)
+        nodes.forEach((el, index) => {
+          if (el.offsetParent !== null && el.style.display !== 'none' && el.style.visibility !== 'hidden') {
+            const tag = el.tagName.toLowerCase()
+            const type = el.type || ''
+            const name = el.name || ''
+            const id = el.id || ''
+            const placeholder = el.placeholder || ''
+            const text = el.textContent?.trim().slice(0, 50) || ''
+            const href = el.href || ''
+            
+            elements.push({
+              tag,
+              type,
+              name,
+              id,
+              placeholder,
+              text,
+              href,
+              selector: id ? `#${id}` : `${tag}${name ? `[name="${name}"]` : ''}${placeholder ? `[placeholder="${placeholder}"]` : ''}`
+            })
+          }
+        })
+      })
+      
+      return elements.slice(0, 20) // Limit to first 20 elements
+    })
+  } catch (error) {
+    console.log('Error getting visible elements:', error.message)
+    return []
+  }
+}
 
 // ---------- Main runner ----------
 export function createRunner(config){
@@ -1033,14 +1209,18 @@ export function createRunner(config){
     // Debug basic auth credentials
     console.log('Basic Auth Debug:')
     console.log('- Provided basicAuthUser:', basicAuthUser)
-    console.log('- Provided basicAuthPass:', basicAuthPass ? '***' : null)
+    console.log('- Provided basicAuthPass:', config.basicAuthPass ? '***' : null)
     console.log('- Profile basicAuth:', profile?.basicAuth)
-    console.log('- Final credentials:', (basicAuthUser && basicAuthPass) ? { username: basicAuthUser, password: '***' } : 'None')
+    
+    // Determine final basic auth credentials (prioritize profile over UI input)
+    const finalBasicAuthUser = profile?.basicAuth?.username || basicAuthUser
+    const finalBasicAuthPass = profile?.basicAuth?.password || basicAuthPass
+    console.log('- Final credentials:', (finalBasicAuthUser && finalBasicAuthPass) ? { username: finalBasicAuthUser, password: '***' } : 'None')
     
     const browser = await chromium.launch()
     const context = await browser.newContext({
       recordVideo: { dir: outDir, size: { width: 1280, height: 720 } },
-      httpCredentials: (basicAuthUser && basicAuthPass) ? { username: basicAuthUser, password: basicAuthPass } : undefined
+      httpCredentials: (finalBasicAuthUser && finalBasicAuthPass) ? { username: finalBasicAuthUser, password: finalBasicAuthPass } : undefined
     })
     const page = await context.newPage()
     const artifacts = []
@@ -1054,7 +1234,25 @@ export function createRunner(config){
 
     try{
       if(url){
-        await page.goto(url, { waitUntil: 'load', timeout: 60000 })
+        console.log(`🌐 Navigating to: ${url}`)
+        console.log(`🔐 Using basic auth: ${finalBasicAuthUser ? 'Yes' : 'No'}`)
+        
+        try {
+          await page.goto(url, { waitUntil: 'load', timeout: 60000 })
+          console.log('✅ Page navigation successful')
+        } catch (error) {
+          console.log(`❌ Page navigation failed: ${error.message}`)
+          
+          // Try with a longer timeout and different wait strategy
+          try {
+            console.log('🔄 Retrying with networkidle strategy...')
+            await page.goto(url, { waitUntil: 'networkidle', timeout: 120000 })
+            console.log('✅ Page navigation successful with networkidle')
+          } catch (retryError) {
+            console.log(`❌ Retry also failed: ${retryError.message}`)
+            throw retryError
+          }
+        }
       } else if(screenshotPath){
         const img = fs.readFileSync(screenshotPath).toString('base64')
         await page.setContent(
@@ -1109,131 +1307,114 @@ export function createRunner(config){
           await page.waitForLoadState('load', { timeout: 15000 }).catch(() => {})
           await snapshot('platform_login_click')
           console.log('Successfully clicked PLATFORM LOGIN')
+          
+          // Now attempt login with credentials
+          await attemptLogin(page, profile, artifacts, outDir)
+          
         } catch (e) {
           console.log('PLATFORM LOGIN click failed:', e.message)
         }
       }
 
-      // Generate and run Playwright script instead of AI-driven testing
-      console.log('🎭 Generating Playwright script for:', testType)
+      // AI-driven testing loop
+      console.log('🤖 Starting AI-driven testing for:', testType)
       
-      // Generate Playwright script based on test type and URL
-      const playwrightScript = await generatePlaywrightScript(testType, url, profile?.projectId || '_default')
+      // Initialize loop prevention counters
+      global.aiFailureCount = 0
+      global.totalActionsGenerated = 0
       
-      // Write the script to a file
-      const scriptPath = path.join(outDir, 'test.spec.js')
-      fs.writeFileSync(scriptPath, playwrightScript, 'utf8')
-      console.log('📝 Playwright script generated and saved to:', scriptPath)
-      
-      // Add the generated script as an artifact
-      artifacts.push({ type: 'script', path: scriptPath })
-      
-      // Actually execute the generated Playwright script
-      console.log('🚀 Executing generated Playwright script...')
-      try {
-        const testResult = await runPlaywrightTest(scriptPath, outDir)
-        console.log('✅ Playwright test execution completed')
-        
-        // Add test results to artifacts
-        if (testResult.stdout) {
-          const resultPath = path.join(outDir, 'test_output.txt')
-          fs.writeFileSync(resultPath, testResult.stdout, 'utf8')
-          artifacts.push({ type: 'text', path: resultPath })
+      while (true) {
+        // Check loop prevention conditions
+        if (global.aiFailureCount > 5) {
+          console.log('🛑 Too many consecutive AI failures, ending test')
+          break
         }
         
-        if (testResult.stderr) {
-          const errorPath = path.join(outDir, 'test_errors.txt')
-          fs.writeFileSync(errorPath, testResult.stderr, 'utf8')
-          artifacts.push({ type: 'text', path: errorPath })
+        if (global.totalActionsGenerated > 20 && global.aiFailureCount > 3) {
+          console.log('🛑 Too many actions generated with failures, ending test')
+          break
         }
-      } catch (error) {
-        console.log('❌ Playwright test execution failed:', error.message)
-        // Continue with the test even if Playwright execution fails
+        
+        try {
+          // Get next batch of actions from AI
+          const decisions = await agentDecideBatch(page, testType, profile, testCases, actions)
+          console.log(`🤖 AI generated ${decisions.length} actions`)
+          
+          if (!decisions || decisions.length === 0) {
+            console.log('🤖 AI returned no actions, ending test')
+            break
+          }
+          
+          // Execute each action in the batch
+          for (const decision of decisions) {
+            try {
+              await executeDecision(page, decision, artifacts, outDir)
+              actions.push({
+                action: decision.action,
+                status: 'success',
+                notes: decision.text || `Executed ${decision.action}`,
+                target: decision.target,
+                value: decision.value
+              })
+              global.totalActionsGenerated++
+            } catch (error) {
+              console.log(`❌ Action execution failed:`, error.message)
+              actions.push({
+                action: decision.action,
+                status: 'error',
+                notes: `Failed: ${error.message}`,
+                target: decision.target,
+                value: decision.value
+              })
+            }
+          }
+          
+          // Reset failure counter on success
+          global.aiFailureCount = 0
+          
+          // Take screenshot after batch
+          await snapshot(`after_batch_${actions.length}`)
+          
+        } catch (error) {
+          console.log(`❌ AI decision failed:`, error.message)
+          global.aiFailureCount++
+          
+          // Generate fallback actions
+          const fallbackActions = await generateFallbackActions(page, profile)
+          console.log(`🔄 Using ${fallbackActions.length} fallback actions`)
+          
+          for (const fallbackAction of fallbackActions) {
+            try {
+              await executeDecision(page, fallbackAction, artifacts, outDir)
+              actions.push({
+                action: fallbackAction.action,
+                status: 'success',
+                notes: `Fallback: ${fallbackAction.text}`,
+                target: fallbackAction.target,
+                value: fallbackAction.value
+              })
+              global.totalActionsGenerated++
+            } catch (error) {
+              console.log(`❌ Fallback action failed:`, error.message)
+              actions.push({
+                action: fallbackAction.action,
+                status: 'error',
+                notes: `Fallback failed: ${error.message}`,
+                target: fallbackAction.target,
+                value: fallbackAction.value
+              })
+            }
+          }
+        }
+        
+        // Check if we should continue
+        if (actions.length >= 50) {
+          console.log('🛑 Maximum actions reached, ending test')
+          break
+        }
       }
       
-      // Take a screenshot of the current page
-      await snapshot('playwright_script_executed')
-      
-      // Create action log based on test type
-      if (testType === 'smoke') {
-        actions.push(
-          { action: 'navigate', status: 'success', notes: `Navigated to ${url}` },
-          { action: 'check', status: 'success', notes: 'Page loaded successfully' },
-          { action: 'check', status: 'success', notes: 'Basic functionality verified' }
-        )
-        
-        // Add login actions if credentials are available
-        const hasAnyCredentials = (profile?.login?.username && profile?.login?.password) || 
-                                 (profile?.login?.usernameEnv && process.env[profile.login.usernameEnv] && 
-                                  profile?.login?.passwordEnv && process.env[profile.login.passwordEnv])
-        if (hasAnyCredentials) {
-          actions.push(
-            { action: 'login', status: 'success', notes: 'Login form detected and tested' },
-            { action: 'check', status: 'success', notes: 'Login functionality verified' }
-          )
-        }
-        
-        actions.push({ action: 'end', status: 'success', notes: 'Smoke test completed' })
-      } else if (testType === 'regression') {
-        actions.push(
-          { action: 'navigate', status: 'success', notes: `Navigated to ${url}` },
-          { action: 'check', status: 'success', notes: 'Navigation elements tested' },
-          { action: 'check', status: 'success', notes: 'Forms and inputs verified' },
-          { action: 'check', status: 'success', notes: 'User flows tested' }
-        )
-        
-        // Add login actions if credentials are available
-        const hasAnyCredentials = (profile?.login?.username && profile?.login?.password) || 
-                                 (profile?.login?.usernameEnv && process.env[profile.login.usernameEnv] && 
-                                  profile?.login?.passwordEnv && process.env[profile.login.passwordEnv])
-        if (hasAnyCredentials) {
-          actions.push(
-            { action: 'login', status: 'success', notes: 'Login form detected and tested' },
-            { action: 'check', status: 'success', notes: 'Login functionality verified' }
-          )
-        }
-        
-        actions.push({ action: 'end', status: 'success', notes: 'Regression test completed' })
-      } else if (testType === 'exploratory') {
-        actions.push(
-          { action: 'navigate', status: 'success', notes: `Navigated to ${url}` },
-          { action: 'explore', status: 'success', notes: 'Page elements explored' },
-          { action: 'check', status: 'success', notes: 'Interactive components tested' }
-        )
-        
-        // Add login actions if credentials are available
-        const hasAnyCredentials = (profile?.login?.username && profile?.login?.password) || 
-                                 (profile?.login?.usernameEnv && process.env[profile.login.usernameEnv] && 
-                                  profile?.login?.passwordEnv && process.env[profile.login.passwordEnv])
-        if (hasAnyCredentials) {
-          actions.push(
-            { action: 'login', status: 'success', notes: 'Login form detected and tested' },
-            { action: 'check', status: 'success', notes: 'Login functionality verified' }
-          )
-        }
-        
-        actions.push({ action: 'end', status: 'success', notes: 'Exploratory test completed' })
-      } else if (testType === 'feature') {
-        actions.push(
-          { action: 'navigate', status: 'success', notes: `Navigated to ${url}` },
-          { action: 'test', status: 'success', notes: 'Feature functionality tested' }
-        )
-        
-        // Add login actions if credentials are available
-        const hasAnyCredentials = (profile?.login?.username && profile?.login?.password) || 
-                                 (profile?.login?.usernameEnv && process.env[profile.login.usernameEnv] && 
-                                  profile?.login?.passwordEnv && process.env[profile.login.passwordEnv])
-        if (hasAnyCredentials) {
-          actions.push(
-            { action: 'login', status: 'success', notes: 'Login form detected and tested' },
-            { action: 'check', status: 'success', notes: 'Login functionality verified' }
-          )
-        }
-        
-        actions.push({ action: 'end', status: 'success', notes: 'Feature test completed' })
-      }
-      
-      // End the test after generating the script
+      console.log(`✅ AI-driven testing completed with ${actions.length} actions`)
 
 
 
@@ -1271,19 +1452,11 @@ export function createRunner(config){
         explicitCases = parseTestCasesFromXlsx(testCasesPath, testType)
       }
 
-      // Create a simple plan object for Playwright-based testing
-      const planObj = {
-        plan: `${testType} testing using Playwright scripts`,
-        checks: [
-          { id: "1", title: "Generate Playwright script", rationale: "Create automated test script" },
-          { id: "2", title: "Execute test", rationale: "Run the generated script" },
-          { id: "3", title: "Capture results", rationale: "Generate screenshots and video" }
-        ],
-        heuristics: ["Automation", "Reliability", "Coverage"]
-      }
-
       // Agent run
       const profile = testingProfiles[config.projectId] || testingProfiles._default
+      
+      // Generate AI test plan
+      const planObj = await planWithAI(testType, url, profile)
       
       // Debug profile and basic auth
       console.log('Profile Debug:')
