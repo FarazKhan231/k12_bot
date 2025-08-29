@@ -1,0 +1,122 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<title>passagePrep · smoke Report</title>
+<style>
+  body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;padding:24px;background:#f7f7fb;color:#111}
+  h1{margin:0 0 8px}
+  .grid{display:grid;grid-template-columns:1fr;gap:16px}
+  .card{background:#fff;border:1px solid #e5e7eb;border-radius:16px;padding:16px}
+  .muted{color:#6b7280}
+  table{width:100%;border-collapse:collapse}
+  th,td{font-size:14px}
+  th{background:#f3f4f6;text-align:left;padding:8px;border-bottom:1px solid #e5e7eb}
+</style>
+</head>
+<body>
+  <h1>passagePrep · smoke Report</h1>
+  <p class="muted">Started: 2025-08-18T03:38:11.081Z</p>
+
+  <div class="grid">
+    <div class="card">
+      <h2>Plan</h2>
+      <div># Smoke Testing Plan for Passage Preparation<br/><br/>This smoke testing plan outlines the essential checks to ensure the core functionalities of the application are operational.<br/><br/>## Objective<br/>To verify that the main features of the application are working as expected without any critical issues.<br/><br/>## Target URL<br/>[Passage Preparation](https://passagepreparation.com/)</div>
+    </div>
+
+    <div class="card">
+      <h2>Checks</h2>
+      <ol><li><strong>Login to Application</strong> — <em>To ensure that users can access the application securely.</em></li>
+<li><strong>Open 'Passages' List</strong> — <em>To verify that the passages list loads correctly for the user.</em></li>
+<li><strong>View First Passage Item</strong> — <em>To confirm that the first passage item is accessible and displays correctly.</em></li>
+<li><strong>Check Next/Previous Navigation</strong> — <em>To ensure that navigation between passage items works as intended.</em></li>
+<li><strong>Logout from Application</strong> — <em>To verify that users can log out safely and securely.</em></li></ol>
+      <h3>Heuristics</h3>
+      <ul><li>Check for UI responsiveness and load times.</li>
+<li>Ensure no critical errors are displayed.</li>
+<li>Verify that all links and buttons are functional.</li>
+<li>Confirm that user sessions are handled correctly.</li></ul>
+    </div>
+
+    <div class="card">
+      <h2>Actions</h2>
+      <table>
+        <thead><tr><th>#</th><th>Action</th><th>Target</th><th>Value</th><th>Status</th><th>Notes</th></tr></thead>
+        <tbody>
+    <tr>
+      <td style="padding:8px;border-bottom:1px solid #eee">1</td>
+      <td style="padding:8px;border-bottom:1px solid #eee"><code>navigate</code></td>
+      <td style="padding:8px;border-bottom:1px solid #eee">Login To Account</td>
+      <td style="padding:8px;border-bottom:1px solid #eee"></td>
+      <td style="padding:8px;border-bottom:1px solid #eee">error</td>
+      <td style="padding:8px;border-bottom:1px solid #eee;color:#6b7280">Navigate to Login To Account to attempt login. | Unsupported action: navigate</td>
+    </tr>
+    <tr>
+      <td style="padding:8px;border-bottom:1px solid #eee">2</td>
+      <td style="padding:8px;border-bottom:1px solid #eee"><code>navigate</code></td>
+      <td style="padding:8px;border-bottom:1px solid #eee">About Us</td>
+      <td style="padding:8px;border-bottom:1px solid #eee"></td>
+      <td style="padding:8px;border-bottom:1px solid #eee">error</td>
+      <td style="padding:8px;border-bottom:1px solid #eee;color:#6b7280">Navigate to About Us for more information about the site. | locator.waitFor: Error: strict mode violation: getByRole('link', { name: 'About Us' }) resolved to 2 elements:
+    1) <a href="https://passagepreparation.com/about/" class="awb-menu__main-a awb-menu__main-a_regular">…</a> aka getByLabel('Menu', { exact: true }).getByRole('link', { name: 'About Us' })
+    2) <a href="https://passagepreparation.com/about/" class="awb-menu__main-a awb-menu__main-a_regular">…</a> aka getByLabel('Footer Pages Menu 01 - Main').getByRole('link', { name: 'About Us' })
+
+Call log:
+[2m  - waiting for getByRole('link', { name: 'About Us' }) to be visible[22m
+</td>
+    </tr>
+    <tr>
+      <td style="padding:8px;border-bottom:1px solid #eee">3</td>
+      <td style="padding:8px;border-bottom:1px solid #eee"><code>navigate</code></td>
+      <td style="padding:8px;border-bottom:1px solid #eee">Contact Us</td>
+      <td style="padding:8px;border-bottom:1px solid #eee"></td>
+      <td style="padding:8px;border-bottom:1px solid #eee">error</td>
+      <td style="padding:8px;border-bottom:1px solid #eee;color:#6b7280">Navigate to Contact Us for support options. | locator.waitFor: Error: strict mode violation: getByRole('link', { name: 'Contact Us' }) resolved to 2 elements:
+    1) <a href="https://passagepreparation.com/contact-us/" class="awb-menu__main-a awb-menu__main-a_regular">…</a> aka getByLabel('Menu', { exact: true }).getByRole('link', { name: 'Contact Us' })
+    2) <a href="https://passagepreparation.com/contact-us/" class="awb-menu__main-a awb-menu__main-a_regular">…</a> aka getByLabel('Footer Pages Menu 01 - Main').getByRole('link', { name: 'Contact Us' })
+
+Call log:
+[2m  - waiting for getByRole('link', { name: 'Contact Us' }) to be visible[22m
+</td>
+    </tr>
+    <tr>
+      <td style="padding:8px;border-bottom:1px solid #eee">4</td>
+      <td style="padding:8px;border-bottom:1px solid #eee"><code>end</code></td>
+      <td style="padding:8px;border-bottom:1px solid #eee"></td>
+      <td style="padding:8px;border-bottom:1px solid #eee"></td>
+      <td style="padding:8px;border-bottom:1px solid #eee">end</td>
+      <td style="padding:8px;border-bottom:1px solid #eee;color:#6b7280">End the session as no further actions are safe.</td>
+    </tr></tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <h2>Video</h2>
+      <div style="margin:0 0 24px">
+       <video controls src="http://localhost:8787/artifacts/ba5104e9-bf7b-40ca-b7f1-67aa7ea1291c/assets/451daee7085efd0b221ee285360e3f59.webm" style="max-width:100%;border-radius:12px;border:1px solid #e5e7eb"></video>
+       <div style="color:#6b7280;font-size:12px">451daee7085efd0b221ee285360e3f59.webm</div>
+     </div>
+    </div>
+
+    <div class="card">
+      <h2>Screenshots</h2>
+      <figure style="margin:0 0 24px">
+       <img src="http://localhost:8787/artifacts/ba5104e9-bf7b-40ca-b7f1-67aa7ea1291c/assets/01_initial.png" alt="01_initial.png" style="max-width:100%;border-radius:12px;border:1px solid #e5e7eb"/>
+       <figcaption style="color:#6b7280;font-size:12px">01_initial.png</figcaption>
+     </figure>
+<figure style="margin:0 0 24px">
+       <img src="http://localhost:8787/artifacts/ba5104e9-bf7b-40ca-b7f1-67aa7ea1291c/assets/02_error.png" alt="02_error.png" style="max-width:100%;border-radius:12px;border:1px solid #e5e7eb"/>
+       <figcaption style="color:#6b7280;font-size:12px">02_error.png</figcaption>
+     </figure>
+<figure style="margin:0 0 24px">
+       <img src="http://localhost:8787/artifacts/ba5104e9-bf7b-40ca-b7f1-67aa7ea1291c/assets/03_error.png" alt="03_error.png" style="max-width:100%;border-radius:12px;border:1px solid #e5e7eb"/>
+       <figcaption style="color:#6b7280;font-size:12px">03_error.png</figcaption>
+     </figure>
+<figure style="margin:0 0 24px">
+       <img src="http://localhost:8787/artifacts/ba5104e9-bf7b-40ca-b7f1-67aa7ea1291c/assets/04_error.png" alt="04_error.png" style="max-width:100%;border-radius:12px;border:1px solid #e5e7eb"/>
+       <figcaption style="color:#6b7280;font-size:12px">04_error.png</figcaption>
+     </figure>
+    </div>
+  </div>
+</body>
+</html>

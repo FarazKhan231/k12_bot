@@ -1,0 +1,75 @@
+{
+  "actions": [
+    {
+      "action": "navigate",
+      "target": {
+        "uid": "e3",
+        "tag": "a",
+        "role": "",
+        "type": "",
+        "name": "",
+        "id": "",
+        "placeholder": "",
+        "href": "https://passageprepstg.wpenginepowered.com/my-account/",
+        "label": "Login To Account",
+        "text": "Login To Account",
+        "required": false,
+        "disabled": false,
+        "selector": "a:has-text(\"Login To Account\")"
+      },
+      "value": null,
+      "status": "error",
+      "notes": "Navigate to the Login To Account page. | Unsupported action: navigate"
+    },
+    {
+      "action": "navigate",
+      "target": {
+        "uid": "e21",
+        "tag": "a",
+        "role": "",
+        "type": "",
+        "name": "",
+        "id": "",
+        "placeholder": "",
+        "href": "https://passageprepstg.wpenginepowered.com/about/",
+        "label": "About Us",
+        "text": "About Us",
+        "required": false,
+        "disabled": false,
+        "selector": "a:has-text(\"About Us\")"
+      },
+      "value": null,
+      "status": "error",
+      "notes": "Navigate to the About Us page for more information. | locator.waitFor: Error: strict mode violation: getByRole('link', { name: 'About Us' }) resolved to 2 elements:\n    1) <a class=\"awb-menu__main-a awb-menu__main-a_regular\" href=\"https://passageprepstg.wpenginepowered.com/about/\">…</a> aka getByLabel('Menu', { exact: true }).getByRole('link', { name: 'About Us' })\n    2) <a class=\"awb-menu__main-a awb-menu__main-a_regular\" href=\"https://passageprepstg.wpenginepowered.com/about/\">…</a> aka getByLabel('Footer Pages Menu 01 - Main').getByRole('link', { name: 'About Us' })\n\nCall log:\n\u001b[2m  - waiting for getByRole('link', { name: 'About Us' }) to be visible\u001b[22m\n"
+    },
+    {
+      "action": "navigate",
+      "target": {
+        "uid": "e22",
+        "tag": "a",
+        "role": "",
+        "type": "",
+        "name": "",
+        "id": "",
+        "placeholder": "",
+        "href": "https://passageprepstg.wpenginepowered.com/contact-us/",
+        "label": "Contact Us",
+        "text": "Contact Us",
+        "required": false,
+        "disabled": false,
+        "selector": "a:has-text(\"Contact Us\")"
+      },
+      "value": null,
+      "status": "error",
+      "notes": "Navigate to the Contact Us page for support. | locator.waitFor: Error: strict mode violation: getByRole('link', { name: 'Contact Us' }) resolved to 2 elements:\n    1) <a class=\"awb-menu__main-a awb-menu__main-a_regular\" href=\"https://passageprepstg.wpenginepowered.com/contact-us/\">…</a> aka getByLabel('Menu', { exact: true }).getByRole('link', { name: 'Contact Us' })\n    2) <a class=\"awb-menu__main-a awb-menu__main-a_regular\" href=\"https://passageprepstg.wpenginepowered.com/contact-us/\">…</a> aka getByLabel('Footer Pages Menu 01 - Main').getByRole('link', { name: 'Contact Us' })\n\nCall log:\n\u001b[2m  - waiting for getByRole('link', { name: 'Contact Us' }) to be visible\u001b[22m\n"
+    },
+    {
+      "action": "end",
+      "status": "end",
+      "notes": "End of actions due to page not found."
+    }
+  ],
+  "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 404 ()"
+  ]
+}

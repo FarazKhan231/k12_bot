@@ -1,0 +1,6 @@
+suite,action,target,value,notes
+smoke,navigate,URL_FROM_CONFIG,,Navigate to the provided URL
+smoke,click,text:PLATFORM LOGIN,,Click on PLATFORM LOGIN button
+smoke,fill,input[name="username"],faraz.khan+1@k12coalition.com,Fill username field
+smoke,fill,input[name="password"],zJmIMIgp&i%fhP1HjhoRY^D6,Fill password field
+smoke,click,text:Login,,Click Login button

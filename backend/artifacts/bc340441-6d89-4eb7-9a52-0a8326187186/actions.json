@@ -1,0 +1,248 @@
+{
+  "actions": [
+    {
+      "action": "navigate",
+      "target": {
+        "id": null,
+        "name": null,
+        "placeholder": null,
+        "text": "URL_FROM_CONFIG",
+        "selector": ""
+      },
+      "value": null,
+      "status": "ok",
+      "notes": "Navigate to the provided URL"
+    },
+    {
+      "action": "click",
+      "target": {
+        "id": null,
+        "name": null,
+        "placeholder": null,
+        "text": "PLATFORM LOGIN",
+        "selector": ""
+      },
+      "value": null,
+      "status": "ok",
+      "notes": "Click on PLATFORM LOGIN button"
+    },
+    {
+      "action": "wait",
+      "target": {
+        "id": null,
+        "name": null,
+        "placeholder": null,
+        "text": "2000",
+        "selector": ""
+      },
+      "value": null,
+      "status": "ok",
+      "notes": "Wait for login form to load"
+    },
+    {
+      "action": "screenshot",
+      "target": {
+        "id": null,
+        "name": null,
+        "placeholder": null,
+        "text": "login-form",
+        "selector": ""
+      },
+      "value": null,
+      "status": "ok",
+      "notes": "Take screenshot of login form"
+    },
+    {
+      "action": "fill",
+      "target": {
+        "selector": "input[name=\"username\"]"
+      },
+      "value": "faraz.khan+1@k12coalition.com",
+      "status": "ok",
+      "notes": "Fill username field"
+    },
+    {
+      "action": "fill",
+      "target": {
+        "selector": "input[name=\"password\"]"
+      },
+      "value": "zJmIMIgp&i%fhP1HjhoRY^D6",
+      "status": "ok",
+      "notes": "Fill password field"
+    },
+    {
+      "action": "screenshot",
+      "target": {
+        "id": null,
+        "name": null,
+        "placeholder": null,
+        "text": "before-login",
+        "selector": ""
+      },
+      "value": null,
+      "status": "ok",
+      "notes": "Take screenshot before clicking login"
+    },
+    {
+      "action": "click",
+      "target": {
+        "id": null,
+        "name": null,
+        "placeholder": null,
+        "text": "button[type=\"submit\"]",
+        "selector": ""
+      },
+      "value": null,
+      "status": "error",
+      "notes": "Try button[type=\"submit\"] selector | locator.waitFor: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText('button[type=\"submit\"]').first() to be visible\u001b[22m\n"
+    },
+    {
+      "action": "wait",
+      "target": {
+        "id": null,
+        "name": null,
+        "placeholder": null,
+        "text": "2000",
+        "selector": ""
+      },
+      "value": null,
+      "status": "ok",
+      "notes": "Wait after first attempt"
+    },
+    {
+      "action": "screenshot",
+      "target": {
+        "id": null,
+        "name": null,
+        "placeholder": null,
+        "text": "after-submit-button",
+        "selector": ""
+      },
+      "value": null,
+      "status": "ok",
+      "notes": "Take screenshot after submit button attempt"
+    },
+    {
+      "action": "click",
+      "target": {
+        "id": null,
+        "name": null,
+        "placeholder": null,
+        "text": "button:has-text(\"Login\")",
+        "selector": ""
+      },
+      "value": null,
+      "status": "error",
+      "notes": "Try button with Login text | locator.waitFor: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText('button:has-text(\"Login\")').first() to be visible\u001b[22m\n"
+    },
+    {
+      "action": "wait",
+      "target": {
+        "id": null,
+        "name": null,
+        "placeholder": null,
+        "text": "2000",
+        "selector": ""
+      },
+      "value": null,
+      "status": "ok",
+      "notes": "Wait after second attempt"
+    },
+    {
+      "action": "screenshot",
+      "target": {
+        "id": null,
+        "name": null,
+        "placeholder": null,
+        "text": "after-login-button",
+        "selector": ""
+      },
+      "value": null,
+      "status": "ok",
+      "notes": "Take screenshot after login button attempt"
+    },
+    {
+      "action": "click",
+      "target": {
+        "id": null,
+        "name": null,
+        "placeholder": null,
+        "text": "button:has-text(\"Sign In\")",
+        "selector": ""
+      },
+      "value": null,
+      "status": "error",
+      "notes": "Try button with Sign In text | locator.waitFor: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText('button:has-text(\"Sign In\")').first() to be visible\u001b[22m\n"
+    },
+    {
+      "action": "wait",
+      "target": {
+        "id": null,
+        "name": null,
+        "placeholder": null,
+        "text": "2000",
+        "selector": ""
+      },
+      "value": null,
+      "status": "ok",
+      "notes": "Wait after third attempt"
+    },
+    {
+      "action": "screenshot",
+      "target": {
+        "id": null,
+        "name": null,
+        "placeholder": null,
+        "text": "after-signin-button",
+        "selector": ""
+      },
+      "value": null,
+      "status": "ok",
+      "notes": "Take screenshot after sign in button attempt"
+    },
+    {
+      "action": "click",
+      "target": {
+        "selector": "input[value=\"Login\"]"
+      },
+      "value": null,
+      "status": "error",
+      "notes": "Try input with Login value | locator.waitFor: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('input[value=\"Login\"]') to be visible\u001b[22m\n"
+    },
+    {
+      "action": "wait",
+      "target": {
+        "id": null,
+        "name": null,
+        "placeholder": null,
+        "text": "2000",
+        "selector": ""
+      },
+      "value": null,
+      "status": "ok",
+      "notes": "Wait after fourth attempt"
+    },
+    {
+      "action": "screenshot",
+      "target": {
+        "id": null,
+        "name": null,
+        "placeholder": null,
+        "text": "after-input-login",
+        "selector": ""
+      },
+      "value": null,
+      "status": "ok",
+      "notes": "Take screenshot after input login attempt"
+    },
+    {
+      "action": "end",
+      "status": "end",
+      "notes": "All Excel test cases completed successfully"
+    }
+  ],
+  "consoleErrors": [
+    "TypeError: $(...).select2 is not a function",
+    "TypeError: $(...).select2 is not a function"
+  ]
+}

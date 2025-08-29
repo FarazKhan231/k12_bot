@@ -1,0 +1,114 @@
+{
+  "actions": [
+    {
+      "action": "navigate",
+      "target": {
+        "id": null,
+        "name": null,
+        "placeholder": null,
+        "text": "URL_FROM_CONFIG",
+        "selector": ""
+      },
+      "value": null,
+      "status": "ok",
+      "notes": "Navigate to the provided URL"
+    },
+    {
+      "action": "click",
+      "target": {
+        "id": null,
+        "name": null,
+        "placeholder": null,
+        "text": "PLATFORM LOGIN",
+        "selector": ""
+      },
+      "value": null,
+      "status": "ok",
+      "notes": "Click on PLATFORM LOGIN button"
+    },
+    {
+      "action": "fill",
+      "target": {
+        "selector": "input[name=\"username\"]"
+      },
+      "value": "faraz.khan+1@k12coalition.com",
+      "status": "ok",
+      "notes": "Fill username field"
+    },
+    {
+      "action": "fill",
+      "target": {
+        "selector": "input[name=\"password\"]"
+      },
+      "value": "zJmIMIgp&i%fhP1HjhoRY^D6",
+      "status": "ok",
+      "notes": "Fill password field"
+    },
+    {
+      "action": "click",
+      "target": {
+        "id": null,
+        "name": null,
+        "placeholder": null,
+        "text": "Login",
+        "selector": ""
+      },
+      "value": null,
+      "status": "ok",
+      "notes": "Click Login button"
+    },
+    {
+      "action": "wait",
+      "target": {
+        "id": null,
+        "name": null,
+        "placeholder": null,
+        "text": "2000",
+        "selector": ""
+      },
+      "value": null,
+      "status": "error",
+      "notes": "Wait 5 seconds for page to load | locator.waitFor: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText('2000').first() to be visible\u001b[22m\n"
+    },
+    {
+      "action": "screenshot",
+      "target": {
+        "id": null,
+        "name": null,
+        "placeholder": null,
+        "text": "login-result",
+        "selector": ""
+      },
+      "value": null,
+      "status": "ok",
+      "notes": "Take screenshot after login attempt"
+    },
+    {
+      "action": "assertText",
+      "target": {
+        "selector": "body"
+      },
+      "value": "dashboard",
+      "status": "error",
+      "notes": "Check if dashboard text appears | locator.waitFor: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText('dashboard') to be visible\u001b[22m\n"
+    },
+    {
+      "action": "assertText",
+      "target": {
+        "selector": "body"
+      },
+      "value": "Sign Out",
+      "status": "error",
+      "notes": "Check if Sign Out option appears | locator.waitFor: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText('Sign Out') to be visible\u001b[22m\n"
+    },
+    {
+      "action": "end",
+      "status": "end",
+      "notes": "All Excel test cases completed successfully"
+    }
+  ],
+  "consoleErrors": [
+    "TypeError: $(...).select2 is not a function",
+    "TypeError: $(...).select2 is not a function"
+  ]
+}

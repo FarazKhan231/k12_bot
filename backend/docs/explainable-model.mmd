@@ -1,0 +1,141 @@
+graph TB
+    subgraph "🎯 PROBLEM"
+        P1[Manual QA is Slow]
+        P2[No Visual Evidence]
+        P3[Hard to Share Results]
+        P4[Test Cases Scattered]
+        P5[No Regression Testing]
+    end
+    
+    subgraph "🚀 SOLUTION"
+        S1[Automated Browser Testing]
+        S2[BDD Test Cases in Excel]
+        S3[Visual Artifacts + Videos]
+        S4[Instant Sharing + Reports]
+        S5[AI-Powered Planning]
+    end
+    
+    subgraph "🔄 HOW IT WORKS"
+        subgraph "Phase 1: Setup"
+            A1[Select Project]
+            A2[Choose Test Suite]
+            A3[Upload Excel/Enter URL]
+            A4[Set Basic Auth]
+        end
+        
+        subgraph "Phase 2: Planning"
+            B1{Excel Uploaded?}
+            B2[Parse BDD Steps]
+            B3[AI Generate Plan]
+            B4[Build Action Queue]
+        end
+        
+        subgraph "Phase 3: Execution"
+            C1[Launch Browser]
+            C2[Execute Actions]
+            C3[Capture Screenshots]
+            C4[Record Video]
+            C5[Log Errors]
+        end
+        
+        subgraph "Phase 4: Results"
+            D1[Generate Report]
+            D2[Create Assets Index]
+            D3[Send Notifications]
+            D4[Serve Artifacts]
+        end
+    end
+    
+    subgraph "📊 EXCEL FORMAT"
+        E1[Sheet: regression]
+        E2[Column: Test Script BDD]
+        E3[BDD Text: navigate to URL]
+        E4[BDD Text: hover over Menu]
+        E5[BDD Text: click Submit]
+    end
+    
+    subgraph "🎬 EXECUTION EXAMPLE"
+        F1[Step 1: Navigate]
+        F2[Step 2: Hover]
+        F3[Step 3: Click]
+        F4[Screenshot: 01_navigate.png]
+        F5[Screenshot: 02_hover.png]
+        F6[Screenshot: 03_click.png]
+        F7[Video: session.webm]
+    end
+    
+    subgraph "📈 BENEFITS"
+        G1[10x Faster Testing]
+        G2[Visual Evidence]
+        G3[Easy Maintenance]
+        G4[Professional Reports]
+        G5[Instant Sharing]
+        G6[Complete Audit Trail]
+    end
+    
+    %% Connections
+    P1 --> S1
+    P2 --> S3
+    P3 --> S4
+    P4 --> S2
+    P5 --> S1
+    
+    A1 --> B1
+    A2 --> B1
+    A3 --> B1
+    A4 --> C1
+    
+    B1 -->|Yes| B2
+    B1 -->|No| B3
+    B2 --> B4
+    B3 --> B4
+    
+    B4 --> C2
+    C2 --> C3
+    C2 --> C4
+    C2 --> C5
+    
+    C3 --> D1
+    C4 --> D1
+    C5 --> D1
+    
+    D1 --> D2
+    D1 --> D3
+    D1 --> D4
+    
+    E1 --> B2
+    E2 --> B2
+    E3 --> B2
+    E4 --> B2
+    E5 --> B2
+    
+    B2 --> F1
+    F1 --> F4
+    F1 --> F2
+    F2 --> F5
+    F2 --> F3
+    F3 --> F6
+    F4 --> F7
+    F5 --> F7
+    F6 --> F7
+    
+    F7 --> G1
+    F4 --> G2
+    E2 --> G3
+    D1 --> G4
+    D3 --> G5
+    D2 --> G6
+    
+    classDef problem fill:#fee2e2,stroke:#dc2626,color:#991b1b
+    classDef solution fill:#dbeafe,stroke:#2563eb,color:#1e40af
+    classDef phase fill:#f0f9ff,stroke:#0ea5e9,color:#0369a1
+    classDef excel fill:#f0fdf4,stroke:#16a34a,color:#15803d
+    classDef execution fill:#fef3c7,stroke:#d97706,color:#92400e
+    classDef benefits fill:#f3e8ff,stroke:#9333ea,color:#7c3aed
+    
+    class P1,P2,P3,P4,P5 problem
+    class S1,S2,S3,S4,S5 solution
+    class A1,A2,A3,A4,B1,B2,B3,B4,C1,C2,C3,C4,C5,D1,D2,D3,D4 phase
+    class E1,E2,E3,E4,E5 excel
+    class F1,F2,F3,F4,F5,F6,F7 execution
+    class G1,G2,G3,G4,G5,G6 benefits

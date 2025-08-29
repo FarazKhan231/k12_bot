@@ -1,0 +1,79 @@
+{
+  "actions": [
+    {
+      "action": "screenshot",
+      "status": "error",
+      "notes": "Fallback failed: executeDecision is not defined",
+      "target": "body"
+    },
+    {
+      "action": "wait",
+      "status": "error",
+      "notes": "Fallback failed: executeDecision is not defined",
+      "target": "2000"
+    },
+    {
+      "action": "screenshot",
+      "status": "error",
+      "notes": "Fallback failed: executeDecision is not defined",
+      "target": "body"
+    },
+    {
+      "action": "wait",
+      "status": "error",
+      "notes": "Fallback failed: executeDecision is not defined",
+      "target": "2000"
+    },
+    {
+      "action": "screenshot",
+      "status": "error",
+      "notes": "Fallback failed: executeDecision is not defined",
+      "target": "body"
+    },
+    {
+      "action": "wait",
+      "status": "error",
+      "notes": "Fallback failed: executeDecision is not defined",
+      "target": "2000"
+    },
+    {
+      "action": "screenshot",
+      "status": "error",
+      "notes": "Fallback failed: executeDecision is not defined",
+      "target": "body"
+    },
+    {
+      "action": "wait",
+      "status": "error",
+      "notes": "Fallback failed: executeDecision is not defined",
+      "target": "2000"
+    },
+    {
+      "action": "screenshot",
+      "status": "error",
+      "notes": "Fallback failed: executeDecision is not defined",
+      "target": "body"
+    },
+    {
+      "action": "wait",
+      "status": "error",
+      "notes": "Fallback failed: executeDecision is not defined",
+      "target": "2000"
+    },
+    {
+      "action": "screenshot",
+      "status": "error",
+      "notes": "Fallback failed: executeDecision is not defined",
+      "target": "body"
+    },
+    {
+      "action": "wait",
+      "status": "error",
+      "notes": "Fallback failed: executeDecision is not defined",
+      "target": "2000"
+    }
+  ],
+  "consoleErrors": [
+    "TypeError: $(...).select2 is not a function"
+  ]
+}

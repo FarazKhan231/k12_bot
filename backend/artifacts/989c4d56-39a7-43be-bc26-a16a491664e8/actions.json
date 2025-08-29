@@ -1,0 +1,75 @@
+{
+  "actions": [
+    {
+      "action": "click",
+      "target": {
+        "uid": "e19",
+        "tag": "a",
+        "role": "",
+        "type": "",
+        "name": "",
+        "id": "",
+        "placeholder": "",
+        "href": "https://laviniagro1stg.wpengine.com/reset-password/",
+        "label": "Lost your password?",
+        "text": "Lost your password?",
+        "required": false,
+        "disabled": false,
+        "selector": "a:has-text(\"Lost your password?\")"
+      },
+      "value": null,
+      "status": "ok",
+      "notes": "Click on 'Lost your password?' to explore password recovery options."
+    },
+    {
+      "action": "click",
+      "target": {
+        "uid": "e5",
+        "tag": "a",
+        "role": "",
+        "type": "",
+        "name": "",
+        "id": "",
+        "placeholder": "",
+        "href": "https://laviniagro1stg.wpengine.com/careers-2/",
+        "label": "CAREERS",
+        "text": "CAREERS",
+        "required": false,
+        "disabled": false,
+        "selector": "a:has-text(\"CAREERS\")"
+      },
+      "value": null,
+      "status": "ok",
+      "notes": "Click on 'OUR TEAM' to explore team information."
+    },
+    {
+      "action": "click",
+      "target": {
+        "uid": "e10",
+        "tag": "a",
+        "role": "",
+        "type": "",
+        "name": "",
+        "id": "",
+        "placeholder": "",
+        "href": "https://laviniagro1stg.wpengine.com/rise-summer-learning-program-k-8/",
+        "label": "Summer Learning",
+        "text": "Summer Learning",
+        "required": false,
+        "disabled": false,
+        "selector": "a:has-text(\"Summer Learning\")"
+      },
+      "value": null,
+      "status": "ok",
+      "notes": "Click on 'Curriculum' to explore curriculum details."
+    },
+    {
+      "action": "end",
+      "status": "end",
+      "notes": "End of actions."
+    }
+  ],
+  "consoleErrors": [
+    "TypeError: $(...).select2 is not a function"
+  ]
+}

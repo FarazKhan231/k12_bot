@@ -1,0 +1,361 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<title>undefined · smoke Report</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    margin: 0; padding: 0; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+  }
+  
+  .container {
+    max-width: 1200px; margin: 0 auto; padding: 20px;
+  }
+  
+  .header {
+    background: white; border-radius: 20px; padding: 30px; margin-bottom: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    text-align: center;
+  }
+  
+  .header h1 {
+    margin: 0 0 10px 0; font-size: 2.5em; font-weight: 700;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .header .meta {
+    color: #6b7280; font-size: 1.1em;
+  }
+  
+  .summary-cards {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px; margin-bottom: 20px;
+  }
+  
+  .summary-card {
+    background: white; border-radius: 16px; padding: 25px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    text-align: center; transition: transform 0.2s;
+  }
+  
+  .summary-card:hover { transform: translateY(-2px); }
+  
+  .summary-card .number {
+    font-size: 2.5em; font-weight: 700; margin-bottom: 5px;
+  }
+  
+  .summary-card .label {
+    color: #6b7280; font-size: 0.9em; text-transform: uppercase; letter-spacing: 0.5px;
+  }
+  
+  .total .number { color: #3b82f6; }
+  .passed .number { color: #10b981; }
+  .failed .number { color: #ef4444; }
+  .success .number { color: #f59e0b; }
+  
+  .section {
+    background: white; border-radius: 16px; margin-bottom: 20px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1); overflow: hidden;
+  }
+  
+  .section-header {
+    background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+    padding: 20px 25px; cursor: pointer; user-select: none;
+    display: flex; align-items: center; justify-content: space-between;
+    transition: background 0.2s;
+  }
+  
+  .section-header:hover { background: linear-gradient(135deg, #e2e8f0, #cbd5e1); }
+  
+  .section-header h2 {
+    margin: 0; font-size: 1.3em; font-weight: 600; color: #1e293b;
+    display: flex; align-items: center; gap: 10px;
+  }
+  
+  .section-header h2::after {
+    content: 'Click to collapse/expand';
+    font-size: 0.7em; font-weight: 400; color: #6b7280;
+    opacity: 0.7;
+  }
+  
+  .section-header.collapsed h2::after {
+    content: 'Click to expand';
+  }
+  
+  .section-content {
+    padding: 25px; display: block; /* Show all sections by default */
+    transition: all 0.3s ease;
+  }
+  
+  .section-content.collapsed { 
+    display: none; 
+  }
+  
+  .section-header.collapsed .toggle-icon { 
+    transform: rotate(180deg); 
+  }
+  
+  .section-header {
+    background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+    padding: 20px 25px; cursor: pointer; user-select: none;
+    display: flex; align-items: center; justify-content: space-between;
+    transition: all 0.3s ease;
+  }
+  
+  .section-header:hover { 
+    background: linear-gradient(135deg, #e2e8f0, #cbd5e1); 
+  }
+  
+  .section-header.collapsed {
+    background: linear-gradient(135deg, #e2e8f0, #cbd5e1);
+  }
+  
+  .toggle-icon {
+    font-size: 1.2em; transition: transform 0.2s;
+  }
+  
+  .section-header.active .toggle-icon { transform: rotate(180deg); }
+  
+  .plan-content {
+    background: #f8fafc; border-radius: 12px; padding: 20px;
+    border-left: 4px solid #3b82f6; font-size: 1.1em; line-height: 1.6;
+  }
+  
+  .checks-list {
+    background: #f8fafc; border-radius: 12px; padding: 20px;
+    border-left: 4px solid #10b981;
+  }
+  
+  .checks-list ol, .checks-list ul {
+    margin: 0; padding-left: 20px;
+  }
+  
+  .checks-list li {
+    margin-bottom: 10px; line-height: 1.5;
+  }
+  
+  .actions-table {
+    width: 100%; border-collapse: collapse; margin-top: 15px;
+  }
+  
+  .actions-table th {
+    background: #f1f5f9; padding: 12px; text-align: left; font-weight: 600;
+    color: #475569; border-bottom: 2px solid #e2e8f0;
+  }
+  
+  .actions-table td {
+    padding: 12px; border-bottom: 1px solid #f1f5f9;
+  }
+  
+  .action-row { transition: background 0.2s; }
+  .action-row:hover { background: #f8fafc; }
+  
+  .action-row.status-ok { border-left: 4px solid #10b981; }
+  .action-row.status-error { border-left: 4px solid #ef4444; }
+  .action-row.status-pending { border-left: 4px solid #f59e0b; }
+  
+  .step-number { font-weight: 600; color: #475569; width: 50px; }
+  .action-type { font-family: 'Monaco', 'Menlo', monospace; }
+  .action-status { font-weight: 600; }
+  .action-notes { color: #6b7280; font-size: 0.9em; }
+  
+  .media-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px; margin-top: 15px;
+  }
+  
+  .media-item {
+    background: #f8fafc; border-radius: 12px; padding: 15px;
+    border: 1px solid #e2e8f0;
+  }
+  
+  .media-item img, .media-item video {
+    width: 100%; border-radius: 8px; margin-bottom: 10px;
+  }
+  
+  .media-item .caption {
+    color: #6b7280; font-size: 0.9em; text-align: center;
+  }
+  
+  .no-media {
+    text-align: center; color: #6b7280; font-style: italic;
+    padding: 40px 20px;
+  }
+  
+  @media (max-width: 768px) {
+    .container { padding: 10px; }
+    .summary-cards { grid-template-columns: repeat(2, 1fr); }
+    .actions-table { font-size: 0.9em; }
+    .actions-table th, .actions-table td { padding: 8px; }
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>undefined · smoke Report</h1>
+      <div class="meta">Started: 2025-08-23T08:04:05.529Z</div>
+    </div>
+
+    <div class="summary-cards">
+      <div class="summary-card total">
+        <div class="number">1</div>
+        <div class="label">Total Steps</div>
+      </div>
+      <div class="summary-card passed">
+        <div class="number">0</div>
+        <div class="label">Passed</div>
+      </div>
+      <div class="summary-card failed">
+        <div class="number">0</div>
+        <div class="label">Failed</div>
+      </div>
+      <div class="summary-card success">
+        <div class="number">0%</div>
+        <div class="label">Success Rate</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header" onclick="toggleSection('plan')">
+        <h2>📋 Test Plan</h2>
+        <span class="toggle-icon">▼</span>
+      </div>
+      <div class="section-content" id="plan-content">
+        <div class="plan-content">smoke testing plan for https://httpbin.org/get</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header" onclick="toggleSection('checks')">
+        <h2>✅ Test Checks</h2>
+        <span class="toggle-icon">▼</span>
+      </div>
+      <div class="section-content" id="checks-content">
+        <div class="checks-list">
+          <h3>Test Steps:</h3>
+          <ol><li><strong>Page load test</strong> — <em>Verify page loads correctly</em></li>
+<li><strong>Basic navigation</strong> — <em>Check main menu functionality</em></li>
+<li><strong>Form validation</strong> — <em>Test input field validation</em></li></ol>
+          <h3>Testing Heuristics:</h3>
+          <ul><li>Usability</li>
+<li>Accessibility</li>
+<li>Functionality</li></ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header" onclick="toggleSection('actions')">
+        <h2>🎯 Test Actions</h2>
+        <span class="toggle-icon">▼</span>
+      </div>
+      <div class="section-content" id="actions-content">
+        <table class="actions-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Action</th>
+              <th>Target</th>
+              <th>Value</th>
+              <th>Status</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+    <tr class="action-row status-pending">
+      <td class="step-number">1</td>
+      <td class="action-type"><code>end</code></td>
+      <td class="action-target"></td>
+      <td class="action-value"></td>
+      <td class="action-status">⏳ end</td>
+      <td class="action-notes">No interactable elements found</td>
+    </tr></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header" onclick="toggleSection('video')">
+        <h2>🎥 Screen Recording</h2>
+        <span class="toggle-icon">▼</span>
+      </div>
+      <div class="section-content" id="video-content">
+        <div class="media-grid">
+            
+              <div class="media-item">
+                <video controls style="width:100%;border-radius:8px;">
+                  <source src="http://localhost:8787/artifacts/a8f99b3e-0539-4694-8cd9-df60625b3a6a/assets/3a0affbb8b54e7ac05e0128ca9fd41e0.webm" type="video/webm">
+                  Your browser does not support the video tag.
+                </video>
+                <div class="caption">3a0affbb8b54e7ac05e0128ca9fd41e0.webm</div>
+              </div>
+            
+          </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header" onclick="toggleSection('screenshots')">
+        <h2>📸 Screenshots</h2>
+        <span class="toggle-icon">▼</span>
+      </div>
+      <div class="section-content" id="screenshots-content">
+        <div class="media-grid">
+            
+              <div class="media-item">
+                <img src="http://localhost:8787/artifacts/a8f99b3e-0539-4694-8cd9-df60625b3a6a/assets/01_initial.png" alt="01_initial.png" style="width:100%;border-radius:8px;">
+                <div class="caption">01_initial.png</div>
+              </div>
+            
+          </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function toggleSection(sectionId) {
+      const header = event.currentTarget;
+      const content = document.getElementById(sectionId + '-content');
+      
+      if (content) {
+        // Toggle collapsed state
+        const isCollapsed = header.classList.contains('collapsed');
+        
+        if (isCollapsed) {
+          // Expand the section
+          header.classList.remove('collapsed');
+          content.classList.remove('collapsed');
+        } else {
+          // Collapse the section
+          header.classList.add('collapsed');
+          content.classList.add('collapsed');
+        }
+        
+        console.log('Toggled section:', sectionId, isCollapsed ? 'expanded' : 'collapsed');
+      } else {
+        console.error('Content element not found for section:', sectionId);
+      }
+    }
+    
+    // Initialize all sections as expanded by default
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('Report loaded, initializing sections...');
+      
+      // Ensure all sections start expanded
+      const allHeaders = document.querySelectorAll('.section-header');
+      const allContents = document.querySelectorAll('.section-content');
+      
+      allHeaders.forEach(header => header.classList.remove('collapsed'));
+      allContents.forEach(content => content.classList.remove('collapsed'));
+      
+      console.log('All sections initialized as expanded');
+    });
+  </script>
+</body>
+</html>

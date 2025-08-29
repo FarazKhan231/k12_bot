@@ -1,0 +1,12 @@
+{
+  "actions": [
+    {
+      "action": "end",
+      "status": "end",
+      "notes": "No actions generated, ending test"
+    }
+  ],
+  "consoleErrors": [
+    "TypeError: $(...).select2 is not a function"
+  ]
+}

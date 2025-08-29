@@ -1,0 +1,376 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<title>Lavinia · exploratory Report</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    margin: 0; padding: 0; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+  }
+  
+  .container {
+    max-width: 1200px; margin: 0 auto; padding: 20px;
+  }
+  
+  .header {
+    background: white; border-radius: 20px; padding: 30px; margin-bottom: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    text-align: center;
+  }
+  
+  .header h1 {
+    margin: 0 0 10px 0; font-size: 2.5em; font-weight: 700;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .header .meta {
+    color: #6b7280; font-size: 1.1em;
+  }
+  
+  .summary-cards {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px; margin-bottom: 20px;
+  }
+  
+  .summary-card {
+    background: white; border-radius: 16px; padding: 25px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    text-align: center; transition: transform 0.2s;
+  }
+  
+  .summary-card:hover { transform: translateY(-2px); }
+  
+  .summary-card .number {
+    font-size: 2.5em; font-weight: 700; margin-bottom: 5px;
+  }
+  
+  .summary-card .label {
+    color: #6b7280; font-size: 0.9em; text-transform: uppercase; letter-spacing: 0.5px;
+  }
+  
+  .total .number { color: #3b82f6; }
+  .passed .number { color: #10b981; }
+  .failed .number { color: #ef4444; }
+  .success .number { color: #f59e0b; }
+  
+  .section {
+    background: white; border-radius: 16px; margin-bottom: 20px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1); overflow: hidden;
+  }
+  
+  .section-header {
+    background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+    padding: 20px 25px; cursor: pointer; user-select: none;
+    display: flex; align-items: center; justify-content: space-between;
+    transition: background 0.2s;
+  }
+  
+  .section-header:hover { background: linear-gradient(135deg, #e2e8f0, #cbd5e1); }
+  
+  .section-header h2 {
+    margin: 0; font-size: 1.3em; font-weight: 600; color: #1e293b;
+  }
+  
+  .section-content {
+    padding: 25px; display: none;
+  }
+  
+  .section-content.active { display: block; }
+  
+  .toggle-icon {
+    font-size: 1.2em; transition: transform 0.2s;
+  }
+  
+  .section-header.active .toggle-icon { transform: rotate(180deg); }
+  
+  .plan-content {
+    background: #f8fafc; border-radius: 12px; padding: 20px;
+    border-left: 4px solid #3b82f6; font-size: 1.1em; line-height: 1.6;
+  }
+  
+  .checks-list {
+    background: #f8fafc; border-radius: 12px; padding: 20px;
+    border-left: 4px solid #10b981;
+  }
+  
+  .checks-list ol, .checks-list ul {
+    margin: 0; padding-left: 20px;
+  }
+  
+  .checks-list li {
+    margin-bottom: 10px; line-height: 1.5;
+  }
+  
+  .actions-table {
+    width: 100%; border-collapse: collapse; margin-top: 15px;
+  }
+  
+  .actions-table th {
+    background: #f1f5f9; padding: 12px; text-align: left; font-weight: 600;
+    color: #475569; border-bottom: 2px solid #e2e8f0;
+  }
+  
+  .actions-table td {
+    padding: 12px; border-bottom: 1px solid #f1f5f9;
+  }
+  
+  .action-row { transition: background 0.2s; }
+  .action-row:hover { background: #f8fafc; }
+  
+  .action-row.status-ok { border-left: 4px solid #10b981; }
+  .action-row.status-error { border-left: 4px solid #ef4444; }
+  .action-row.status-pending { border-left: 4px solid #f59e0b; }
+  
+  .step-number { font-weight: 600; color: #475569; width: 50px; }
+  .action-type { font-family: 'Monaco', 'Menlo', monospace; }
+  .action-status { font-weight: 600; }
+  .action-notes { color: #6b7280; font-size: 0.9em; }
+  
+  .media-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px; margin-top: 15px;
+  }
+  
+  .media-item {
+    background: #f8fafc; border-radius: 12px; padding: 15px;
+    border: 1px solid #e2e8f0;
+  }
+  
+  .media-item img, .media-item video {
+    width: 100%; border-radius: 8px; margin-bottom: 10px;
+  }
+  
+  .media-item .caption {
+    color: #6b7280; font-size: 0.9em; text-align: center;
+  }
+  
+  .no-media {
+    text-align: center; color: #6b7280; font-style: italic;
+    padding: 40px 20px;
+  }
+  
+  @media (max-width: 768px) {
+    .container { padding: 10px; }
+    .summary-cards { grid-template-columns: repeat(2, 1fr); }
+    .actions-table { font-size: 0.9em; }
+    .actions-table th, .actions-table td { padding: 8px; }
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Lavinia · exploratory Report</h1>
+      <div class="meta">Started: 2025-08-21T07:38:48.988Z</div>
+    </div>
+
+    <div class="summary-cards">
+      <div class="summary-card total">
+        <div class="number">4</div>
+        <div class="label">Total Steps</div>
+      </div>
+      <div class="summary-card passed">
+        <div class="number">3</div>
+        <div class="label">Passed</div>
+      </div>
+      <div class="summary-card failed">
+        <div class="number">0</div>
+        <div class="label">Failed</div>
+      </div>
+      <div class="summary-card success">
+        <div class="number">75%</div>
+        <div class="label">Success Rate</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header" onclick="toggleSection('plan')">
+        <h2>📋 Test Plan</h2>
+        <span class="toggle-icon">▼</span>
+      </div>
+      <div class="section-content" id="plan-content">
+        <div class="plan-content"># Exploratory Testing Plan for Lavinia Agro<br/><br/>## Objective<br/>Conduct a comprehensive exploratory testing session on the live URL to discover and validate application features.<br/><br/>## Scope<br/>Focus on user management, navigation, core features, content management, integrations, performance, and edge cases.<br/><br/>## Duration<br/>Estimated time: 4-6 hours<br/><br/>## Approach<br/>1. Systematic exploration of application sections.<br/>2. Document findings and issues in real-time.<br/>3. Prioritize high-impact areas based on user flows.</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header" onclick="toggleSection('checks')">
+        <h2>✅ Test Checks</h2>
+        <span class="toggle-icon">▼</span>
+      </div>
+      <div class="section-content" id="checks-content">
+        <div class="checks-list">
+          <h3>Test Steps:</h3>
+          <ol><li><strong>Test login with valid credentials</strong> — <em>Verify access to the dashboard for authenticated users.</em></li>
+<li><strong>Test logout functionality</strong> — <em>Ensure users return to the homepage after logging out.</em></li>
+<li><strong>Attempt login with invalid credentials</strong> — <em>Check error handling for unauthorized access.</em></li>
+<li><strong>Check 'Remember Me' functionality</strong> — <em>Verify session persistence for returning users.</em></li>
+<li><strong>Test password reset flow</strong> — <em>Ensure users can recover access to their accounts.</em></li>
+<li><strong>Explore user profile settings</strong> — <em>Validate customization options for user preferences.</em></li>
+<li><strong>Systematically click EVERY menu item</strong> — <em>Ensure all navigation paths are functional.</em></li>
+<li><strong>Test ALL footer links</strong> — <em>Verify accessibility of secondary navigation.</em></li>
+<li><strong>Explore breadcrumb navigation</strong> — <em>Check usability on deep pages.</em></li>
+<li><strong>Test site search functionality</strong> — <em>Ensure users can find content easily.</em></li>
+<li><strong>Test internal page-to-page linking</strong> — <em>Verify all links lead to the correct destinations.</em></li>
+<li><strong>Explore data tables and grid functionality</strong> — <em>Validate data presentation and interaction.</em></li>
+<li><strong>Test advanced filtering and sorting</strong> — <em>Ensure users can manipulate data views effectively.</em></li>
+<li><strong>Check form functionality and validation rules</strong> — <em>Verify data entry processes are robust.</em></li>
+<li><strong>Test file upload/download capabilities</strong> — <em>Ensure file handling works as expected.</em></li>
+<li><strong>Explore reporting and analytics features</strong> — <em>Validate data insights provided to users.</em></li>
+<li><strong>Test user role-based access controls</strong> — <em>Ensure permissions are enforced correctly.</em></li>
+<li><strong>Test content creation and editing workflows</strong> — <em>Validate content management processes.</em></li>
+<li><strong>Check data export and reporting features</strong> — <em>Ensure users can extract data as needed.</em></li>
+<li><strong>Monitor page load times</strong> — <em>Assess performance across various sections.</em></li>
+<li><strong>Test with different network conditions</strong> — <em>Evaluate application performance under stress.</em></li>
+<li><strong>Test mobile responsiveness</strong> — <em>Ensure usability on various devices.</em></li>
+<li><strong>Explore offline functionality</strong> — <em>Check application behavior without internet.</em></li>
+<li><strong>Test unusual user workflows</strong> — <em>Identify potential edge cases.</em></li></ol>
+          <h3>Testing Heuristics:</h3>
+          <ul><li>User Control and Freedom</li>
+<li>Consistency and Standards</li>
+<li>Error Prevention</li>
+<li>Recognition Rather Than Recall</li>
+<li>Flexibility and Efficiency of Use</li>
+<li>Aesthetic and Minimalist Design</li>
+<li>Help Users Recognize, Diagnose, and Recover from Errors</li>
+<li>Help and Documentation</li></ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header" onclick="toggleSection('actions')">
+        <h2>🎯 Test Actions</h2>
+        <span class="toggle-icon">▼</span>
+      </div>
+      <div class="section-content" id="actions-content">
+        <table class="actions-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Action</th>
+              <th>Target</th>
+              <th>Value</th>
+              <th>Status</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+    <tr class="action-row status-ok">
+      <td class="step-number">1</td>
+      <td class="action-type"><code>click</code></td>
+      <td class="action-target">Lost your password?</td>
+      <td class="action-value"></td>
+      <td class="action-status">✅ ok</td>
+      <td class="action-notes">Test the 'Lost your password?' link for password reset functionality.</td>
+    </tr>
+    <tr class="action-row status-ok">
+      <td class="step-number">2</td>
+      <td class="action-type"><code>click</code></td>
+      <td class="action-target">CAREERS</td>
+      <td class="action-value"></td>
+      <td class="action-status">✅ ok</td>
+      <td class="action-notes">Navigate to 'OUR TEAM' to explore team information.</td>
+    </tr>
+    <tr class="action-row status-ok">
+      <td class="step-number">3</td>
+      <td class="action-type"><code>click</code></td>
+      <td class="action-target">PLATFORM LOGIN</td>
+      <td class="action-value"></td>
+      <td class="action-status">✅ ok</td>
+      <td class="action-notes">Navigate to 'CAREERS' to check job opportunities.</td>
+    </tr>
+    <tr class="action-row status-pending">
+      <td class="step-number">4</td>
+      <td class="action-type"><code>end</code></td>
+      <td class="action-target"></td>
+      <td class="action-value"></td>
+      <td class="action-status">⏳ end</td>
+      <td class="action-notes">End of exploration actions.</td>
+    </tr></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header" onclick="toggleSection('video')">
+        <h2>🎥 Screen Recording</h2>
+        <span class="toggle-icon">▼</span>
+      </div>
+      <div class="section-content" id="video-content">
+        <div class="media-grid">
+            
+              <div class="media-item">
+                <video controls style="width:100%;border-radius:8px;">
+                  <source src="http://localhost:8787/artifacts/221226d7-28fc-4905-903f-a1cb477b7f68/assets/15a967728a2ccd0674b548472ece5410.webm" type="video/webm">
+                  Your browser does not support the video tag.
+                </video>
+                <div class="caption">15a967728a2ccd0674b548472ece5410.webm</div>
+              </div>
+            
+          </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header" onclick="toggleSection('screenshots')">
+        <h2>📸 Screenshots</h2>
+        <span class="toggle-icon">▼</span>
+      </div>
+      <div class="section-content" id="screenshots-content">
+        <div class="media-grid">
+            
+              <div class="media-item">
+                <img src="http://localhost:8787/artifacts/221226d7-28fc-4905-903f-a1cb477b7f68/assets/01_initial.png" alt="01_initial.png" style="width:100%;border-radius:8px;">
+                <div class="caption">01_initial.png</div>
+              </div>
+            
+              <div class="media-item">
+                <img src="http://localhost:8787/artifacts/221226d7-28fc-4905-903f-a1cb477b7f68/assets/01_platform_login_click.png" alt="01_platform_login_click.png" style="width:100%;border-radius:8px;">
+                <div class="caption">01_platform_login_click.png</div>
+              </div>
+            
+              <div class="media-item">
+                <img src="http://localhost:8787/artifacts/221226d7-28fc-4905-903f-a1cb477b7f68/assets/02_click.png" alt="02_click.png" style="width:100%;border-radius:8px;">
+                <div class="caption">02_click.png</div>
+              </div>
+            
+              <div class="media-item">
+                <img src="http://localhost:8787/artifacts/221226d7-28fc-4905-903f-a1cb477b7f68/assets/03_click.png" alt="03_click.png" style="width:100%;border-radius:8px;">
+                <div class="caption">03_click.png</div>
+              </div>
+            
+              <div class="media-item">
+                <img src="http://localhost:8787/artifacts/221226d7-28fc-4905-903f-a1cb477b7f68/assets/04_click.png" alt="04_click.png" style="width:100%;border-radius:8px;">
+                <div class="caption">04_click.png</div>
+              </div>
+            
+          </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function toggleSection(sectionId) {
+      const header = event.currentTarget;
+      const content = document.getElementById(sectionId + '-content');
+      
+      header.classList.toggle('active');
+      content.classList.toggle('active');
+    }
+    
+    // Auto-expand first section (Test Plan)
+    document.addEventListener('DOMContentLoaded', function() {
+      const firstSection = document.querySelector('.section-header');
+      if (firstSection) {
+        firstSection.click();
+      }
+    });
+  </script>
+</body>
+</html>

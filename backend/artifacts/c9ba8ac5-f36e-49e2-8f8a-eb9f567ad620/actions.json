@@ -1,0 +1,178 @@
+{
+  "actions": [
+    {
+      "action": "navigate",
+      "target": {
+        "uid": "e3",
+        "tag": "a",
+        "role": "",
+        "type": "",
+        "name": "",
+        "id": "",
+        "placeholder": "",
+        "href": "https://passageprepstg:777456c1@passageprepstg.wpenginepowered.com/my-account/",
+        "label": "Login To Account",
+        "text": "Login To Account",
+        "required": false,
+        "disabled": false,
+        "selector": "a:has-text(\"Login To Account\")"
+      },
+      "value": null,
+      "status": "error",
+      "notes": "Navigating to the Login To Account page to explore user authentication flow. | Unsupported action: navigate"
+    },
+    {
+      "action": "select",
+      "target": {
+        "uid": "e29",
+        "tag": "select",
+        "role": "",
+        "type": "",
+        "name": "select_your_state_or_territory",
+        "id": "select_your_state_or_territory-45dd4272-2900-4c8a-a684-d337f6a2cee2",
+        "placeholder": "",
+        "href": "",
+        "label": "Select Your State or Territory*",
+        "text": "Please Select\nAlabama\nAlaska\nArizona\nArkansas\nCalifornia\nColorado\nConnecticut\nDelaware\nFlorida\nGeorgia\nHawaii\nIdaho\nIlli",
+        "required": false,
+        "disabled": false,
+        "selector": "#select_your_state_or_territory-45dd4272-2900-4c8a-a684-d337f6a2cee2"
+      },
+      "value": "Alabama",
+      "status": "error",
+      "notes": "Selecting a state is a required action to proceed with any further interactions. | locator.waitFor: Error: strict mode violation: locator('#select_your_state_or_territory-45dd4272-2900-4c8a-a684-d337f6a2cee2') resolved to 2 elements:\n    1) <select required=\"\" class=\"hs-input is-placeholder\" name=\"select_your_state_or_territory\" id=\"select_your_state_or_territory-45dd4272-2900-4c8a-a684-d337f6a2cee2\">…</select> aka getByLabel('Select Your State or')\n    2) <select required=\"\" class=\"hs-input is-placeholder\" name=\"select_your_state_or_territory\" id=\"select_your_state_or_territory-45dd4272-2900-4c8a-a684-d337f6a2cee2\">…</select> aka locator('#select_your_state_or_territory-45dd4272-2900-4c8a-a684-d337f6a2cee2').nth(1)\n\nCall log:\n\u001b[2m  - waiting for locator('#select_your_state_or_territory-45dd4272-2900-4c8a-a684-d337f6a2cee2') to be visible\u001b[22m\n"
+    },
+    {
+      "action": "click",
+      "target": {
+        "uid": "e3",
+        "tag": "a",
+        "role": "",
+        "type": "",
+        "name": "",
+        "id": "",
+        "placeholder": "",
+        "href": "https://passageprepstg:777456c1@passageprepstg.wpenginepowered.com/my-account/",
+        "label": "Login To Account",
+        "text": "Login To Account",
+        "required": false,
+        "disabled": false,
+        "selector": "a:has-text(\"Login To Account\")"
+      },
+      "value": null,
+      "status": "ok",
+      "notes": "Navigating to the login page to explore account functionalities."
+    },
+    {
+      "action": "fill",
+      "target": {
+        "uid": "e14",
+        "tag": "input",
+        "role": "",
+        "type": "text",
+        "name": "username",
+        "id": "username",
+        "placeholder": "",
+        "href": "",
+        "label": "Username or email address *\nRequired",
+        "text": "",
+        "required": true,
+        "disabled": false,
+        "selector": "#username"
+      },
+      "value": "testuser@example.com",
+      "status": "ok",
+      "notes": "Filling the required username field to proceed with the login process."
+    },
+    {
+      "action": "fill",
+      "target": {
+        "uid": "e21",
+        "tag": "input",
+        "role": "",
+        "type": "password",
+        "name": "password",
+        "id": "password",
+        "placeholder": "",
+        "href": "",
+        "label": "Password *\nRequired",
+        "text": "",
+        "required": true,
+        "disabled": false,
+        "selector": "#password"
+      },
+      "value": "password123",
+      "status": "ok",
+      "notes": "Filling the required password field to proceed with the login process."
+    },
+    {
+      "action": "press",
+      "target": {
+        "uid": "e24",
+        "tag": "button",
+        "role": "",
+        "type": "submit",
+        "name": "login",
+        "id": "",
+        "placeholder": "",
+        "href": "",
+        "label": "Log In",
+        "text": "Log In",
+        "required": false,
+        "disabled": false,
+        "selector": "[name=\"login\"]"
+      },
+      "value": "Enter",
+      "status": "ok",
+      "notes": "Submitting the login form after filling in the required fields."
+    },
+    {
+      "action": "press",
+      "target": {
+        "uid": "e17",
+        "tag": "button",
+        "role": "",
+        "type": "submit",
+        "name": "login",
+        "id": "",
+        "placeholder": "",
+        "href": "",
+        "label": "Log In",
+        "text": "Log In",
+        "required": false,
+        "disabled": false,
+        "selector": "[name=\"login\"]"
+      },
+      "value": "Enter",
+      "status": "ok",
+      "notes": "Submitting the login form after filling in the required fields."
+    },
+    {
+      "action": "press",
+      "target": {
+        "uid": "e24",
+        "tag": "button",
+        "role": "",
+        "type": "submit",
+        "name": "login",
+        "id": "",
+        "placeholder": "",
+        "href": "",
+        "label": "Log In",
+        "text": "Log In",
+        "required": false,
+        "disabled": false,
+        "selector": "[name=\"login\"]"
+      },
+      "value": "Enter",
+      "status": "ok",
+      "notes": "Pressing Enter to submit the login form after filling in the required fields."
+    },
+    {
+      "action": "end",
+      "status": "error",
+      "notes": "Agent parse error: 429 Rate limit reached for gpt-4o-mini in organization org-H5qzjnKwwWehu1jvG1H1CfNs on requests per min (RPM): Limit 3, Used 3, Requested 1. Please try again in 20s. Visit https://platform.openai.com/account/rate-limits to learn more. You can increase your rate limit by adding a payment method to your account at https://platform.openai.com/account/billing."
+    }
+  ],
+  "consoleErrors": []
+}

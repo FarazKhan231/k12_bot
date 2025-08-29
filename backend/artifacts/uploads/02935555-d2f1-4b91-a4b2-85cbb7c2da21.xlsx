@@ -1,0 +1,20 @@
+suite,action,target,value,notes
+smoke,navigate,URL_FROM_CONFIG,,Navigate to the provided URL
+smoke,click,text:PLATFORM LOGIN,,Click on PLATFORM LOGIN button
+smoke,wait,2000,,Wait for login form to load
+smoke,screenshot,login-form,,Take screenshot of login form
+smoke,fill,input[name="username"],faraz.khan+1@k12coalition.com,Fill username field
+smoke,fill,input[name="password"],zJmIMIgp&i%fhP1HjhoRY^D6,Fill password field
+smoke,screenshot,before-login,,Take screenshot before clicking login
+smoke,click,button[type="submit"],,Try button[type="submit"] selector
+smoke,wait,2000,,Wait after first attempt
+smoke,screenshot,after-submit-button,,Take screenshot after submit button attempt
+smoke,click,button:has-text("Login"),,Try button with Login text
+smoke,wait,2000,,Wait after second attempt
+smoke,screenshot,after-login-button,,Take screenshot after login button attempt
+smoke,click,button:has-text("Sign In"),,Try button with Sign In text
+smoke,wait,2000,,Wait after third attempt
+smoke,screenshot,after-signin-button,,Take screenshot after sign in button attempt
+smoke,click,input[value="Login"],,Try input with Login value
+smoke,wait,2000,,Wait after fourth attempt
+smoke,screenshot,after-input-login,,Take screenshot after input login attempt

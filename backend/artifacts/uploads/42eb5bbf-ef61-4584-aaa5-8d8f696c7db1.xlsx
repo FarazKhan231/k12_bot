@@ -1,0 +1,21 @@
+suite,action,target,value,notes
+smoke,navigate,URL_FROM_CONFIG,,Navigate to the provided URL
+smoke,assertText,body,homepage,Verify homepage loaded
+smoke,click,text:PLATFORM LOGIN,,Click on PLATFORM LOGIN button
+smoke,assertText,body,login form,Verify login form appears
+smoke,fill,input[name="username"],faraz.khan+1@k12coalition.com,Fill username field
+smoke,fill,input[name="password"],zJmIMIgp&i%fhP1HjhoRY^D6,Fill password field
+smoke,click,text:Login,,Click Login button
+smoke,assertText,body,dashboard,Verify successful login and dashboard access
+smoke,assertText,body,Sign Out,Verify Sign Out option is visible
+smoke,click,text:Sign Out,,Click Sign Out button
+smoke,assertText,body,homepage,Verify return to homepage
+smoke,navigate,URL_FROM_CONFIG,,Navigate to URL again for negative test
+smoke,assertText,body,homepage,Verify homepage loaded
+smoke,click,text:PLATFORM LOGIN,,Click on PLATFORM LOGIN button
+smoke,assertText,body,login form,Verify login form appears
+smoke,fill,input[name="username"],,Leave username empty
+smoke,fill,input[name="password"],,Leave password empty
+smoke,click,text:Login,,Click Login button
+smoke,assertText,body,error,Verify error message appears
+smoke,assertText,body,login,Verify user stays on login page

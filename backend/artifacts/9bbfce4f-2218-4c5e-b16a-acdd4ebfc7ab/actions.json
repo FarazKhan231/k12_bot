@@ -1,0 +1,138 @@
+{
+  "actions": [
+    {
+      "action": "note",
+      "target": null,
+      "value": null,
+      "status": "error",
+      "notes": "Given a valid user(k12qaautomation@gmail.com) and password(yE4hkSy3iEvPlvUte!HB@#CQ) is logged in to environment | Target not found"
+    },
+    {
+      "action": "click",
+      "target": {
+        "id": null,
+        "name": null,
+        "placeholder": null,
+        "text": "When navigating to the dashboard",
+        "selector": ""
+      },
+      "value": null,
+      "status": "error",
+      "notes": "locator.waitFor: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText('When navigating to the dashboard') to be visible\u001b[22m\n"
+    },
+    {
+      "action": "hover",
+      "target": {
+        "id": null,
+        "name": null,
+        "placeholder": null,
+        "text": "the RISE curriculum Library",
+        "selector": ""
+      },
+      "value": null,
+      "status": "error",
+      "notes": "And the user hovers over the RISE curriculum Library | locator.waitFor: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText('the RISE curriculum Library') to be visible\u001b[22m\n"
+    },
+    {
+      "action": "assertText",
+      "target": null,
+      "value": "the Rising 1st Grade - 9th Grade pages will appear",
+      "status": "error",
+      "notes": "Then the Rising 1st Grade - 9th Grade pages will appear | Target not found"
+    },
+    {
+      "action": "click",
+      "target": {
+        "id": null,
+        "name": null,
+        "placeholder": null,
+        "text": "When the user selects the Rising pages",
+        "selector": ""
+      },
+      "value": null,
+      "status": "error",
+      "notes": "locator.waitFor: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText('When the user selects the Rising pages') to be visible\u001b[22m\n"
+    },
+    {
+      "action": "assertText",
+      "target": null,
+      "value": "the links will be correctly linked.",
+      "status": "error",
+      "notes": "Then the links will be correctly linked. | Target not found"
+    },
+    {
+      "action": "navigate",
+      "target": {
+        "uid": "e5",
+        "tag": "a",
+        "role": "",
+        "type": "",
+        "name": "",
+        "id": "",
+        "placeholder": "",
+        "href": "https://laviniagro1stg.wpengine.com/team/",
+        "label": "OUR TEAM",
+        "text": "OUR TEAM",
+        "required": false,
+        "disabled": false,
+        "selector": "a:has-text(\"OUR TEAM\")"
+      },
+      "value": null,
+      "status": "error",
+      "notes": "Navigate to 'OUR TEAM' to check the team details. | locator.waitFor: Error: strict mode violation: getByRole('link', { name: 'OUR TEAM' }) resolved to 2 elements:\n    1) <a href=\"https://laviniagro1stg.wpengine.com/team/\">…</a> aka locator('#menu-item-51820').getByRole('link', { name: 'Our Team' })\n    2) <a target=\"_self\" class=\"fl-button\" href=\"https://laviniagro1stg.wpengine.com/team/\">…</a> aka getByRole('contentinfo').getByRole('link', { name: 'Our Team' })\n\nCall log:\n\u001b[2m  - waiting for getByRole('link', { name: 'OUR TEAM' }) to be visible\u001b[22m\n"
+    },
+    {
+      "action": "navigate",
+      "target": {
+        "uid": "e6",
+        "tag": "a",
+        "role": "",
+        "type": "",
+        "name": "",
+        "id": "",
+        "placeholder": "",
+        "href": "https://laviniagro1stg.wpengine.com/careers-2/",
+        "label": "CAREERS",
+        "text": "CAREERS",
+        "required": false,
+        "disabled": false,
+        "selector": "a:has-text(\"CAREERS\")"
+      },
+      "value": null,
+      "status": "error",
+      "notes": "Navigate to 'CAREERS' to verify career opportunities. | Unsupported action: navigate"
+    },
+    {
+      "action": "navigate",
+      "target": {
+        "uid": "e10",
+        "tag": "a",
+        "role": "",
+        "type": "",
+        "name": "",
+        "id": "",
+        "placeholder": "",
+        "href": "https://laviniagro1stg.wpengine.com/redthread-knowledge-literacy-program/",
+        "label": "Curriculum",
+        "text": "Curriculum",
+        "required": false,
+        "disabled": false,
+        "selector": "a:has-text(\"Curriculum\")"
+      },
+      "value": null,
+      "status": "error",
+      "notes": "Navigate to 'Curriculum' to validate curriculum details. | Unsupported action: navigate"
+    },
+    {
+      "action": "end",
+      "status": "end",
+      "notes": "End of actions."
+    }
+  ],
+  "consoleErrors": [
+    "Access to script at 'https://js.hsleadflows.net/leadflows.js' from origin 'https://laviniagro1stg.wpengine.com' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+    "Failed to load resource: net::ERR_FAILED",
+    "Timeout (C)",
+    "Timeout (z)"
+  ]
+}

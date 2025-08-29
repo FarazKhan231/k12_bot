@@ -1,0 +1,69 @@
+{
+  "actions": [
+    {
+      "action": "navigate",
+      "target": {
+        "id": null,
+        "name": null,
+        "placeholder": null,
+        "text": "URL_FROM_CONFIG",
+        "selector": ""
+      },
+      "value": null,
+      "status": "ok",
+      "notes": "Navigate to the provided URL"
+    },
+    {
+      "action": "click",
+      "target": {
+        "id": null,
+        "name": null,
+        "placeholder": null,
+        "text": "PLATFORM LOGIN",
+        "selector": ""
+      },
+      "value": null,
+      "status": "ok",
+      "notes": "Click on PLATFORM LOGIN button"
+    },
+    {
+      "action": "fill",
+      "target": {
+        "selector": "input[name=\"username\"]"
+      },
+      "value": "faraz.khan+1@k12coalition.com",
+      "status": "ok",
+      "notes": "Fill username field"
+    },
+    {
+      "action": "fill",
+      "target": {
+        "selector": "input[name=\"password\"]"
+      },
+      "value": "zJmIMIgp&i%fhP1HjhoRY^D6",
+      "status": "ok",
+      "notes": "Fill password field"
+    },
+    {
+      "action": "click",
+      "target": {
+        "id": null,
+        "name": null,
+        "placeholder": null,
+        "text": "Login",
+        "selector": ""
+      },
+      "value": null,
+      "status": "ok",
+      "notes": "Click Login button"
+    },
+    {
+      "action": "end",
+      "status": "end",
+      "notes": "All Excel test cases completed successfully"
+    }
+  ],
+  "consoleErrors": [
+    "TypeError: $(...).select2 is not a function"
+  ]
+}

@@ -1,0 +1,128 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<title>Lavinia · smoke Report</title>
+<style>
+  body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;padding:24px;background:#f7f7fb;color:#111}
+  h1{margin:0 0 8px}
+  .grid{display:grid;grid-template-columns:1fr;gap:16px}
+  .card{background:#fff;border:1px solid #e5e7eb;border-radius:16px;padding:16px}
+  .muted{color:#6b7280}
+  table{width:100%;border-collapse:collapse}
+  th,td{font-size:14px}
+  th{background:#f3f4f6;text-align:left;padding:8px;border-bottom:1px solid #e5e7eb}
+  .metrics{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px}
+  .badge{display:inline-block;border-radius:999px;padding:6px 12px;font-weight:600;border:1px solid #e5e7eb}
+  .ok{background:#ecfdf5;color:#065f46;border-color:#a7f3d0}
+  .fail{background:#fef2f2;color:#991b1b;border-color:#fecaca}
+</style>
+</head>
+<body>
+  <h1>Lavinia · smoke Report</h1>
+  <p class="muted">Started: 2025-08-20T16:48:31.724Z</p>
+
+  <div class="grid">
+    <div class="card">
+      <h2>Summary</h2>
+      <div class="metrics">
+        <span class="badge">Total steps: 4</span>
+        <span class="badge ok">Passed: 0</span>
+        <span class="badge fail">Failed: 3</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Plan</h2>
+      <div># Smoke Testing Plan for Lavinia<br/><br/>This smoke testing plan outlines the essential checks to ensure the basic functionality of the Lavinia application.<br/><br/>## Objectives<br/>- Validate core functionalities without major blockers.<br/><br/>## Target URL<br/>- [Lavinia Staging](https://laviniagro1stg.wpengine.com/)</div>
+    </div>
+
+    <div class="card">
+      <h2>Checks</h2>
+      <ol><li><strong>Login and Dashboard Load</strong> — <em>Ensure that users can log in and the dashboard loads without any console errors.</em></li>
+<li><strong>Auto-discover First Section</strong> — <em>Verify that the list view renders correctly when navigating to the first section.</em></li>
+<li><strong>Open First Item</strong> — <em>Check that the detail page for the first item renders correctly.</em></li>
+<li><strong>Validate Safe Submit</strong> — <em>If a form is available, ensure it submits without errors and receives a non-error response.</em></li></ol>
+      <h3>Heuristics</h3>
+      <ul><li>Check for console errors during navigation.</li>
+<li>Ensure all links and buttons are functional.</li>
+<li>Verify that all expected elements are present on the page.</li>
+<li>Confirm that the application responds within acceptable time limits.</li></ul>
+    </div>
+
+    <div class="card">
+      <h2>Actions</h2>
+      <table>
+        <thead><tr><th>#</th><th>Action</th><th>Target</th><th>Value</th><th>Status</th><th>Notes</th></tr></thead>
+        <tbody>
+    <tr>
+      <td style="padding:8px;border-bottom:1px solid #eee">1</td>
+      <td style="padding:8px;border-bottom:1px solid #eee"><code>navigate</code></td>
+      <td style="padding:8px;border-bottom:1px solid #eee">OUR TEAM</td>
+      <td style="padding:8px;border-bottom:1px solid #eee"></td>
+      <td style="padding:8px;border-bottom:1px solid #eee">error</td>
+      <td style="padding:8px;border-bottom:1px solid #eee;color:#6b7280">Navigate to OUR TEAM page. | locator.waitFor: Error: strict mode violation: getByRole('link', { name: 'OUR TEAM' }) resolved to 2 elements:
+    1) <a href="https://laviniagro1stg.wpengine.com/team/">…</a> aka locator('#menu-item-51820').getByRole('link', { name: 'Our Team' })
+    2) <a target="_self" class="fl-button" href="https://laviniagro1stg.wpengine.com/team/">…</a> aka getByRole('contentinfo').getByRole('link', { name: 'Our Team' })
+
+Call log:
+[2m  - waiting for getByRole('link', { name: 'OUR TEAM' }) to be visible[22m
+</td>
+    </tr>
+    <tr>
+      <td style="padding:8px;border-bottom:1px solid #eee">2</td>
+      <td style="padding:8px;border-bottom:1px solid #eee"><code>navigate</code></td>
+      <td style="padding:8px;border-bottom:1px solid #eee">CAREERS</td>
+      <td style="padding:8px;border-bottom:1px solid #eee"></td>
+      <td style="padding:8px;border-bottom:1px solid #eee">error</td>
+      <td style="padding:8px;border-bottom:1px solid #eee;color:#6b7280">Navigate to CAREERS page. | Unsupported action: navigate</td>
+    </tr>
+    <tr>
+      <td style="padding:8px;border-bottom:1px solid #eee">3</td>
+      <td style="padding:8px;border-bottom:1px solid #eee"><code>navigate</code></td>
+      <td style="padding:8px;border-bottom:1px solid #eee">Curriculum</td>
+      <td style="padding:8px;border-bottom:1px solid #eee"></td>
+      <td style="padding:8px;border-bottom:1px solid #eee">error</td>
+      <td style="padding:8px;border-bottom:1px solid #eee;color:#6b7280">Navigate to Curriculum page. | Unsupported action: navigate</td>
+    </tr>
+    <tr>
+      <td style="padding:8px;border-bottom:1px solid #eee">4</td>
+      <td style="padding:8px;border-bottom:1px solid #eee"><code>end</code></td>
+      <td style="padding:8px;border-bottom:1px solid #eee"></td>
+      <td style="padding:8px;border-bottom:1px solid #eee"></td>
+      <td style="padding:8px;border-bottom:1px solid #eee">end</td>
+      <td style="padding:8px;border-bottom:1px solid #eee;color:#6b7280">End of actions.</td>
+    </tr></tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <h2>Video</h2>
+      <div style="margin:0 0 24px">
+       <video controls src="http://localhost:8787/artifacts/90f1c73c-cd63-4931-99f1-0ac430f21b83/assets/220b9e24b4ea2821067f3a7560e3d7fa.webm" style="max-width:100%;border-radius:12px;border:1px solid #e5e7eb"></video>
+       <div style="color:#6b7280;font-size:12px">220b9e24b4ea2821067f3a7560e3d7fa.webm</div>
+     </div>
+    </div>
+
+    <div class="card">
+      <h2>Screenshots</h2>
+      <figure style="margin:0 0 24px">
+       <img src="http://localhost:8787/artifacts/90f1c73c-cd63-4931-99f1-0ac430f21b83/assets/01_initial.png" alt="01_initial.png" style="max-width:100%;border-radius:12px;border:1px solid #e5e7eb"/>
+       <figcaption style="color:#6b7280;font-size:12px">01_initial.png</figcaption>
+     </figure>
+<figure style="margin:0 0 24px">
+       <img src="http://localhost:8787/artifacts/90f1c73c-cd63-4931-99f1-0ac430f21b83/assets/02_error.png" alt="02_error.png" style="max-width:100%;border-radius:12px;border:1px solid #e5e7eb"/>
+       <figcaption style="color:#6b7280;font-size:12px">02_error.png</figcaption>
+     </figure>
+<figure style="margin:0 0 24px">
+       <img src="http://localhost:8787/artifacts/90f1c73c-cd63-4931-99f1-0ac430f21b83/assets/03_error.png" alt="03_error.png" style="max-width:100%;border-radius:12px;border:1px solid #e5e7eb"/>
+       <figcaption style="color:#6b7280;font-size:12px">03_error.png</figcaption>
+     </figure>
+<figure style="margin:0 0 24px">
+       <img src="http://localhost:8787/artifacts/90f1c73c-cd63-4931-99f1-0ac430f21b83/assets/04_error.png" alt="04_error.png" style="max-width:100%;border-radius:12px;border:1px solid #e5e7eb"/>
+       <figcaption style="color:#6b7280;font-size:12px">04_error.png</figcaption>
+     </figure>
+    </div>
+  </div>
+</body>
+</html>

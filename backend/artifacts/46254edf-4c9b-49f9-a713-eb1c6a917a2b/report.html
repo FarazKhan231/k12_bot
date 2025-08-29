@@ -1,0 +1,122 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<title>Lavinia · smoke Report</title>
+<style>
+  body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;padding:24px;background:#f7f7fb;color:#111}
+  h1{margin:0 0 8px}
+  .grid{display:grid;grid-template-columns:1fr;gap:16px}
+  .card{background:#fff;border:1px solid #e5e7eb;border-radius:16px;padding:16px}
+  .muted{color:#6b7280}
+  table{width:100%;border-collapse:collapse}
+  th,td{font-size:14px}
+  th{background:#f3f4f6;text-align:left;padding:8px;border-bottom:1px solid #e5e7eb}
+  .metrics{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px}
+  .badge{display:inline-block;border-radius:999px;padding:6px 12px;font-weight:600;border:1px solid #e5e7eb}
+  .ok{background:#ecfdf5;color:#065f46;border-color:#a7f3d0}
+  .fail{background:#fef2f2;color:#991b1b;border-color:#fecaca}
+</style>
+</head>
+<body>
+  <h1>Lavinia · smoke Report</h1>
+  <p class="muted">Started: 2025-08-20T16:53:08.478Z</p>
+
+  <div class="grid">
+    <div class="card">
+      <h2>Summary</h2>
+      <div class="metrics">
+        <span class="badge">Total steps: 4</span>
+        <span class="badge ok">Passed: 3</span>
+        <span class="badge fail">Failed: 0</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Plan</h2>
+      <div># Smoke Testing Plan for Lavinia<br/><br/>This plan outlines the essential smoke tests for the Lavinia application to ensure core functionalities are operational before further testing.<br/><br/>## Target URL<br/>- [Lavinia Staging](https://laviniagro1stg.wpengine.com/)</div>
+    </div>
+
+    <div class="card">
+      <h2>Checks</h2>
+      <ol><li><strong>Login and Dashboard Load</strong> — <em>To ensure users can log in and access the main interface without errors.</em></li>
+<li><strong>Auto-discover First Section from Navigation</strong> — <em>To verify that the navigation functionality works and the list view is displayed correctly.</em></li>
+<li><strong>Open First Item</strong> — <em>To confirm that the detail page for the first item renders as expected.</em></li>
+<li><strong>Validate Safe Submit for Available Form</strong> — <em>To ensure that form submissions do not result in errors and are processed correctly.</em></li></ol>
+      <h3>Heuristics</h3>
+      <ul><li>Check for console errors during page loads.</li>
+<li>Ensure all links and buttons are functional.</li>
+<li>Verify that the UI elements are displayed correctly.</li>
+<li>Confirm that the application responds within acceptable time limits.</li></ul>
+    </div>
+
+    <div class="card">
+      <h2>Actions</h2>
+      <table>
+        <thead><tr><th>#</th><th>Action</th><th>Target</th><th>Value</th><th>Status</th><th>Notes</th></tr></thead>
+        <tbody>
+    <tr>
+      <td style="padding:8px;border-bottom:1px solid #eee">1</td>
+      <td style="padding:8px;border-bottom:1px solid #eee"><code>fill</code></td>
+      <td style="padding:8px;border-bottom:1px solid #eee">Username or Email Address</td>
+      <td style="padding:8px;border-bottom:1px solid #eee">testuser</td>
+      <td style="padding:8px;border-bottom:1px solid #eee">ok</td>
+      <td style="padding:8px;border-bottom:1px solid #eee;color:#6b7280">Fill in the username field.</td>
+    </tr>
+    <tr>
+      <td style="padding:8px;border-bottom:1px solid #eee">2</td>
+      <td style="padding:8px;border-bottom:1px solid #eee"><code>fill</code></td>
+      <td style="padding:8px;border-bottom:1px solid #eee">Password</td>
+      <td style="padding:8px;border-bottom:1px solid #eee">***</td>
+      <td style="padding:8px;border-bottom:1px solid #eee">ok</td>
+      <td style="padding:8px;border-bottom:1px solid #eee;color:#6b7280">Fill in the password field.</td>
+    </tr>
+    <tr>
+      <td style="padding:8px;border-bottom:1px solid #eee">3</td>
+      <td style="padding:8px;border-bottom:1px solid #eee"><code>click</code></td>
+      <td style="padding:8px;border-bottom:1px solid #eee">#wp-submit</td>
+      <td style="padding:8px;border-bottom:1px solid #eee"></td>
+      <td style="padding:8px;border-bottom:1px solid #eee">ok</td>
+      <td style="padding:8px;border-bottom:1px solid #eee;color:#6b7280">Click the submit button to log in.</td>
+    </tr>
+    <tr>
+      <td style="padding:8px;border-bottom:1px solid #eee">4</td>
+      <td style="padding:8px;border-bottom:1px solid #eee"><code>end</code></td>
+      <td style="padding:8px;border-bottom:1px solid #eee"></td>
+      <td style="padding:8px;border-bottom:1px solid #eee"></td>
+      <td style="padding:8px;border-bottom:1px solid #eee">end</td>
+      <td style="padding:8px;border-bottom:1px solid #eee;color:#6b7280">End actions after login attempt.</td>
+    </tr></tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <h2>Video</h2>
+      <div style="margin:0 0 24px">
+       <video controls src="http://localhost:8787/artifacts/46254edf-4c9b-49f9-a713-eb1c6a917a2b/assets/ca37a96a9477bdd0a8c087d56496006f.webm" style="max-width:100%;border-radius:12px;border:1px solid #e5e7eb"></video>
+       <div style="color:#6b7280;font-size:12px">ca37a96a9477bdd0a8c087d56496006f.webm</div>
+     </div>
+    </div>
+
+    <div class="card">
+      <h2>Screenshots</h2>
+      <figure style="margin:0 0 24px">
+       <img src="http://localhost:8787/artifacts/46254edf-4c9b-49f9-a713-eb1c6a917a2b/assets/01_initial.png" alt="01_initial.png" style="max-width:100%;border-radius:12px;border:1px solid #e5e7eb"/>
+       <figcaption style="color:#6b7280;font-size:12px">01_initial.png</figcaption>
+     </figure>
+<figure style="margin:0 0 24px">
+       <img src="http://localhost:8787/artifacts/46254edf-4c9b-49f9-a713-eb1c6a917a2b/assets/02_fill.png" alt="02_fill.png" style="max-width:100%;border-radius:12px;border:1px solid #e5e7eb"/>
+       <figcaption style="color:#6b7280;font-size:12px">02_fill.png</figcaption>
+     </figure>
+<figure style="margin:0 0 24px">
+       <img src="http://localhost:8787/artifacts/46254edf-4c9b-49f9-a713-eb1c6a917a2b/assets/03_fill.png" alt="03_fill.png" style="max-width:100%;border-radius:12px;border:1px solid #e5e7eb"/>
+       <figcaption style="color:#6b7280;font-size:12px">03_fill.png</figcaption>
+     </figure>
+<figure style="margin:0 0 24px">
+       <img src="http://localhost:8787/artifacts/46254edf-4c9b-49f9-a713-eb1c6a917a2b/assets/04_click.png" alt="04_click.png" style="max-width:100%;border-radius:12px;border:1px solid #e5e7eb"/>
+       <figcaption style="color:#6b7280;font-size:12px">04_click.png</figcaption>
+     </figure>
+    </div>
+  </div>
+</body>
+</html>
