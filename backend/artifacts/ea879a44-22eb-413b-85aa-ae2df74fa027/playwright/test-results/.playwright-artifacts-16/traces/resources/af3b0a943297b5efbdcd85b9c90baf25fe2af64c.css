@@ -1,0 +1,118 @@
+/*
+Theme Name: Beaver Builder Child Theme
+Theme URI: http://www.wpbeaverbuilder.com
+Version: 1.0
+Description: An example child theme that can be used as a starting point for custom development.
+Author: The Beaver Builder Team
+Author URI: http://www.fastlinemedia.com
+template: bb-theme
+*/
+
+/* Add your custom styles here... */ 
+
+
+
+
+/*delete form css here*/
+  .delete-user-container {
+            max-width: 600px;
+            margin: 40px auto;
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            padding: 30px;
+            border-radius: 8px;
+            font-family: "Segoe UI", sans-serif;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .delete-user-container h2 {
+            text-align: center;
+            color: #111827;
+            margin-bottom: 20px;
+        }
+
+        .delete-user-container p.info {
+            text-align: center;
+            font-size: 14px;
+            color: #6b7280;
+        }
+
+        .delete-user-container a.download-link {
+            display: inline-block;
+            margin: 10px auto;
+            text-align: center;
+            font-size: 16px;
+            text-decoration: none;
+            color: #1d4ed8;
+            font-weight: bold;
+        }
+
+        .delete-user-container form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .delete-user-container label {
+            font-weight: 600;
+            color: #374151;
+        }
+
+        .delete-user-container input[type="file"] {
+            padding: 10px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            background-color: #fff;
+        }
+
+        .delete-user-container .note {
+            font-size: 13px;
+            color: #9ca3af;
+        }
+
+        .delete-user-container button {
+            background-color: #1d4ed8;
+            color: #ffffff;
+            border: none;
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .delete-user-container button:hover {
+            background-color: #1e40af;
+        }
+        .notice-yes {
+            background-color: #f2fbf4;
+            border: 2px solid #a7aca8;  
+            border-radius: 8px;
+            padding: 15px 20px;
+            width: 51%;
+            margin: 34px auto;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .notice-yes p {
+            margin: 8px 0;
+            font-weight: 600;
+            font-size: 20px;
+            color: #155724; 
+        }
+
+       
+
+        .notice-yes.null {
+            background-color: #e2e2e2;
+            border-color: #615859;
+             
+        }
+
+        .notice-yes.null p {
+            font-weight: 500;
+            font-size: 16px;
+            color: #720914ff!important;  
+              
+        }

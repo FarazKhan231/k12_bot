@@ -1,0 +1,177 @@
+# Page snapshot
+
+```yaml
+- button "Accessibility Menu": Accessibility
+- link "Skip to content":
+  - /url: "#fl-main-content"
+- banner:
+  - button "Twitter": 
+  - button "Instagram": 
+  - button "LinkedIn": 
+  - navigation "Menu":
+    - list:
+      - listitem:
+        - link "Our Team":
+          - /url: https://laviniagro1stg.wpengine.com/team/
+      - listitem:
+        - link "Careers":
+          - /url: https://laviniagro1stg.wpengine.com/careers-2/
+      - listitem:
+        - link "platform Login":
+          - /url: /user-account/
+      - listitem:
+        - link "Contact Us":
+          - /url: https://laviniagro1stg.wpengine.com/contact-us-sales-support/
+  - link "unnamed":
+    - /url: https://laviniagro1stg.wpengine.com
+    - img "unnamed"
+  - navigation "Menu":
+    - list:
+      - listitem:
+        - link "Curriculum":
+          - /url: https://laviniagro1stg.wpengine.com/redthread-knowledge-literacy-program/
+      - listitem:
+        - link "Summer Learning":
+          - /url: https://laviniagro1stg.wpengine.com/rise-summer-learning-program-k-8/
+      - listitem:
+        - link "Professional Learning":
+          - /url: https://laviniagro1stg.wpengine.com/professional-learning/
+      - listitem:
+        - link "Consulting":
+          - /url: https://laviniagro1stg.wpengine.com/consulting/
+      - listitem:
+        - link "Impact":
+          - /url: https://laviniagro1stg.wpengine.com/our-impact/
+      - listitem:
+        - link "Resources":
+          - /url: https://articles.laviniagro1stg.wpengine.com/blog
+- main:
+  - article:
+    - heading "Elevating Achievement," [level=2]
+    - heading "Forging Remarkable" [level=1]:
+      - text: Forging Remarkable
+      - img
+    - paragraph: Change lives from inside the classroom with instructional coaching, professional learning, and curriculum that accelerates student achievement.
+    - heading "A Proven Pathway to" [level=2]:
+      - text: A Proven Pathway to
+      - img
+    - paragraph: For school leaders seeking big gains in math and literacy, Lavinia Group’s targeted instructional coaching, RISE Summer Program, and game-changing RedThread Literacy Program are proven to transform academic performance and rapidly deliver double-digit growth among students of all cultural backgrounds and socio-economic statuses.
+    - heading "Guided by Experts in Accelerating Achievement" [level=5]
+    - paragraph: Our research-based approach builds instructional excellence at all levels within a school.
+    - paragraph: Our exceptional team is comprised of former superintendents, principals, and expert teachers. Each is driven by a core belief in setting high standards and brings an impressive track record of boosting academic achievement.
+    - img "K12-home-img-1"
+    - heading "Elbow to Elbow" [level=2]:
+      - text: Elbow to Elbow
+      - img
+    - paragraph: We've built Lavinia Group's reputation on both the results we enable our partners to achieve and our collaborative approach. We are roll-up-the-sleeves people who listen, invite ideas, and demonstrate our methods in classrooms rather than just prescribe them.
+    - heading "Instructional Coaching" [level=4]
+    - paragraph: Empower sustainable change. From setting strategic goals to coaching instructional coaches to leading lab-sites, we adapt to your situation.
+    - list:
+      - listitem: In-classroom coaching and feedback
+      - listitem: Demonstrations of data-driven lesson planning
+      - listitem: Exclusive access to lesson planning tools, and instructional resources
+      - listitem: Model exemplary instruction
+    - link "Learn more":
+      - /url: /consulting/
+    - heading "Professional Learning" [level=4]
+    - paragraph: Accelerate math and literacy learning using the latest research, educational tools, and innovative methods.
+    - list:
+      - listitem: Asynchronous, blended learning, or in-person learning opportunities
+      - listitem: Aligned to academic standards
+      - listitem: Eligible for course credit
+    - link "Learn more":
+      - /url: /professional-learning-courses/
+    - heading "RISE Summer Program" [level=4]
+    - paragraph: Achieve triple-digit gains in math & literacy achievement in just 5 weeks.
+    - list:
+      - listitem: Comprehensive curriculum for a broad age range
+      - listitem: Turnkey solution with professional development
+      - listitem: Robust pre- and post- assessments
+    - link "Learn more":
+      - /url: /rise-summer-learning-education-program-k-8/
+    - heading "K-8 Literacy Program" [level=4]
+    - paragraph: Activate young minds with RedThread, the only comprehensive K-8 literacy program on the market.
+    - list:
+      - listitem: Aligned with the science of reading
+      - listitem: Powered by multicultural literature
+      - listitem: Built-in knowledge-building across early literacy curricula
+    - link "Learn more":
+      - /url: /redthread-knowledge-literacy-program/
+    - heading "Lavinia In Action" [level=2]
+    - group "Testimonial 1 of 9":
+      - paragraph:
+        - text: “The Lavinia Group team members were the ideal guides through the complex world of raising rigor in ELA instruction. They helped us
+        - strong: paint a clear vision for what we wanted
+        - text: college prep reading and writing instruction to look like in our schools and
+        - strong: then provided professional development and coaching to help us get there.
+        - text: Working with them, we were able to
+        - strong: dramatically increase the proportion of our students who were meeting and exceeding standards.
+        - text: ”
+      - heading [level=3]
+      - heading "Max Koltuv, Former Superintendent, Achievement First, NY" [level=4]
+    - button "Testimonial Slide 1"
+    - button "Testimonial Slide 2"
+    - button "Testimonial Slide 3"
+    - button "Testimonial Slide 4"
+    - button "Testimonial Slide 5"
+    - button "Testimonial Slide 6"
+    - button "Testimonial Slide 7"
+    - button "Testimonial Slide 8"
+    - button "Testimonial Slide 9"
+    - button "Previous"
+    - button "Next"
+    - heading "Big Gains, Year-Over-Year" [level=2]
+    - paragraph: Inspire a wave of change that leads to rapid and ongoing leaps in math and literacy achievement. By embedding knowledge, new methods, and transferable skills, we help catalyze a cultural shift that makes instructional and academic excellence the new norm.
+    - img "K12-home-img-6-1"
+    - img
+    - text: 0% improvement in literacy on average in 2023
+    - img
+    - text: 0% improvement in math on average in 2023
+    - img
+    - text: 0% outperformance in foundational reading
+    - link "Explore Our Impact":
+      - /url: /our-impact/
+    - heading "Expert Help of the Way" [level=2]:
+      - text: Expert Help
+      - img
+      - text: of the Way
+    - paragraph: Drawing from our background as education leaders, our team engages with empathy, experience, and expertise. We are resolute in our pursuit of academic achievement, working side-by side and with leaders and teachers to eliminate roadblocks and barriers and forge a legacy of lasting achievement.
+    - link "Meet Your Support Team":
+      - /url: /team/
+    - heading "Unlock Your Students' Full Potential" [level=2]
+    - paragraph: In today's demanding educational landscape, teaching is no easy feat. We help schools reignite and reinvigorate the joy and fulfillment of teaching and reshape the academic trajectory of students' lives.
+    - paragraph:
+      - text: Drive lasting improvements in instruction and performance year after year.
+      - strong: Explore a partnership with Lavinia Group today.
+    - iframe
+- contentinfo:
+  - link "B-Corp-Logo-White-RGB":
+    - /url: https://k12coalition.com/b-corp/?__hstc=51647990.2921d393982d20fde14231976db00add.1756402398646.1756402398646.1756402398646.1&__hssc=51647990.1.1756402398646&__hsfp=3571075205
+    - img "B-Corp-Logo-White-RGB"
+  - img "Lavinia-Mono-White"
+  - heading "Support for Educators & Learners" [level=3]
+  - paragraph: At Lavinia Group we close the opportunity gap by helping our partner schools and networks achieve world-class literacy and math instruction, through world-class leader and teacher training. Whether as superintendent, principal, or classroom teacher, each Lavinia Group team member has delivered phenomenal results on behalf of the students that they served.
+  - link "info@laviniagro1stg.wpengine.com":
+    - /url: mailto:info@laviniagro1stg.wpengine.com
+    - paragraph: info@laviniagro1stg.wpengine.com
+  - button ""
+  - button ""
+  - button ""
+  - link "Our Services":
+    - /url: https://laviniagro1stg.wpengine.com/services/
+  - link "Our Institutes":
+    - /url: https://laviniagro1stg.wpengine.com/sy-23-24-institutes-overview/
+  - link "Our Team":
+    - /url: https://laviniagro1stg.wpengine.com/team/
+  - link "Our Impact":
+    - /url: https://laviniagro1stg.wpengine.com/impact/
+  - link "News & Updates":
+    - /url: https://laviniagro1stg.wpengine.com/news/
+  - paragraph:
+    - text: © 2025 Lavinia Group. All Rights Reserved. |
+    - link "Privacy Policy":
+      - /url: https://laviniagro1stg.wpengine.com/privacy-policy
+- dialog
+- dialog
+- status
+```

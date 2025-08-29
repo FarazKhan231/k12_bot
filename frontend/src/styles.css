@@ -1,0 +1,122 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --card: #ffffff;
+}
+
+.card {
+  @apply rounded-2xl shadow-soft bg-white border border-slate-100;
+}
+
+.btn {
+  @apply px-4 py-2 rounded-xl border border-slate-200 hover:border-slate-300 hover:bg-slate-50 transition;
+}
+
+.btn-primary {
+  @apply bg-black text-white hover:bg-slate-800;
+}
+
+/* Badges */
+.badge { @apply inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium; }
+.badge-green { @apply bg-green-100 text-green-700 border border-green-200; }
+.badge-yellow { @apply bg-yellow-100 text-yellow-700 border border-yellow-200; }
+.badge-red { @apply bg-red-100 text-red-700 border border-red-200; }
+.badge-slate { @apply bg-slate-100 text-slate-700 border border-slate-200; }
+
+/* Fancy card */
+.card-fancy { @apply rounded-2xl border border-slate-200 bg-white shadow-lg shadow-slate-200/40; }
+
+/* Copy button */
+.copy-btn { @apply px-2 py-1 text-xs rounded-md border border-slate-300 hover:bg-slate-50; }
+
+/* Animated mascot */
+.floaty {
+  animation: floaty 3s ease-in-out infinite;
+}
+@keyframes floaty {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+  100% { transform: translateY(0); }
+}
+
+/* RTCTEK Theme */
+.bg-rtctek {
+  background: linear-gradient(-45deg, #6d28d9, #0ea5e9, #22c55e, #f59e0b);
+  background-size: 400% 400%;
+  animation: rtctek-shift 18s ease infinite;
+}
+@keyframes rtctek-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Optional photo layer behind the gradient */
+.bg-rtctek-photo {
+  background-image:
+    linear-gradient(rgba(2,6,23,0.25), rgba(2,6,23,0.2)),
+    url('https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=1600&auto=format&fit=crop');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+.glass-card { @apply backdrop-blur-xl shadow-xl rounded-3xl border; }
+.glass-card { 
+  background: 
+    linear-gradient(135deg, rgba(2,6,23,0.35), rgba(2,6,23,0.25)),
+    linear-gradient(135deg, rgba(14,165,233,0.25), rgba(109,40,217,0.22));
+  border-color: rgba(255,255,255,0.25);
+}
+
+/* Darker variant for stronger contrast */
+.glass-card-dark { @apply backdrop-blur-xl shadow-2xl rounded-3xl border; }
+.glass-card-dark {
+  background:
+    linear-gradient(135deg, rgba(2,6,23,0.55), rgba(2,6,23,0.45)),
+    linear-gradient(135deg, rgba(14,165,233,0.28), rgba(109,40,217,0.26));
+  border-color: rgba(255,255,255,0.2);
+}
+
+.btn-rtctek {
+  background: linear-gradient(135deg, #6d28d9, #0ea5e9);
+  @apply text-white rounded-xl px-4 py-2 shadow-md hover:opacity-90 transition;
+}
+
+.btn-rtctek-lg { @apply px-5 py-3 text-base; }
+
+.overlay-backdrop {
+  background: radial-gradient(1200px 600px at 50% -20%, rgba(255,255,255,0.35), rgba(255,255,255,0.05)), rgba(10,10,20,0.65);
+  backdrop-filter: blur(6px);
+}
+
+.glow-text {
+  background: linear-gradient(135deg, #f59e0b, #06b6d4);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* 3D automation grid background */
+.auto-3d { position: relative; }
+.auto-3d::before {
+  content: "";
+  position: fixed;
+  inset: -200px -200px 0 -200px;
+  background:
+    radial-gradient(1200px 400px at 50% -10%, rgba(255,255,255,0.25), rgba(255,255,255,0) 60%),
+    linear-gradient(rgba(255,255,255,0.07) 1px, transparent 1px) 0 0/40px 40px,
+    linear-gradient(90deg, rgba(255,255,255,0.07) 1px, transparent 1px) 0 0/40px 40px;
+  transform: perspective(1000px) rotateX(60deg) translateY(-120px);
+  transform-origin: center top;
+  animation: grid-pan 22s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes grid-pan {
+  0% { background-position: 0 0, 0 0, 0 0; }
+  100% { background-position: 0 0, 0 400px, 400px 0; }
+}
